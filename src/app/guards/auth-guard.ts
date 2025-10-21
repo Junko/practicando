@@ -12,21 +12,48 @@ export const authGuard: CanActivateFn = (
   const firebaseSvc = inject(Firebase);
   const utilsSvc = inject(Utils);
   
-  let user = localStorage.getItem('user');
+  // Función para limpiar localStorage si hay problemas
+  const clearCorruptedStorage = () => {
+    console.log('Limpiando localStorage corrupto...');
+    localStorage.removeItem('user');
+    // También limpiar otros datos relacionados si existen
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('session');
+  };
+  
+  // Función para verificar si localStorage está disponible
+  const isLocalStorageAvailable = () => {
+    try {
+      const test = '__localStorage_test__';
+      localStorage.setItem(test, test);
+      localStorage.removeItem(test);
+      return true;
+    } catch (e) {
+      console.error('localStorage no disponible:', e);
+      return false;
+    }
+  };
+  
+  // Verificación simple y directa
+  const user = localStorage.getItem('user');
   
   console.log('=== AUTH GUARD ===');
   console.log('Ruta solicitada:', state.url);
-  console.log('User localStorage:', user);
-  console.log('User parseado:', user ? JSON.parse(user) : null);
+  console.log('Usuario encontrado:', !!user);
   
-  // Verificación simple: si hay usuario en localStorage, permitir acceso
   if (user) {
-    console.log('Auth Guard - PERMITIDO - Usuario encontrado en localStorage');
-    return true;
-  } else {
-    console.log('Auth Guard - BLOQUEADO - No hay usuario en localStorage');
-    console.log('Redirigiendo a /login...');
-    utilsSvc.routerLink('/login');
-    return false;
+    try {
+      const userParsed = JSON.parse(user);
+      if (userParsed.uid && userParsed.correo) {
+        console.log('Auth Guard - PERMITIDO');
+        return true;
+      }
+    } catch (error) {
+      console.error('Error al parsear usuario:', error);
+    }
   }
+  
+  console.log('Auth Guard - BLOQUEADO - Redirigiendo a login');
+  window.location.href = '/login';
+  return false;
 };

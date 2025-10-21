@@ -11,7 +11,8 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule),
+    canActivate: [noAuthGuard]
   },
   {
     path: 'inicio',
@@ -32,6 +33,16 @@ const routes: Routes = [
   {
     path: 'usuarios-crud',
     loadChildren: () => import('./pages/usuarios-crud/usuarios-crud.module').then( m => m.UsuariosCrudPageModule),
+    canActivate: [authGuard]
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./pages/admin/admin.module').then( m => m.AdminModule),
+    canActivate: [authGuard]
+  },
+  {
+    path: 'padre',
+    loadChildren: () => import('./pages/padre/padre.module').then( m => m.PadreModule),
     canActivate: [authGuard]
   },
   {

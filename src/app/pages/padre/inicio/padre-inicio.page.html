@@ -1,0 +1,92 @@
+<ion-menu side="start" menuId="padre-menu" contentId="padre-content">
+  <ion-header>
+    <ion-toolbar color="secondary">
+      <ion-title>Menú Padre</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <ion-list>
+      <ion-item button routerLink="/padre/inicio" routerDirection="root">
+        <ion-icon name="home-outline" slot="start"></ion-icon>
+        <ion-label>Inicio</ion-label>
+      </ion-item>
+      
+      <ion-item button routerLink="/padre/hijos" routerDirection="root">
+        <ion-icon name="people-outline" slot="start"></ion-icon>
+        <ion-label>Mis Hijos</ion-label>
+      </ion-item>
+      
+      <ion-item button routerLink="/padre/notificaciones" routerDirection="root">
+        <ion-icon name="notifications-outline" slot="start"></ion-icon>
+        <ion-label>Notificaciones</ion-label>
+      </ion-item>
+      
+      <ion-item button routerLink="/padre/perfil" routerDirection="root">
+        <ion-icon name="person-outline" slot="start"></ion-icon>
+        <ion-label>Mi Perfil</ion-label>
+      </ion-item>
+      
+      <ion-item button (click)="signOut()">
+        <ion-icon name="log-out-outline" slot="start"></ion-icon>
+        <ion-label>Cerrar Sesión</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-app>
+  <ion-router-outlet id="padre-content"></ion-router-outlet>
+</ion-app>
+
+<app-header title="Panel Padre" menuId="padre-menu"></app-header>
+
+<ion-content [fullscreen]="true" class="padre-content" id="padre-content">
+  <div class="welcome-section">
+    <h1>¡Bienvenido!</h1>
+    <p>Panel de padre de familia</p>
+    
+    <div class="user-info">
+      <h2>Información del padre:</h2>
+      <p><strong>Nombre:</strong> {{ userInfo?.nombres }} {{ userInfo?.apellidos }}</p>
+      <p><strong>Correo:</strong> {{ userInfo?.correo }}</p>
+      <p><strong>Teléfono:</strong> {{ userInfo?.telefono }}</p>
+    </div>
+    
+    <div class="padre-modules">
+      <h2>Opciones disponibles:</h2>
+      
+      <div class="module-grid">
+        <ion-card button routerLink="/padre/hijos">
+          <ion-card-header>
+            <ion-icon name="people-outline" size="large"></ion-icon>
+            <ion-card-title>Mis Hijos</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>Gestionar información de tus hijos</p>
+          </ion-card-content>
+        </ion-card>
+        
+        <ion-card button routerLink="/padre/notificaciones">
+          <ion-card-header>
+            <ion-icon name="notifications-outline" size="large"></ion-icon>
+            <ion-card-title>Notificaciones</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>Ver notificaciones sobre útiles olvidados</p>
+          </ion-card-content>
+        </ion-card>
+        
+        <ion-card button routerLink="/padre/perfil">
+          <ion-card-header>
+            <ion-icon name="person-outline" size="large"></ion-icon>
+            <ion-card-title>Mi Perfil</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>Actualizar información personal</p>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+  </div>
+</ion-content>

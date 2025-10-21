@@ -1,14 +1,14 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { Utils } from '../../../services/utils';
 import { Firebase } from '../../../services/firebase';
+import { Utils } from '../../../services/utils';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.page.html',
-  styleUrls: ['./home.page.scss'],
+  selector: 'app-admin-inicio',
+  templateUrl: './admin-inicio.page.html',
+  styleUrls: ['./admin-inicio.page.scss'],
   standalone: false
 })
-export class HomePage implements OnInit {
+export class AdminInicioPage implements OnInit {
 
   userInfo: any = null;
   firebaseSvc = inject(Firebase);
@@ -24,9 +24,9 @@ export class HomePage implements OnInit {
     const user = localStorage.getItem('user');
     if (user) {
       this.userInfo = JSON.parse(user);
-      console.log('Usuario cargado en home:', this.userInfo);
+      console.log('Admin cargado:', this.userInfo);
     } else {
-      console.error('No se encontró información del usuario');
+      console.error('No se encontró información del admin');
     }
   }
 

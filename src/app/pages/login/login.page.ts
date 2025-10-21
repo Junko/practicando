@@ -21,6 +21,15 @@ export class LoginPage implements OnInit {
   utilsSvc = inject(Utils)
 
   ngOnInit() {
+    // Limpiar el formulario al inicializar la página
+    this.clearForm();
+  }
+
+  // Función para limpiar el formulario
+  clearForm() {
+    this.form.reset();
+    this.form.markAsUntouched();
+    this.form.markAsPristine();
   }
 
   async submit() {
@@ -45,6 +54,9 @@ export class LoginPage implements OnInit {
       
       }).catch(error => {
           console.error('Error en login:', error);
+          
+          // Limpiar el formulario en caso de error
+          this.clearForm();
           
           // Mostrar mensaje de error amigable al usuario
           this.utilsSvc.presentToast({
@@ -76,12 +88,13 @@ export class LoginPage implements OnInit {
       
       if (user) {
         console.log('Guardando usuario en localStorage...');
-        this.utilsSvc.saveInLocalStorage('user', user);
+        localStorage.setItem('user', JSON.stringify(user));
         
-        // Verificar que se guardó
+        // Verificar que se guardó inmediatamente
         const savedUser = localStorage.getItem('user');
         console.log('Usuario guardado en localStorage:', savedUser);
         
+        if (savedUser) {
         this.utilsSvc.presentToast({
           message: `Te damos la bienvenida ${user.nombres}`,
           duration: 1500,
@@ -90,8 +103,34 @@ export class LoginPage implements OnInit {
           icon: 'happy'
         });
         
-        console.log('Redirigiendo a /main...');
-        this.utilsSvc.routerLink('/main');
+        // Limpiar el formulario después del login exitoso
+        this.clearForm();
+          
+          console.log('Redirigiendo a /main...');
+          // Remover el foco del botón activo para evitar problemas de accesibilidad
+          if (document.activeElement && document.activeElement instanceof HTMLElement) {
+            document.activeElement.blur();
+          }
+          
+          // Navegar según el rol del usuario
+          if (user.rol === 'admin') {
+            this.utilsSvc.routerLink('/admin/inicio');
+          } else if (user.rol === 'padre') {
+            this.utilsSvc.routerLink('/padre/inicio');
+          } else {
+            // Rol no reconocido, ir a main como fallback
+            this.utilsSvc.routerLink('/main/home');
+          }
+        } else {
+          console.error('Error: Usuario no se guardó en localStorage');
+          this.utilsSvc.presentToast({
+            message: 'Error al guardar sesión',
+            duration: 3000,
+            color: 'danger',
+            position: 'top',
+            icon: 'warning'
+          });
+        }
       } else {
         console.error('No se encontró información del usuario en Firestore');
         console.log('El usuario existe en Authentication pero no tiene perfil en Firestore');
@@ -108,7 +147,13 @@ export class LoginPage implements OnInit {
         });
         
         console.log('Redirigiendo a /login...');
-        this.utilsSvc.routerLink('/login');
+        // Remover el foco del botón activo para evitar problemas de accesibilidad
+        if (document.activeElement && document.activeElement instanceof HTMLElement) {
+          document.activeElement.blur();
+        }
+        setTimeout(() => {
+          this.utilsSvc.routerLink('/login');
+        }, 100);
       }
     } catch (error) {
       console.error('Error al obtener información del usuario:', error);

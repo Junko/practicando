@@ -95,6 +95,12 @@ export class Firebase {
 
   //=== Cerrar sesión ===
   signOut() {
+    getAuth().signOut();
+    localStorage.removeItem('user');
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('session');
+    // Nota: No podemos usar this.utilsSvc aquí porque no está inyectado
+    // La redirección se manejará en el componente
     return this.auth.signOut();
   }
 }

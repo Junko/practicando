@@ -1,22 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
+import { SharedModule } from '../../shared/shared-module';
 
-import { HomePageRoutingModule } from './home-routing.module';
-import { SharedModule } from '../../../shared/shared-module';
-
-import { HomePage } from './home.page';
+import { AdminRoutingModule } from './admin-routing.module';
+import { AdminInicioPage } from './inicio/admin-inicio.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule,
+    AdminRoutingModule,
     SharedModule
   ],
-  declarations: [HomePage]
+  declarations: [
+    AdminInicioPage
+  ]
 })
-export class HomePageModule {}
+export class AdminModule {}

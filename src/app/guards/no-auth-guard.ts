@@ -20,7 +20,8 @@ export const noAuthGuard: CanActivateFn = (
     return true;
   } else {
     console.log('No-Auth Guard - BLOQUEADO - Redirigiendo a main');
-    utilsSvc.routerLink('/main');
+    // Usar window.location en lugar de router para evitar bucles
+    window.location.href = '/main/home';
     return false;
   }
 };
