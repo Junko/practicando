@@ -6,16 +6,16 @@ import { authGuard } from './guards/auth-guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'inicio',
+    redirectTo: 'login',
     pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
   {
     path: 'inicio',
     loadChildren: () => import('./pages/inicio/inicio.module').then( m => m.InicioPageModule)
-  },
-  {
-    path: 'login',
-    loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule), canActivate:[noAuthGuard]
   },
   {
     path: 'start',
@@ -31,11 +31,13 @@ const routes: Routes = [
   },
   {
     path: 'usuarios-crud',
-    loadChildren: () => import('./pages/usuarios-crud/usuarios-crud.module').then( m => m.UsuariosCrudPageModule)
+    loadChildren: () => import('./pages/usuarios-crud/usuarios-crud.module').then( m => m.UsuariosCrudPageModule),
+    canActivate: [authGuard]
   },
   {
     path: 'main',
-    loadChildren: () => import('./pages/main/main.module').then( m => m.MainPageModule), canActivate:[authGuard]
+    loadChildren: () => import('./pages/main/main.module').then( m => m.MainPageModule),
+    canActivate: [authGuard]
   },
   {
     path: '**',
