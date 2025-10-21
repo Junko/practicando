@@ -87,19 +87,34 @@ export class Firebase {
   //=== Verificar si un correo existe en Firestore ===
   async checkEmailExists(email: string): Promise<boolean> {
     try {
+      console.log('Iniciando verificación de correo:', email);
+      
       // Buscar en Firestore si existe un usuario con ese correo
       const usersRef = getFirestore();
-      const usersSnapshot = await getDocs(collection(usersRef, 'users'));
+      const usersCollection = collection(usersRef, 'users');
+      const usersSnapshot = await getDocs(usersCollection);
       
-      const users = usersSnapshot.docs.map(doc => doc.data());
-      const userExists = users.some(user => user['correo'] === email);
+      console.log('Documentos encontrados:', usersSnapshot.docs.length);
       
-      console.log('Verificando correo:', email, 'Existe:', userExists);
+      const users = usersSnapshot.docs.map(doc => {
+        const data = doc.data();
+        console.log('Usuario encontrado:', data);
+        return data;
+      });
+      
+      const userExists = users.some(user => {
+        const correo = user['correo'];
+        console.log('Comparando:', correo, 'con', email);
+        return correo === email;
+      });
+      
+      console.log('Resultado final - Correo existe:', userExists);
       return userExists;
       
     } catch (error) {
       console.error('Error al verificar correo en Firestore:', error);
-      return false;
+      // Si hay error en la consulta, asumimos que el correo existe para no bloquear usuarios legítimos
+      return true;
     }
   }
 
