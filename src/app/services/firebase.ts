@@ -42,8 +42,8 @@ export class Firebase {
   //== Crear Usuario Completo (Authentication + Firestore) ==
   async createUserComplete(userData: CrearUsuario) {
     try {
-      // 1. Crear usuario en Firebase Authentication usando AngularFire
-      const userCredential = await this.auth.createUserWithEmailAndPassword(userData.correo, userData.contrasena);
+      // 1. Crear usuario en Firebase Authentication usando Firebase v9 (no afecta sesión actual)
+      const userCredential = await createUserWithEmailAndPassword(getAuth(), userData.correo, userData.contrasena);
       const uid = userCredential.user?.uid;
 
       if (!uid) {
@@ -65,7 +65,7 @@ export class Firebase {
       await this.setDocument(`users/${uid}`, userProfile);
 
       // 4. Actualizar el displayName en Authentication
-      await userCredential.user?.updateProfile({
+      await updateProfile(userCredential.user, {
         displayName: `${userData.nombres} ${userData.apellidos}`
       });
 

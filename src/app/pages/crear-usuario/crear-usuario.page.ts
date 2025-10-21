@@ -35,6 +35,7 @@ export class CrearUsuarioPage implements OnInit {
 
       this.firebaseSvc.createUserComplete(this.form.value as CrearUsuario).then(async res => {
         console.log('Usuario creado exitosamente:', res);
+        console.log('Usuario actual en localStorage:', localStorage.getItem('user'));
         
         // NO guardar en localStorage - solo crear el usuario
         // El localStorage debe mantenerse con el usuario admin actual
