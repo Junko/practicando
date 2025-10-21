@@ -52,7 +52,7 @@ export class CrearUsuarioPage implements OnInit {
         this.form.reset();
         
         // Navegar a la página principal
-        this.utilsSvc.routerLink('/home');
+        this.utilsSvc.routerLink('/main');
       
       }).catch(error => {
           console.error('Error al crear usuario:', error);

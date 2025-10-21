@@ -19,8 +19,8 @@ export const noAuthGuard: CanActivateFn = (
     console.log('No-Auth Guard - PERMITIDO (no autenticado)');
     return true;
   } else {
-    console.log('No-Auth Guard - BLOQUEADO - Redirigiendo a home');
-    utilsSvc.routerLink('/home');
+    console.log('No-Auth Guard - BLOQUEADO - Redirigiendo a main');
+    utilsSvc.routerLink('/main');
     return false;
   }
 };

@@ -67,7 +67,7 @@ export class LoginPage implements OnInit {
         position: 'top',
         icon: 'happy'
       });
-      this.utilsSvc.routerLink('/home');
+      this.utilsSvc.routerLink('/main');
     }
   }
 
