@@ -87,11 +87,16 @@ export class Firebase {
   //=== Verificar si el usuario existe ===
   async checkUserExists(email: string) {
     try {
+      console.log('Buscando usuario con email:', email);
+      
       // Buscar en la colección de usuarios por email
       const db = getFirestore();
       const usersRef = collection(db, 'users');
       const q = query(usersRef, where('correo', '==', email));
       const querySnapshot = await getDocs(q);
+      
+      console.log('Resultado de búsqueda:', querySnapshot.empty ? 'No encontrado' : 'Encontrado');
+      console.log('Número de documentos encontrados:', querySnapshot.size);
       
       return !querySnapshot.empty;
     } catch (error) {
@@ -103,7 +108,7 @@ export class Firebase {
   //=== Enviar email para restablecer contraseña (con validación) ===
   async sendRecoveryEmail(email: string) {
     try {
-      // Verificar si el usuario existe
+      // Verificar si el usuario existe en Firestore
       const userExists = await this.checkUserExists(email);
       
       if (!userExists) {
@@ -111,8 +116,16 @@ export class Firebase {
       }
       
       // Si el usuario existe, enviar el email de recuperación
+      console.log('Enviando email de recuperación a:', email);
       return sendPasswordResetEmail(getAuth(), email);
-    } catch (error) {
+    } catch (error: any) {
+      console.error('Error en sendRecoveryEmail:', error);
+      
+      // Si es un error de Firebase Auth, verificar si es porque el usuario no existe
+      if (error.code === 'auth/user-not-found') {
+        throw new Error('El correo electrónico no está registrado en el sistema');
+      }
+      
       throw error;
     }
   }
