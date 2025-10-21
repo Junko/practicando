@@ -94,48 +94,21 @@ export class LoginPage implements OnInit {
         this.utilsSvc.routerLink('/main');
       } else {
         console.error('No se encontró información del usuario en Firestore');
-        console.log('El usuario existe en Authentication pero no en Firestore');
-        console.log('Creando usuario en Firestore...');
+        console.log('El usuario existe en Authentication pero no tiene perfil en Firestore');
         
-        // Crear usuario en Firestore con datos básicos
-        const userData = {
-          uid: uid,
-          correo: this.form.value.correo,
-          nombres: 'Usuario',
-          apellidos: 'Sistema',
-          telefono: '',
-          rol: 'user',
-          creadoEn: new Date()
-        };
+        // Cerrar sesión porque no tiene perfil
+        await this.firebaseSvc.signOut();
         
-        try {
-          await this.firebaseSvc.setDocument(`users/${uid}`, userData);
-          console.log('Usuario creado en Firestore:', userData);
-          
-          // Guardar en localStorage
-          this.utilsSvc.saveInLocalStorage('user', userData);
-          
-          this.utilsSvc.presentToast({
-            message: `Te damos la bienvenida ${userData.nombres}`,
-            duration: 1500,
-            color: 'success',
-            position: 'top',
-            icon: 'happy'
-          });
-          
-          console.log('Redirigiendo a /main...');
-          this.utilsSvc.routerLink('/main');
-          
-        } catch (error) {
-          console.error('Error al crear usuario en Firestore:', error);
-          this.utilsSvc.presentToast({
-            message: 'Error al crear perfil de usuario',
-            duration: 3000,
-            color: 'danger',
-            position: 'top',
-            icon: 'warning'
-          });
-        }
+        this.utilsSvc.presentToast({
+          message: 'Usuario no tiene perfil. Contacta al administrador.',
+          duration: 3000,
+          color: 'danger',
+          position: 'top',
+          icon: 'warning'
+        });
+        
+        console.log('Redirigiendo a /login...');
+        this.utilsSvc.routerLink('/login');
       }
     } catch (error) {
       console.error('Error al obtener información del usuario:', error);
