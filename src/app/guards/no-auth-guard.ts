@@ -16,9 +16,13 @@ export const noAuthGuard: CanActivateFn = (
     const subscription = firebaseSvc.auth.authState.subscribe((auth) => {
       subscription.unsubscribe(); // Desuscribirse inmediatamente
       
+      console.log('No-Auth Guard - Auth:', auth);
+      
       if (!auth) {
+        console.log('No-Auth Guard - PERMITIDO (no autenticado)');
         resolve(true); // Permitir acceso si no está autenticado
       } else {
+        console.log('No-Auth Guard - BLOQUEADO - Redirigiendo a home');
         utilsSvc.routerLink('/home'); // Redirigir a home si ya está autenticado
         resolve(false);
       }

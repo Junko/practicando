@@ -51,8 +51,8 @@ export class CrearUsuarioPage implements OnInit {
         // Limpiar formulario
         this.form.reset();
         
-        // Navegar a la página principal (como en el tutorial)
-        this.utilsSvc.routerLink('/inicio');
+        // Navegar a la página principal
+        this.utilsSvc.routerLink('/home');
       
       }).catch(error => {
           console.error('Error al crear usuario:', error);
