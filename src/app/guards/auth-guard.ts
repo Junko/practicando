@@ -19,7 +19,7 @@ export const authGuard: CanActivateFn = (
       if (auth) {
         if (user) resolve(true);
       } else {
-        utilsSvc.routerLink('/auth');
+        utilsSvc.routerLink('/login');
         resolve(false);
       }
     });
