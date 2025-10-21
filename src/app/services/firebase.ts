@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, sendPasswordResetEmail } from 'firebase/auth';
-import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
+import { getFirestore, doc, setDoc, getDoc, collection, getDocs } from 'firebase/firestore';
 import { User, CrearUsuario } from '../models/user.model';
 
 @Injectable({
@@ -84,29 +84,22 @@ export class Firebase {
     return updateProfile(getAuth().currentUser, { displayName });
   }
 
-  //=== Verificar si un correo existe en el sistema ===
+  //=== Verificar si un correo existe en Firestore ===
   async checkEmailExists(email: string): Promise<boolean> {
     try {
-      // Intentar obtener información del usuario por email
-      // Firebase no tiene un método directo, pero podemos intentar hacer signIn
-      // y capturar el error específico
-      const auth = getAuth();
+      // Buscar en Firestore si existe un usuario con ese correo
+      const usersRef = getFirestore();
+      const usersSnapshot = await getDocs(collection(usersRef, 'users'));
       
-      // Intentar enviar email de recuperación
-      // Si el correo no existe, Firebase lanzará un error específico
-      await sendPasswordResetEmail(auth, email);
-      return true;
-    } catch (error: any) {
-      console.log('Error al verificar correo:', error);
+      const users = usersSnapshot.docs.map(doc => doc.data());
+      const userExists = users.some(user => user['correo'] === email);
       
-      // Códigos de error específicos de Firebase
-      if (error.code === 'auth/user-not-found') {
-        return false;
-      }
+      console.log('Verificando correo:', email, 'Existe:', userExists);
+      return userExists;
       
-      // Para otros errores, asumimos que el correo existe
-      // (por seguridad, no revelamos si existe o no)
-      return true;
+    } catch (error) {
+      console.error('Error al verificar correo en Firestore:', error);
+      return false;
     }
   }
 
