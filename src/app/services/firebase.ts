@@ -92,4 +92,9 @@ export class Firebase {
   sendRecoveryEmail(email: string) {
     return sendPasswordResetEmail(getAuth(), email);
   }
+
+  //=== Cerrar sesión ===
+  signOut() {
+    return this.auth.signOut();
+  }
 }
