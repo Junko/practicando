@@ -28,36 +28,34 @@ export class ForgotPasswordPage implements OnInit {
       await loading.present();
 
       try {
-        // Verificar si el correo existe en el sistema
-        const emailExists = await this.firebaseSvc.checkEmailExists(this.form.value.correo);
-        
-        if (emailExists) {
-          // Si el correo existe, enviar el email de recuperación
-          await this.firebaseSvc.sendRecoveryEmail(this.form.value.correo);
-          
-          this.utilsSvc.presentToast({
-            message: 'Se ha enviado un email de recuperación a tu correo',
-            duration: 4000,
-            color: 'success',
-            position: 'top',
-            icon: 'mail'
-          });
-        } else {
-          // Si el correo no existe, mostrar mensaje de error
-          this.utilsSvc.presentToast({
-            message: 'El correo electrónico no está registrado en nuestro sistema',
-            duration: 4000,
-            color: 'danger',
-            position: 'top',
-            icon: 'warning'
-          });
-        }
-        
-      } catch (error: any) {
-        console.error('Error al procesar solicitud:', error);
+        const res = await this.firebaseSvc.sendRecoveryEmail(this.form.value.correo);
+        console.log('Email de recuperación enviado:', res);
         
         this.utilsSvc.presentToast({
-          message: 'Error al procesar la solicitud. Inténtalo de nuevo.',
+          message: 'Se ha enviado un email de recuperación a tu correo',
+          duration: 3000,
+          color: 'success',
+          position: 'top',
+          icon: 'mail'
+        });
+
+        // Redirigir al login después de enviar el email
+        setTimeout(() => {
+          this.utilsSvc.routerLink('/login');
+        }, 2000);
+        
+      } catch (error: any) {
+        console.error('Error al enviar email:', error);
+        
+        let errorMessage = 'Error al enviar el email de recuperación';
+        
+        // Verificar si es un error de usuario no registrado
+        if (error.message && error.message.includes('no está registrado')) {
+          errorMessage = 'El correo electrónico no está registrado en el sistema';
+        }
+        
+        this.utilsSvc.presentToast({
+          message: errorMessage,
           duration: 4000,
           color: 'danger',
           position: 'top',

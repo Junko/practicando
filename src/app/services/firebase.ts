@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, sendPasswordResetEmail } from 'firebase/auth';
-import { getFirestore, doc, setDoc, getDoc, collection, getDocs } from 'firebase/firestore';
+import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
 import { User, CrearUsuario } from '../models/user.model';
 
 @Injectable({
@@ -84,42 +84,32 @@ export class Firebase {
     return updateProfile(getAuth().currentUser, { displayName });
   }
 
-  //=== Verificar si un correo existe en Firestore ===
-  async checkEmailExists(email: string): Promise<boolean> {
+  //=== Verificar si el usuario existe ===
+  async checkUserExists(email: string) {
     try {
-      console.log('Iniciando verificación de correo:', email);
-      
-      // Buscar en Firestore si existe un usuario con ese correo
-      const usersRef = getFirestore();
-      const usersCollection = collection(usersRef, 'users');
-      const usersSnapshot = await getDocs(usersCollection);
-      
-      console.log('Documentos encontrados:', usersSnapshot.docs.length);
-      
-      const users = usersSnapshot.docs.map(doc => {
-        const data = doc.data();
-        console.log('Usuario encontrado:', data);
-        return data;
-      });
-      
-      const userExists = users.some(user => {
-        const correo = user['correo'];
-        console.log('Comparando:', correo, 'con', email);
-        return correo === email;
-      });
-      
-      console.log('Resultado final - Correo existe:', userExists);
-      return userExists;
-      
+      // Intentar obtener el usuario por email
+      const userDoc = await this.getDocument(`users/${email}`);
+      return userDoc !== null;
     } catch (error) {
-      console.error('Error al verificar correo en Firestore:', error);
-      // Si hay error en la consulta, asumimos que el correo existe para no bloquear usuarios legítimos
-      return true;
+      console.error('Error al verificar usuario:', error);
+      return false;
     }
   }
 
-  //=== Enviar email para restablecer contraseña ===
-  sendRecoveryEmail(email: string) {
-    return sendPasswordResetEmail(getAuth(), email);
+  //=== Enviar email para restablecer contraseña (con validación) ===
+  async sendRecoveryEmail(email: string) {
+    try {
+      // Verificar si el usuario existe
+      const userExists = await this.checkUserExists(email);
+      
+      if (!userExists) {
+        throw new Error('El correo electrónico no está registrado en el sistema');
+      }
+      
+      // Si el usuario existe, enviar el email de recuperación
+      return sendPasswordResetEmail(getAuth(), email);
+    } catch (error) {
+      throw error;
+    }
   }
 }
