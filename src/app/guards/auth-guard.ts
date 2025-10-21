@@ -13,22 +13,16 @@ export const authGuard: CanActivateFn = (
   const utilsSvc = inject(Utils);
   
   let user = localStorage.getItem('user');
-
-  return new Promise((resolve) => {
-    const subscription = firebaseSvc.auth.authState.subscribe((auth) => {
-      subscription.unsubscribe(); // Desuscribirse inmediatamente
-      
-      console.log('Auth Guard - Auth:', auth);
-      console.log('Auth Guard - User localStorage:', user);
-      
-      if (auth && user) {
-        console.log('Auth Guard - PERMITIDO');
-        resolve(true);
-      } else {
-        console.log('Auth Guard - BLOQUEADO - Redirigiendo a login');
-        utilsSvc.routerLink('/login');
-        resolve(false);
-      }
-    });
-  });
+  
+  console.log('Auth Guard - User localStorage:', user);
+  
+  // Verificación simple: si hay usuario en localStorage, permitir acceso
+  if (user) {
+    console.log('Auth Guard - PERMITIDO');
+    return true;
+  } else {
+    console.log('Auth Guard - BLOQUEADO - Redirigiendo a login');
+    utilsSvc.routerLink('/login');
+    return false;
+  }
 };
