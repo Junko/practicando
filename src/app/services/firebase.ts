@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, sendPasswordResetEmail } from 'firebase/auth';
-import { getFirestore, doc, setDoc, getDoc, collection, query, where, getDocs } from 'firebase/firestore';
+import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
 import { User, CrearUsuario } from '../models/user.model';
 
 @Injectable({
@@ -84,49 +84,8 @@ export class Firebase {
     return updateProfile(getAuth().currentUser, { displayName });
   }
 
-  //=== Verificar si el usuario existe ===
-  async checkUserExists(email: string) {
-    try {
-      console.log('Buscando usuario con email:', email);
-      
-      // Buscar en la colección de usuarios por email
-      const db = getFirestore();
-      const usersRef = collection(db, 'users');
-      const q = query(usersRef, where('correo', '==', email));
-      const querySnapshot = await getDocs(q);
-      
-      console.log('Resultado de búsqueda:', querySnapshot.empty ? 'No encontrado' : 'Encontrado');
-      console.log('Número de documentos encontrados:', querySnapshot.size);
-      
-      return !querySnapshot.empty;
-    } catch (error) {
-      console.error('Error al verificar usuario:', error);
-      return false;
-    }
-  }
-
-  //=== Enviar email para restablecer contraseña (con validación) ===
-  async sendRecoveryEmail(email: string) {
-    try {
-      // Verificar si el usuario existe en Firestore
-      const userExists = await this.checkUserExists(email);
-      
-      if (!userExists) {
-        throw new Error('El correo electrónico no está registrado en el sistema');
-      }
-      
-      // Si el usuario existe, enviar el email de recuperación
-      console.log('Enviando email de recuperación a:', email);
-      return sendPasswordResetEmail(getAuth(), email);
-    } catch (error: any) {
-      console.error('Error en sendRecoveryEmail:', error);
-      
-      // Si es un error de Firebase Auth, verificar si es porque el usuario no existe
-      if (error.code === 'auth/user-not-found') {
-        throw new Error('El correo electrónico no está registrado en el sistema');
-      }
-      
-      throw error;
-    }
+  //=== Enviar email para restablecer contraseña ===
+  sendRecoveryEmail(email: string) {
+    return sendPasswordResetEmail(getAuth(), email);
   }
 }

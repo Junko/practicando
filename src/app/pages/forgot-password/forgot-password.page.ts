@@ -27,44 +27,31 @@ export class ForgotPasswordPage implements OnInit {
       const loading = await this.utilsSvc.loading();
       await loading.present();
 
-      try {
-        const res = await this.firebaseSvc.sendRecoveryEmail(this.form.value.correo);
+      this.firebaseSvc.sendRecoveryEmail(this.form.value.correo).then(res => {
         console.log('Email de recuperación enviado:', res);
         
         this.utilsSvc.presentToast({
-          message: 'Se ha enviado un email de recuperación a tu correo',
+          message: 'Se ha enviado un email de recuperación',
           duration: 3000,
           color: 'success',
           position: 'top',
           icon: 'mail'
         });
-
-        // Redirigir al login después de enviar el email
-        setTimeout(() => {
-          this.utilsSvc.routerLink('/login');
-        }, 2000);
-        
-      } catch (error: any) {
-        console.error('Error al enviar email:', error);
-        
-        let errorMessage = 'Error al enviar el email de recuperación';
-        
-        // Verificar si es un error de usuario no registrado
-        if (error.message && error.message.includes('no está registrado')) {
-          errorMessage = 'El correo electrónico no está registrado en el sistema';
-        }
-        
-        this.utilsSvc.presentToast({
-          message: errorMessage,
-          duration: 4000,
-          color: 'danger',
-          position: 'top',
-          icon: 'warning'
-        });
-        
-      } finally {
+      
+      }).catch(error => {
+          console.error('Error al enviar email:', error);
+          
+          this.utilsSvc.presentToast({
+            message: 'Error al enviar el email de recuperación',
+            duration: 3000,
+            color: 'danger',
+            position: 'top',
+            icon: 'warning'
+          });
+      
+      }).finally(() => {
         loading.dismiss();
-      }
+      })
     } else {
       console.log('Formulario inválido');
       this.form.markAllAsTouched();
