@@ -24,22 +24,14 @@ export class LoginPage implements OnInit {
   }
 
   async submit() {
-    console.log('=== INICIO LOGIN ===');
-    console.log('Formulario válido:', this.form.valid);
-    console.log('Datos del formulario:', this.form.value);
-    
     if (this.form.valid) {
-      // Limpiar localStorage antes del login
+      // Limpiar localStorage antes del login para evitar conflictos
       localStorage.removeItem('user');
-      console.log('localStorage limpiado');
 
       const loading = await this.utilsSvc.loading();
       await loading.present();
 
-      console.log('Llamando a Firebase signIn...');
       this.firebaseSvc.signIn(this.form.value as User).then(async res => {
-        console.log('Firebase signIn exitoso:', res);
-        console.log('UID del usuario:', res.user.uid);
         // Obtener perfil del usuario y guardar/navegar
         await this.getUserInfo(res.user.uid);
       
@@ -66,16 +58,11 @@ export class LoginPage implements OnInit {
 
   // Obtener información del usuario después del login
   async getUserInfo(uid: string) {
-    console.log('Obteniendo información del usuario con UID:', uid);
     const path = `users/${uid}`;
     const user = await this.firebaseSvc.getDocument(path) as any;
-    console.log('Usuario obtenido de Firestore:', user);
     
     if (user) {
-      console.log('Guardando usuario en localStorage...');
       this.utilsSvc.saveInLocalStorage('user', user);
-      console.log('Usuario guardado en localStorage');
-      
       this.utilsSvc.presentToast({
         message: `Te damos la bienvenida ${user.nombres}`,
         duration: 1500,
@@ -83,11 +70,7 @@ export class LoginPage implements OnInit {
         position: 'top',
         icon: 'happy'
       });
-      
-      console.log('Redirigiendo a /main...');
       this.utilsSvc.routerLink('/main');
-    } else {
-      console.error('No se encontró información del usuario en Firestore');
     }
   }
 
