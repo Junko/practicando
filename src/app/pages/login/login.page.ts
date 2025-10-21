@@ -58,10 +58,13 @@ export class LoginPage implements OnInit {
 
   // Obtener información del usuario después del login
   async getUserInfo(uid: string) {
+    console.log('UID del usuario:', uid);
     const path = `users/${uid}`;
     const user = await this.firebaseSvc.getDocument(path) as any;
+    console.log('Usuario obtenido de Firestore:', user);
     
     if (user) {
+      console.log('Guardando usuario en localStorage');
       this.utilsSvc.saveInLocalStorage('user', user);
       this.utilsSvc.presentToast({
         message: `Te damos la bienvenida ${user.nombres}`,
@@ -71,6 +74,15 @@ export class LoginPage implements OnInit {
         icon: 'happy'
       });
       this.utilsSvc.routerLink('/main');
+    } else {
+      console.error('No se encontró el usuario en Firestore');
+      this.utilsSvc.presentToast({
+        message: 'Error: No se encontró información del usuario',
+        duration: 3000,
+        color: 'danger',
+        position: 'top',
+        icon: 'warning'
+      });
     }
   }
 
