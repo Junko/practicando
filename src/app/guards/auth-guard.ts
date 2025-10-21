@@ -15,7 +15,9 @@ export const authGuard: CanActivateFn = (
   let user = localStorage.getItem('user');
 
   return new Promise((resolve) => {
-    firebaseSvc.auth.authState.subscribe((auth) => {
+    const subscription = firebaseSvc.auth.authState.subscribe((auth) => {
+      subscription.unsubscribe(); // Desuscribirse inmediatamente
+      
       if (auth && user) {
         resolve(true);
       } else {

@@ -25,6 +25,10 @@ export class Firebase {
 
   //=== AUTENTICACION ===
 
+  getAuth() {
+    return getAuth();
+  }
+
   //== Acceder ==
   signIn(user: User) {
     return signInWithEmailAndPassword(getAuth(), user.correo, user.contrasena);
