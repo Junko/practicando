@@ -1,0 +1,96 @@
+<ion-content [fullscreen]="true" class="usuarios-content">
+  <div class="content-wrapper">
+    <!-- Título -->
+    <div class="title-container">
+      <h1 class="page-title">Usuarios</h1>
+    </div>
+
+  <!-- Barra de búsqueda -->
+  <div class="search-container">
+    <ion-searchbar 
+      [(ngModel)]="searchTerm" 
+      (ionInput)="onSearchChange($event)"
+      placeholder="Buscar usuarios..."
+      class="custom-searchbar">
+    </ion-searchbar>
+  </div>
+
+  <!-- Filtros -->
+  <div class="filters-container">
+    <span class="filters-label">Filtros:</span>
+    <div class="filter-buttons">
+      <ion-button 
+        [class.active]="selectedFilter === 'padres'"
+        (click)="setFilter('padres')"
+        class="filter-btn">
+        Padres
+      </ion-button>
+      <ion-button 
+        [class.active]="selectedFilter === 'admins'"
+        (click)="setFilter('admins')"
+        class="filter-btn">
+        Admins
+      </ion-button>
+    </div>
+  </div>
+
+  <!-- Lista de usuarios -->
+  <div class="users-list">
+    <div 
+      *ngFor="let user of filteredUsers" 
+      class="user-card">
+      <div class="user-info">
+        <div class="user-avatar">
+          <img [src]="user.avatar" [alt]="user.name" class="avatar-img">
+        </div>
+        <div class="user-details">
+          <h3 class="user-name">{{ user.name }}</h3>
+          <p class="user-email">{{ user.email }}</p>
+        </div>
+      </div>
+      <div class="user-actions">
+        <ion-button fill="clear" (click)="editUser(user)" class="action-btn">
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" (click)="deleteUser(user)" class="action-btn">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botón crear usuario -->
+  <div class="create-user-container">
+    <ion-button 
+      (click)="createUser()" 
+      class="create-user-btn"
+      expand="block">
+      + Crear Nuevo Usuario
+    </ion-button>
+  </div>
+
+  <!-- Navegación inferior -->
+  <div class="bottom-navigation">
+    <div class="nav-item" [class.active]="currentPage === 'inicio'" (click)="navigateTo('inicio')">
+      <ion-icon name="home-outline"></ion-icon>
+      <span>Inicio</span>
+    </div>
+    <div class="nav-item" [class.active]="currentPage === 'usuario'" (click)="navigateTo('usuario')">
+      <ion-icon name="people-outline"></ion-icon>
+      <span>Usuario</span>
+    </div>
+    <div class="nav-item" [class.active]="currentPage === 'utilidades'" (click)="navigateTo('utilidades')">
+      <ion-icon name="construct-outline"></ion-icon>
+      <span>Utilidades</span>
+    </div>
+    <div class="nav-item" [class.active]="currentPage === 'aulas'" (click)="navigateTo('aulas')">
+      <ion-icon name="grid-outline"></ion-icon>
+      <span>Aulas</span>
+    </div>
+    <div class="nav-item" [class.active]="currentPage === 'reportes'" (click)="navigateTo('reportes')">
+      <ion-icon name="document-text-outline"></ion-icon>
+      <span>Reportes</span>
+    </div>
+  </div>
+  </div>
+</ion-content>

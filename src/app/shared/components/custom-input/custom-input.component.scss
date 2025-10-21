@@ -1,0 +1,31 @@
+.custom-input-container {
+  position: relative;
+  width: 100%;
+  
+  ion-input {
+    --background: white;
+    --border-radius: 8px;
+    --border-width: 1px;
+    --border-color: #ddd;
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --padding-top: 16px;
+    --padding-bottom: 16px;
+    font-size: 16px;
+    color: black;
+    width: 100%;
+  }
+  
+  .password-toggle {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    --color: #666;
+    z-index: 10;
+    
+    &:hover {
+      --color: black;
+    }
+  }
+}

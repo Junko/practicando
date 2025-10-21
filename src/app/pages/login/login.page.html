@@ -1,0 +1,50 @@
+
+<ion-content [fullscreen]="true" class="login-content">
+  <!-- Logo Section -->
+  <div class="logo-section">
+    <img src="assets/montessori-logo.svg" alt="Logo" class="logo">
+  </div>
+
+  <!-- Login Form Section -->
+  <div class="form-section">
+    <form [formGroup]="form" class="login-form" (ngSubmit)="submit()" (keypress.enter)="submit()">
+      <h1 class="form-title">Iniciar sesión</h1>
+      
+      <div class="input-group">
+        <label class="input-label">EMAIL</label>
+        <app-custom-input 
+          [control]="form.controls.correo"
+          type="email"
+          label=""
+          icon=""
+          autocomplete="email">
+        </app-custom-input>
+        <div class="validators" *ngIf="form.controls.correo.errors && form.controls.correo.touched">
+          <div *ngIf="form.controls.correo.errors?.['required']">El correo es requerido</div>
+          <div *ngIf="form.controls.correo.errors?.['email']">Ingrese un correo válido</div>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">CONTRASEÑA</label>
+        <app-custom-input 
+          [control]="form.controls.contrasena"
+          type="password"
+          label=""
+          icon=""
+          autocomplete="current-password">
+        </app-custom-input>
+        <div class="validators" *ngIf="form.controls.contrasena.errors && form.controls.contrasena.touched">
+          <div *ngIf="form.controls.contrasena.errors?.['required']">La contraseña es requerida</div>
+        </div>
+      </div>
+
+      <ion-button expand="block" mode="ios" fill="solid" color="dark" type="submit">Entrar</ion-button>
+
+      <div class="form-links">
+        <p routerLink="/forgot-password" class="form-link">¿Has olvidado la contraseña?</p>
+      </div>
+
+    </form>
+  </div>
+</ion-content>
