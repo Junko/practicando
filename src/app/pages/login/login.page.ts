@@ -95,15 +95,47 @@ export class LoginPage implements OnInit {
       } else {
         console.error('No se encontró información del usuario en Firestore');
         console.log('El usuario existe en Authentication pero no en Firestore');
-        console.log('Esto puede pasar si el usuario se creó solo en Authentication');
+        console.log('Creando usuario en Firestore...');
         
-        this.utilsSvc.presentToast({
-          message: 'Error: No se encontró información del usuario en la base de datos',
-          duration: 3000,
-          color: 'danger',
-          position: 'top',
-          icon: 'warning'
-        });
+        // Crear usuario en Firestore con datos básicos
+        const userData = {
+          uid: uid,
+          correo: this.form.value.correo,
+          nombres: 'Usuario',
+          apellidos: 'Sistema',
+          telefono: '',
+          rol: 'user',
+          creadoEn: new Date()
+        };
+        
+        try {
+          await this.firebaseSvc.setDocument(`users/${uid}`, userData);
+          console.log('Usuario creado en Firestore:', userData);
+          
+          // Guardar en localStorage
+          this.utilsSvc.saveInLocalStorage('user', userData);
+          
+          this.utilsSvc.presentToast({
+            message: `Te damos la bienvenida ${userData.nombres}`,
+            duration: 1500,
+            color: 'success',
+            position: 'top',
+            icon: 'happy'
+          });
+          
+          console.log('Redirigiendo a /main...');
+          this.utilsSvc.routerLink('/main');
+          
+        } catch (error) {
+          console.error('Error al crear usuario en Firestore:', error);
+          this.utilsSvc.presentToast({
+            message: 'Error al crear perfil de usuario',
+            duration: 3000,
+            color: 'danger',
+            position: 'top',
+            icon: 'warning'
+          });
+        }
       }
     } catch (error) {
       console.error('Error al obtener información del usuario:', error);
