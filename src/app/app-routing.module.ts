@@ -42,7 +42,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/main/main.module').then( m => m.MainPageModule)
   },
   {
-    path: 'main/home',
+    path: 'home',
     loadChildren: () => import('./pages/main/home/home.module').then( m => m.HomePageModule), canActivate:[authGuard]
   }
 ];
