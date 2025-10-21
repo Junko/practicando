@@ -14,14 +14,18 @@ export const authGuard: CanActivateFn = (
   
   let user = localStorage.getItem('user');
   
-  console.log('Auth Guard - User localStorage:', user);
+  console.log('=== AUTH GUARD ===');
+  console.log('Ruta solicitada:', state.url);
+  console.log('User localStorage:', user);
+  console.log('User parseado:', user ? JSON.parse(user) : null);
   
   // Verificación simple: si hay usuario en localStorage, permitir acceso
   if (user) {
-    console.log('Auth Guard - PERMITIDO');
+    console.log('Auth Guard - PERMITIDO - Usuario encontrado en localStorage');
     return true;
   } else {
-    console.log('Auth Guard - BLOQUEADO - Redirigiendo a login');
+    console.log('Auth Guard - BLOQUEADO - No hay usuario en localStorage');
+    console.log('Redirigiendo a /login...');
     utilsSvc.routerLink('/login');
     return false;
   }
