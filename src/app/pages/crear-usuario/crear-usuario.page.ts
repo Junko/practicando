@@ -36,8 +36,8 @@ export class CrearUsuarioPage implements OnInit {
       this.firebaseSvc.createUserComplete(this.form.value as CrearUsuario).then(async res => {
         console.log('Usuario creado exitosamente:', res);
         
-        // Guardar usuario en localStorage (como en el tutorial)
-        this.utilsSvc.saveInLocalStorage('user', res.profile);
+        // NO guardar en localStorage - solo crear el usuario
+        // El localStorage debe mantenerse con el usuario admin actual
         
         // Mostrar mensaje de éxito
         this.utilsSvc.presentToast({
@@ -51,8 +51,8 @@ export class CrearUsuarioPage implements OnInit {
         // Limpiar formulario
         this.form.reset();
         
-        // Navegar a la página principal
-        this.utilsSvc.routerLink('/main');
+        // NO navegar - mantener al admin en la página de crear usuario
+        // El admin puede crear múltiples usuarios sin perder su sesión
       
       }).catch(error => {
           console.error('Error al crear usuario:', error);
