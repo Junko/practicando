@@ -17,7 +17,7 @@ export const noAuthGuard: CanActivateFn = (
       if (!auth) {
         resolve(false);
       } else {
-        utilsSvc.routerLink('/main/home');
+        utilsSvc.routerLink('/login');
       }
     });
   });

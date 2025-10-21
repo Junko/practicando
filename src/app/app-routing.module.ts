@@ -34,16 +34,12 @@ const routes: Routes = [
     loadChildren: () => import('./pages/usuarios-crud/usuarios-crud.module').then( m => m.UsuariosCrudPageModule)
   },
   {
+    path: 'main',
+    loadChildren: () => import('./pages/main/main.module').then( m => m.MainPageModule), canActivate:[authGuard]
+  },
+  {
     path: '**',
     redirectTo: 'login'
-  },
-  {
-    path: 'main',
-    loadChildren: () => import('./pages/main/main.module').then( m => m.MainPageModule)
-  },
-  {
-    path: 'home',
-    loadChildren: () => import('./pages/main/home/home.module').then( m => m.HomePageModule), canActivate:[authGuard]
   }
 ];
 
