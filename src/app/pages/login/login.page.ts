@@ -70,31 +70,45 @@ export class LoginPage implements OnInit {
     const path = `users/${uid}`;
     console.log('Buscando en Firestore en la ruta:', path);
     
-    const user = await this.firebaseSvc.getDocument(path) as any;
-    console.log('Usuario obtenido de Firestore:', user);
-    
-    if (user) {
-      console.log('Guardando usuario en localStorage...');
-      this.utilsSvc.saveInLocalStorage('user', user);
+    try {
+      const user = await this.firebaseSvc.getDocument(path) as any;
+      console.log('Usuario obtenido de Firestore:', user);
       
-      // Verificar que se guardó
-      const savedUser = localStorage.getItem('user');
-      console.log('Usuario guardado en localStorage:', savedUser);
-      
+      if (user) {
+        console.log('Guardando usuario en localStorage...');
+        this.utilsSvc.saveInLocalStorage('user', user);
+        
+        // Verificar que se guardó
+        const savedUser = localStorage.getItem('user');
+        console.log('Usuario guardado en localStorage:', savedUser);
+        
+        this.utilsSvc.presentToast({
+          message: `Te damos la bienvenida ${user.nombres}`,
+          duration: 1500,
+          color: 'success',
+          position: 'top',
+          icon: 'happy'
+        });
+        
+        console.log('Redirigiendo a /main...');
+        this.utilsSvc.routerLink('/main');
+      } else {
+        console.error('No se encontró información del usuario en Firestore');
+        console.log('El usuario existe en Authentication pero no en Firestore');
+        console.log('Esto puede pasar si el usuario se creó solo en Authentication');
+        
+        this.utilsSvc.presentToast({
+          message: 'Error: No se encontró información del usuario en la base de datos',
+          duration: 3000,
+          color: 'danger',
+          position: 'top',
+          icon: 'warning'
+        });
+      }
+    } catch (error) {
+      console.error('Error al obtener información del usuario:', error);
       this.utilsSvc.presentToast({
-        message: `Te damos la bienvenida ${user.nombres}`,
-        duration: 1500,
-        color: 'success',
-        position: 'top',
-        icon: 'happy'
-      });
-      
-      console.log('Redirigiendo a /main...');
-      this.utilsSvc.routerLink('/main');
-    } else {
-      console.error('No se encontró información del usuario en Firestore');
-      this.utilsSvc.presentToast({
-        message: 'Error: No se encontró información del usuario',
+        message: 'Error al conectar con la base de datos',
         duration: 3000,
         color: 'danger',
         position: 'top',
