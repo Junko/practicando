@@ -11,12 +11,15 @@ export const authGuard: CanActivateFn = (
   
   const firebaseSvc = inject(Firebase);
   const utilsSvc = inject(Utils);
+  
+  let user = localStorage.getItem('user');
 
   return new Promise((resolve) => {
     firebaseSvc.getAuth().onAuthStateChanged((auth) => {
       if (auth) {
-        resolve(true);
+        if (user) resolve(true);
       } else {
+        utilsSvc.routerLink('/auth');
         resolve(false);
       }
     });
