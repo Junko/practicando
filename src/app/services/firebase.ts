@@ -84,6 +84,32 @@ export class Firebase {
     return updateProfile(getAuth().currentUser, { displayName });
   }
 
+  //=== Verificar si un correo existe en el sistema ===
+  async checkEmailExists(email: string): Promise<boolean> {
+    try {
+      // Intentar obtener información del usuario por email
+      // Firebase no tiene un método directo, pero podemos intentar hacer signIn
+      // y capturar el error específico
+      const auth = getAuth();
+      
+      // Intentar enviar email de recuperación
+      // Si el correo no existe, Firebase lanzará un error específico
+      await sendPasswordResetEmail(auth, email);
+      return true;
+    } catch (error: any) {
+      console.log('Error al verificar correo:', error);
+      
+      // Códigos de error específicos de Firebase
+      if (error.code === 'auth/user-not-found') {
+        return false;
+      }
+      
+      // Para otros errores, asumimos que el correo existe
+      // (por seguridad, no revelamos si existe o no)
+      return true;
+    }
+  }
+
   //=== Enviar email para restablecer contraseña ===
   sendRecoveryEmail(email: string) {
     return sendPasswordResetEmail(getAuth(), email);

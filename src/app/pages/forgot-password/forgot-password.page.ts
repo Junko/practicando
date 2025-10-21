@@ -27,31 +27,46 @@ export class ForgotPasswordPage implements OnInit {
       const loading = await this.utilsSvc.loading();
       await loading.present();
 
-      this.firebaseSvc.sendRecoveryEmail(this.form.value.correo).then(res => {
-        console.log('Email de recuperación enviado:', res);
+      try {
+        // Verificar si el correo existe en el sistema
+        const emailExists = await this.firebaseSvc.checkEmailExists(this.form.value.correo);
         
-        this.utilsSvc.presentToast({
-          message: 'Se ha enviado un email de recuperación',
-          duration: 3000,
-          color: 'success',
-          position: 'top',
-          icon: 'mail'
-        });
-      
-      }).catch(error => {
-          console.error('Error al enviar email:', error);
+        if (emailExists) {
+          // Si el correo existe, enviar el email de recuperación
+          await this.firebaseSvc.sendRecoveryEmail(this.form.value.correo);
           
           this.utilsSvc.presentToast({
-            message: 'Error al enviar el email de recuperación',
-            duration: 3000,
+            message: 'Se ha enviado un email de recuperación a tu correo',
+            duration: 4000,
+            color: 'success',
+            position: 'top',
+            icon: 'mail'
+          });
+        } else {
+          // Si el correo no existe, mostrar mensaje de error
+          this.utilsSvc.presentToast({
+            message: 'El correo electrónico no está registrado en nuestro sistema',
+            duration: 4000,
             color: 'danger',
             position: 'top',
             icon: 'warning'
           });
-      
-      }).finally(() => {
+        }
+        
+      } catch (error: any) {
+        console.error('Error al procesar solicitud:', error);
+        
+        this.utilsSvc.presentToast({
+          message: 'Error al procesar la solicitud. Inténtalo de nuevo.',
+          duration: 4000,
+          color: 'danger',
+          position: 'top',
+          icon: 'warning'
+        });
+        
+      } finally {
         loading.dismiss();
-      })
+      }
     } else {
       console.log('Formulario inválido');
       this.form.markAllAsTouched();
