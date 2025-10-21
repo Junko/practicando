@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, sendPasswordResetEmail } from 'firebase/auth';
-import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
+import { getFirestore, doc, setDoc, getDoc, collection, query, where, getDocs } from 'firebase/firestore';
 import { User, CrearUsuario } from '../models/user.model';
 
 @Injectable({
@@ -87,9 +87,13 @@ export class Firebase {
   //=== Verificar si el usuario existe ===
   async checkUserExists(email: string) {
     try {
-      // Intentar obtener el usuario por email
-      const userDoc = await this.getDocument(`users/${email}`);
-      return userDoc !== null;
+      // Buscar en la colección de usuarios por email
+      const db = getFirestore();
+      const usersRef = collection(db, 'users');
+      const q = query(usersRef, where('correo', '==', email));
+      const querySnapshot = await getDocs(q);
+      
+      return !querySnapshot.empty;
     } catch (error) {
       console.error('Error al verificar usuario:', error);
       return false;
