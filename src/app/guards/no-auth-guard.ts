@@ -13,7 +13,7 @@ export const noAuthGuard: CanActivateFn = (
   const utilsSvc = inject(Utils);
 
   return new Promise((resolve) => {
-    firebaseSvc.getAuth().onAuthStateChanged((auth) => {
+    firebaseSvc.auth.authState.subscribe((auth) => {
       if (!auth) {
         resolve(false);
       } else {

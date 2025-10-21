@@ -15,7 +15,7 @@ export const authGuard: CanActivateFn = (
   let user = localStorage.getItem('user');
 
   return new Promise((resolve) => {
-    firebaseSvc.getAuth().onAuthStateChanged((auth) => {
+    firebaseSvc.auth.authState.subscribe((auth) => {
       if (auth) {
         if (user) resolve(true);
       } else {
