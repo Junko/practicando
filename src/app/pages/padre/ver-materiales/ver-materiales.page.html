@@ -1,0 +1,51 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/padre/inicio"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Ver materiales</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div id="container">
+    <h1 class="list-title">Lista de Carlos</h1>
+
+    <ion-card class="material-card">
+      <ion-card-content>
+        <div class="material-item">
+          <span>Cuaderno Rojo A4</span>
+          <ion-icon name="checkmark-circle" color="success"></ion-icon>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="material-card">
+      <ion-card-content>
+        <div class="material-item">
+          <span>Estuche clásico</span>
+          <ion-icon name="checkmark-circle" color="success"></ion-icon>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="material-card">
+      <ion-card-content>
+        <div class="material-item">
+          <span>Set de colores</span>
+          <ion-icon name="checkmark-circle" color="success"></ion-icon>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="material-card missing-item">
+      <ion-card-content>
+        <div class="material-item">
+          <span>Regla 30cm</span>
+          <ion-icon name="close-circle" color="danger"></ion-icon>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+</ion-content>
