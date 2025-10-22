@@ -1,0 +1,21 @@
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
+import { ListasCrudPage } from './listas-crud.page';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: ListasCrudPage
+  },  {
+    path: 'crear-listas',
+    loadChildren: () => import('./crear-listas/crear-listas.module').then( m => m.CrearListasPageModule)
+  }
+
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
+})
+export class ListasCrudPageRoutingModule {}

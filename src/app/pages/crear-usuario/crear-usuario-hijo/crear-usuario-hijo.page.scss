@@ -1,0 +1,158 @@
+.container {
+  padding: 20px;
+  background-color: #ffffff;
+  min-height: 100vh;
+}
+
+.instruction-text {
+  margin-bottom: 20px;
+  
+  p {
+    color: #000000;
+    font-size: 16px;
+    line-height: 1.4;
+    margin: 0;
+    text-align: left;
+  }
+}
+
+.form-container {
+  background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-field {
+  margin-bottom: 16px;
+  
+  label {
+    display: block;
+    color: #000000;
+    font-weight: 500;
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+  
+  ion-input, ion-select {
+    --background: #ffffff;
+    --color: #000000;
+    --border-radius: 8px;
+    --border-width: 1px;
+    --border-color: #000000;
+    --padding-start: 12px;
+    --padding-end: 12px;
+    --padding-top: 12px;
+    --padding-bottom: 12px;
+    font-size: 14px;
+  }
+  
+  ion-select {
+    --placeholder-color: #666666;
+  }
+}
+
+.form-row {
+  display: flex;
+  gap: 12px;
+  
+  .form-field.half {
+    flex: 1;
+    margin-bottom: 0;
+  }
+}
+
+.save-button {
+  --background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+  --color: #000000;
+  --border-radius: 12px;
+  --border-width: 0;
+  --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  height: 50px;
+  
+  ion-icon {
+    margin-right: 8px;
+  }
+}
+
+
+.hijos-list {
+  margin-bottom: 20px;
+  
+  h3 {
+    color: #000000;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+}
+
+.hijo-card {
+  margin-bottom: 8px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  
+  ion-card-content {
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.hijo-info {
+  display: flex;
+  flex-direction: column;
+  
+  .hijo-name {
+    font-weight: 600;
+    color: #000000;
+    font-size: 14px;
+    margin-bottom: 2px;
+  }
+  
+  .hijo-details {
+    color: #666666;
+    font-size: 12px;
+  }
+}
+
+.register-button {
+  --background: #333333;
+  --color: #ffffff;
+  --border-radius: 12px;
+  --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  font-weight: 600;
+  font-size: 16px;
+  height: 50px;
+  margin-top: 20px;
+  
+  &:disabled {
+    --background: #cccccc;
+    --color: #666666;
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+  
+  .form-container {
+    padding: 16px;
+  }
+  
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+    
+    .form-field.half {
+      margin-bottom: 16px;
+    }
+  }
+}

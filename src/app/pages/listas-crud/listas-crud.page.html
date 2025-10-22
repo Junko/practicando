@@ -1,0 +1,56 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>
+      <strong>Gestión de Listas</strong>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="navigateToCreate()" fill="solid" color="primary">
+        <ion-icon name="add" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="listas-crud-content">
+
+  <div class="content-container">
+    <h2 class="page-title">Listas de Útiles</h2>
+    <p class="page-subtitle">Gestiona las listas de útiles escolares</p>
+
+    <!-- Lista de listas existentes -->
+    <div class="lists-container">
+      <ion-card *ngFor="let lista of listas" class="lista-card">
+        <ion-card-header>
+          <ion-card-title>{{ lista.name }}</ion-card-title>
+          <ion-card-subtitle>{{ lista.nivel }} - {{ lista.grado }}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <p><strong>Año:</strong> {{ lista.anio }}</p>
+          <p><strong>Materiales:</strong> {{ lista.materiales?.length || 0 }} items</p>
+        </ion-card-content>
+        <ion-card-content>
+          <ion-button fill="outline" size="small" (click)="editLista(lista)">
+            <ion-icon name="create" slot="start"></ion-icon>
+            Editar
+          </ion-button>
+          <ion-button fill="outline" color="danger" size="small" (click)="deleteLista(lista)">
+            <ion-icon name="trash" slot="start"></ion-icon>
+            Eliminar
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <!-- Mensaje cuando no hay listas -->
+    <div *ngIf="listas.length === 0" class="empty-state">
+      <ion-icon name="list" size="large" color="medium"></ion-icon>
+      <h3>No hay listas creadas</h3>
+      <p>Crea tu primera lista de útiles escolares</p>
+      <ion-button (click)="navigateToCreate()" fill="solid" color="primary">
+        <ion-icon name="add" slot="start"></ion-icon>
+        Crear Lista
+      </ion-button>
+    </div>
+  </div>
+
+</ion-content>
