@@ -38,25 +38,25 @@ export const PADRE_TABS_CONFIG: TabsConfig = {
     {
       id: 'inicio',
       label: 'Inicio',
-      icon: 'home',
+      icon: 'home-outline',
       route: '/padre/inicio'
     },
     {
       id: 'listas',
-      label: 'Listas',
-      icon: 'list',
+      label: 'Lista',
+      icon: 'library-outline',
       route: '/padre/listas'
     },
     {
-      id: 'hijos',
-      label: 'Mis Hijos',
-      icon: 'people',
-      route: '/padre/hijos'
+      id: 'notificaciones',
+      label: 'Notificaciones',
+      icon: 'notifications-outline',
+      route: '/padre/notificaciones'
     },
     {
       id: 'perfil',
       label: 'Perfil',
-      icon: 'person',
+      icon: 'person-circle-outline',
       route: '/padre/perfil'
     }
   ],
