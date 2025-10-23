@@ -26,12 +26,12 @@ export class CrearListasPage implements OnInit {
     id: new FormControl(''),
     id_lista: new FormControl(''),
     nombre_material: new FormControl('', [Validators.required]),
+    descripcion: new FormControl(''),
     cantidad: new FormControl('', [Validators.required, Validators.min(1)]),
     imagen: new FormControl(''),
   });
 
   materiales: any[] = []; // Array para almacenar los materiales
-  showMaterialForm = false;
 
   utilsSvc = inject(Utils);
 
@@ -91,12 +91,9 @@ export class CrearListasPage implements OnInit {
     return `${grado} ${nivel} - ${anio}`;
   }
 
-  // Mostrar/ocultar formulario de material
-  toggleMaterialForm() {
-    this.showMaterialForm = !this.showMaterialForm;
-    if (!this.showMaterialForm) {
-      this.materialForm.reset();
-    }
+  // Limpiar formulario de material
+  clearMaterialForm() {
+    this.materialForm.reset();
   }
 
   // Agregar material a la lista
@@ -106,13 +103,13 @@ export class CrearListasPage implements OnInit {
         id: Date.now().toString(), // ID temporal
         id_lista: '', // Se asignará cuando se cree la lista
         nombre_material: this.materialForm.get('nombre_material')?.value,
+        descripcion: this.materialForm.get('descripcion')?.value || '',
         cantidad: this.materialForm.get('cantidad')?.value,
         imagen: this.materialForm.get('imagen')?.value || ''
       };
       
       this.materiales.push(material);
       this.materialForm.reset();
-      this.showMaterialForm = false;
     } else {
       this.materialForm.markAllAsTouched();
     }
@@ -121,7 +118,6 @@ export class CrearListasPage implements OnInit {
   // Editar material
   editMaterial(material: any) {
     this.materialForm.patchValue(material);
-    this.showMaterialForm = true;
   }
 
   // Eliminar material

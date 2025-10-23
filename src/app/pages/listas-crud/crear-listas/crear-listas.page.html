@@ -1,118 +1,98 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar>
+  <ion-toolbar class="header-toolbar">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/listas-crud"></ion-back-button>
+      <ion-back-button defaultHref="/listas-crud" class="back-button"></ion-back-button>
     </ion-buttons>
-    <ion-title>
-      <strong>Crear Lista</strong>
+    <ion-title class="header-title">
+      <strong>Editar</strong>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true" class="crear-listas-content">
 
-  <!-- Sección de Datos Generales -->
-  <div class="datos-generales-section">
-    <h2 class="section-title">Datos Generales de la Lista</h2>
-    
-    <form [formGroup]="form" class="datos-form">
+  <!-- Sección de Configuración de Lista (Blanca) -->
+  <div class="lista-config-section">
+    <form [formGroup]="form" class="config-form">
       
-      <div class="input-group">
-        <label class="input-label">NIVEL</label>
-        <ion-select [formControl]="form.controls.nivel" placeholder="Seleccione el nivel">
+      <div class="config-row">
+        <label class="config-label">Nivel:</label>
+        <ion-select [formControl]="form.controls.nivel" placeholder="Inicial" class="config-select">
           <ion-select-option value="Inicial">Inicial</ion-select-option>
           <ion-select-option value="Primaria">Primaria</ion-select-option>
           <ion-select-option value="Secundaria">Secundaria</ion-select-option>
         </ion-select>
-        <div class="validators" *ngIf="form.controls.nivel.errors && form.controls.nivel.touched">
-          <div *ngIf="form.controls.nivel.errors?.['required']">El nivel es requerido</div>
-        </div>
       </div>
 
-      <div class="input-group">
-        <label class="input-label">GRADO</label>
-        <ion-select [formControl]="form.controls.grado" placeholder="Seleccione el grado" [disabled]="!form.get('nivel')?.value">
+      <div class="config-row">
+        <label class="config-label">Grado:</label>
+        <ion-select [formControl]="form.controls.grado" placeholder="3°" [disabled]="!form.get('nivel')?.value" class="config-select">
           <ion-select-option *ngFor="let grado of gradosOptions" [value]="grado.value">
             {{ grado.label }}
           </ion-select-option>
         </ion-select>
-        <div class="validators" *ngIf="form.controls.grado.errors && form.controls.grado.touched">
-          <div *ngIf="form.controls.grado.errors?.['required']">El grado es requerido</div>
-        </div>
-        <div class="help-text" *ngIf="!form.get('nivel')?.value">
-          Primero seleccione el nivel
-        </div>
       </div>
 
-      <div class="input-group">
-        <label class="input-label">AÑO</label>
+      <div class="config-row">
+        <label class="config-label">Año:</label>
         <ion-input 
           [formControl]="form.controls.anio"
           type="number"
-          placeholder="Ingrese el año"
-          [min]="anioActual - 1"
-          [max]="anioActual + 1"
-          class="custom-input">
+          placeholder="2025"
+          [readonly]="true"
+          class="config-input readonly-input">
         </ion-input>
-        <div class="validators" *ngIf="form.controls.anio.errors && form.controls.anio.touched">
-          <div *ngIf="form.controls.anio.errors?.['required']">El año es requerido</div>
-          <div *ngIf="form.controls.anio.errors?.['min']">El año debe ser mayor o igual a {{ anioActual - 1 }}</div>
-          <div *ngIf="form.controls.anio.errors?.['max']">El año debe ser menor o igual a {{ anioActual + 1 }}</div>
-        </div>
-        <div class="help-text">
-          Año actual: {{ anioActual }}
-        </div>
       </div>
     </form>
   </div>
 
-  <!-- Barra de Título de la Lista (Fondo Amarillo) -->
-  <div class="lista-title-bar" *ngIf="form.get('grado')?.value && form.get('nivel')?.value && form.get('anio')?.value">
-    <h3 class="lista-title">Lista: {{ getListaTitle() }}</h3>
-  </div>
-
-  <!-- Sección de Gestión de Materiales -->
-  <div class="materiales-section">
-    <div class="materiales-header">
-      <h3 class="materiales-title">Items:</h3>
-      <ion-button (click)="toggleMaterialForm()" fill="solid" color="success" size="small">
-        <ion-icon name="add" slot="start"></ion-icon>
-        Añadir Item
-      </ion-button>
+  <!-- Sección Principal Amarilla con Lista -->
+  <div class="main-yellow-section">
+    <!-- Título de la Lista -->
+    <div class="lista-title-container" *ngIf="form.get('grado')?.value && form.get('nivel')?.value && form.get('anio')?.value">
+      <h2 class="lista-title">Lista: {{ getListaTitle() }}</h2>
     </div>
 
-    <!-- Formulario para Añadir/Editar Material -->
-    <div class="material-form-container" *ngIf="showMaterialForm">
+    <!-- Header con Items y Botón -->
+    <div class="items-header">
+      <span class="items-label">Items:</span>
+    </div>
+
+    <!-- Formulario para Añadir/Editar Material (Blanco dentro del amarillo) - Siempre visible -->
+    <div class="material-form-container">
       <form [formGroup]="materialForm" class="material-form">
-        <div class="input-group">
-          <label class="input-label">NOMBRE DEL MATERIAL</label>
+        <div class="material-input-group">
+          <label class="material-label">Nombre:</label>
           <ion-input 
             [formControl]="materialForm.controls.nombre_material"
             type="text"
-            placeholder="Ej: Cuaderno Verde A4"
-            class="custom-input">
+            placeholder="Cuaderno Verde A4"
+            class="material-input">
           </ion-input>
-          <div class="validators" *ngIf="materialForm.controls.nombre_material.errors && materialForm.controls.nombre_material.touched">
-            <div *ngIf="materialForm.controls.nombre_material.errors?.['required']">El nombre es requerido</div>
-          </div>
         </div>
 
-        <div class="input-group">
-          <label class="input-label">CANTIDAD</label>
+        <div class="material-input-group">
+          <label class="material-label">Descripción:</label>
+          <ion-textarea 
+            [formControl]="materialForm.controls.descripcion"
+            placeholder="Cuaderno nuevo de color o forrado en verde para el curso de Ciencias Sociales"
+            class="material-textarea"
+            rows="3">
+          </ion-textarea>
+        </div>
+
+        <div class="material-input-group">
+          <label class="material-label">Cantidad:</label>
           <ion-input 
             [formControl]="materialForm.controls.cantidad"
             type="number"
             placeholder="Ej: 2"
-            class="custom-input">
+            class="material-input">
           </ion-input>
-          <div class="validators" *ngIf="materialForm.controls.cantidad.errors && materialForm.controls.cantidad.touched">
-            <div *ngIf="materialForm.controls.cantidad.errors?.['required']">La cantidad es requerida</div>
-            <div *ngIf="materialForm.controls.cantidad.errors?.['min']">Mínimo 1</div>
-          </div>
         </div>
 
-        <div class="input-group">
-          <label class="input-label">IMAGEN DEL MATERIAL</label>
+        <div class="material-input-group">
+          <label class="material-label">Imagen del Material:</label>
           <div class="image-container">
             <ion-avatar *ngIf="materialForm.get('imagen')?.value" class="material-avatar">
               <img [src]="materialForm.get('imagen')?.value" alt="Imagen del material">
@@ -125,36 +105,36 @@
           </div>
         </div>
 
-        <ion-button (click)="addMaterial()" expand="block" fill="solid" color="success" type="button">
+        <button class="save-btn" (click)="addMaterial()" type="button">
           Guardar
-        </ion-button>
+        </button>
       </form>
     </div>
 
-    <!-- Lista de Materiales Existentes -->
-    <div class="materiales-list" *ngIf="materiales.length > 0">
-      <div class="material-item" *ngFor="let material of materiales">
-        <div class="material-info">
+    <!-- Sección de Items Existentes -->
+    <div class="items-list-container">
+      <div class="material-item-white" *ngFor="let material of materiales">
+        <div class="material-content">
           <h4 class="material-name">{{ material.nombre_material }}</h4>
-          <p class="material-details">Cantidad: {{ material.cantidad }}</p>
-          <p class="material-description" *ngIf="material.imagen">{{ material.imagen }}</p>
+          <p class="material-description">{{ material.descripcion || 'Sin descripción' }}</p>
+          <p class="material-quantity">Cantidad: {{ material.cantidad }}</p>
         </div>
         <div class="material-actions">
-          <ion-button (click)="editMaterial(material)" fill="clear" size="small">
-            <ion-icon name="create" color="primary"></ion-icon>
+          <ion-button (click)="editMaterial(material)" fill="clear" size="small" class="action-btn">
+            <ion-icon name="create" color="dark"></ion-icon>
           </ion-button>
-          <ion-button (click)="deleteMaterial(material)" fill="clear" size="small">
-            <ion-icon name="trash" color="danger"></ion-icon>
+          <ion-button (click)="deleteMaterial(material)" fill="clear" size="small" class="action-btn">
+            <ion-icon name="trash" color="dark"></ion-icon>
           </ion-button>
         </div>
       </div>
-    </div>
 
-    <!-- Mensaje cuando no hay materiales -->
-    <div class="empty-materials" *ngIf="materiales.length === 0 && !showMaterialForm">
-      <ion-icon name="list" size="large" color="medium"></ion-icon>
-      <p>No hay materiales agregados</p>
-      <p>Haz clic en "Añadir Item" para comenzar</p>
+      <!-- Mensaje cuando no hay materiales -->
+      <div class="empty-materials" *ngIf="materiales.length === 0">
+        <ion-icon name="list" size="large" color="medium"></ion-icon>
+        <p>No hay materiales agregados</p>
+        <p>Completa el formulario de arriba para añadir items</p>
+      </div>
     </div>
   </div>
 

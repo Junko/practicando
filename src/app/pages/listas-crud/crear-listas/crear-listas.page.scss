@@ -1,149 +1,172 @@
 .crear-listas-content {
-  --background: #f5f5f5;
+  --background: white;
 }
 
-// Sección de Datos Generales
-.datos-generales-section {
+// Header
+.header-toolbar {
+  --background: white;
+  --color: black;
+}
+
+.header-title {
+  font-weight: bold;
+  color: black;
+  font-family: sans-serif;
+}
+
+.back-button {
+  --color: black;
+}
+
+// Sección de Configuración de Lista (Blanca)
+.lista-config-section {
   background: white;
-  margin: 20px;
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  margin-bottom: 0;
 }
 
-.section-title {
-  color: #333;
-  font-size: 1.3rem;
-  font-weight: 600;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.datos-form {
-  .input-group {
-    margin-bottom: 20px;
+.config-form {
+  .config-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 
-  .input-label {
-    display: block;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 8px;
-    font-size: 0.9rem;
+  .config-label {
+    font-weight: bold;
+    color: black;
+    font-family: sans-serif;
+    font-size: 14px;
+    margin-right: 15px;
+    min-width: 60px;
   }
 
-  ion-select {
-    --background: #f8f9fa;
+  .config-select, .config-input {
+    flex: 1;
+    --background: #f5f5f5;
     --border-radius: 8px;
     --padding-start: 12px;
     --padding-end: 12px;
     --padding-top: 12px;
     --padding-bottom: 12px;
-    border: 1px solid #e9ecef;
+    border: 1px solid #e0e0e0;
     border-radius: 8px;
+    font-family: sans-serif;
   }
 
-  .custom-input {
-    --background: #f8f9fa;
-    --border-radius: 8px;
-    --padding-start: 12px;
-    --padding-end: 12px;
-    --padding-top: 12px;
-    --padding-bottom: 12px;
-    border: 1px solid #e9ecef;
-    border-radius: 8px;
+  .readonly-input {
+    --background: #f0f0f0;
+    --color: #666;
+    cursor: not-allowed;
   }
 
-  .validators {
-    color: #dc3545;
-    font-size: 0.8rem;
-    margin-top: 5px;
-  }
-
-  .help-text {
-    color: #666;
-    font-size: 0.8rem;
-    margin-top: 5px;
-    font-style: italic;
+  .config-select {
+    --placeholder-color: #999;
   }
 }
 
-// Barra de Título de la Lista (Fondo Amarillo)
-.lista-title-bar {
+// Sección Principal Amarilla
+.main-yellow-section {
   background: #ffc107;
-  margin: 20px;
-  padding: 15px;
-  border-radius: 8px;
-  text-align: center;
+  border-radius: 15px 15px 0 0;
+  padding: 20px;
+  margin-top: 0;
+  margin-left: 0;
+  margin-right: 0;
+  min-height: calc(100vh - 250px);
+}
+
+.lista-title-container {
+  margin-bottom: 20px;
 }
 
 .lista-title {
-  color: #333;
-  font-size: 1.2rem;
-  font-weight: 700;
+  font-weight: bold;
+  color: black;
+  font-family: sans-serif;
+  font-size: 18px;
   margin: 0;
+  text-align: left;
 }
 
-// Sección de Materiales
-.materiales-section {
-  background: white;
-  margin: 20px;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.materiales-header {
+.items-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.materiales-title {
-  color: #333;
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin: 0;
+.items-label {
+  font-weight: bold;
+  color: black;
+  font-family: sans-serif;
+  font-size: 16px;
 }
 
-// Formulario de Material
-.material-form-container {
-  background: #f8f9fa;
-  padding: 20px;
+.add-item-btn {
+  background: #666;
+  color: white;
+  border: none;
   border-radius: 8px;
+  padding: 8px 16px;
+  font-family: sans-serif;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  
+  &:hover {
+    background: #555;
+  }
+}
+
+.add-icon {
+  font-size: 16px;
+  color: white;
+}
+
+// Formulario de Material (Blanco dentro del amarillo)
+.material-form-container {
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
   margin-bottom: 20px;
-  border: 1px solid #e9ecef;
 }
 
 .material-form {
-  .input-group {
+  .material-input-group {
     margin-bottom: 15px;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 
-  .input-label {
+  .material-label {
     display: block;
-    font-weight: 600;
-    color: #333;
+    font-weight: bold;
+    color: black;
+    font-family: sans-serif;
+    font-size: 14px;
     margin-bottom: 8px;
-    font-size: 0.9rem;
   }
 
-  .custom-input, .custom-textarea {
-    --background: white;
+  .material-input, .material-textarea {
+    --background: #f5f5f5;
     --border-radius: 8px;
     --padding-start: 12px;
     --padding-end: 12px;
     --padding-top: 12px;
     --padding-bottom: 12px;
-    border: 1px solid #e9ecef;
+    border: 1px solid #e0e0e0;
     border-radius: 8px;
-  }
-
-  .validators {
-    color: #dc3545;
-    font-size: 0.8rem;
-    margin-top: 5px;
+    font-family: sans-serif;
+    width: 100%;
   }
 
   .image-container {
@@ -176,57 +199,92 @@
   }
 }
 
-// Lista de Materiales
-.materiales-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+.save-btn {
+  background: #666;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-family: sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  width: 100%;
+  cursor: pointer;
+  margin-top: 15px;
+  
+  &:hover {
+    background: #555;
+  }
 }
 
-.material-item {
+// Sección de Items Existentes dentro del contenedor amarillo
+.items-list-container {
+  margin-top: 20px;
+}
+
+.material-item-white {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  background: #f8f9fa;
+  background: white;
   padding: 15px;
-  border-radius: 8px;
-  border: 1px solid #e9ecef;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
-.material-info {
+.material-content {
   flex: 1;
   
   .material-name {
-    color: #333;
-    font-size: 1rem;
-    font-weight: 600;
-    margin: 0 0 5px 0;
-  }
-  
-  .material-details {
-    color: #666;
-    font-size: 0.9rem;
+    font-weight: bold;
+    color: black;
+    font-family: sans-serif;
+    font-size: 16px;
     margin: 0 0 5px 0;
   }
   
   .material-description {
-    color: #888;
-    font-size: 0.8rem;
+    color: black;
+    font-family: sans-serif;
+    font-size: 14px;
+    margin: 0 0 5px 0;
+  }
+  
+  .material-quantity {
+    color: black;
+    font-family: sans-serif;
+    font-size: 12px;
     margin: 0;
-    font-style: italic;
   }
 }
 
 .material-actions {
   display: flex;
+  flex-direction: column;
   gap: 5px;
+}
+
+.action-btn {
+  --color: black;
+  --padding-start: 8px;
+  --padding-end: 8px;
+  --padding-top: 8px;
+  --padding-bottom: 8px;
 }
 
 // Estado vacío
 .empty-materials {
   text-align: center;
-  padding: 30px 20px;
+  padding: 20px;
   color: #666;
+  background: white;
+  border-radius: 10px;
+  margin-top: 15px;
   
   ion-icon {
     margin-bottom: 10px;
@@ -235,15 +293,18 @@
   p {
     margin: 5px 0;
     font-size: 0.9rem;
+    font-family: sans-serif;
   }
 }
 
 // Botón de crear lista
 .create-button-container {
-  padding: 20px;
+  padding: 10px 20px 20px 20px;
+  background: #ffc107;
   
   ion-button {
     --border-radius: 8px;
     font-weight: 600;
+    font-family: sans-serif;
   }
 }
