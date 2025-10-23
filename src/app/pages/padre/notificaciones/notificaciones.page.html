@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/padre/inicio"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Notificaciones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <div class="notification-icon-container">
+        <ion-icon name="close-circle"></ion-icon>
+      </div>
+      <div class="notification-details">
+        <div class="notification-title">Material faltante: Regla 30 cm</div>
+        <p>Dirígete a dirección para entregar el material que falta de la lista de Carlos</p>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-content>
+      <div class="notification-icon-container">
+        <ion-icon name="close-circle"></ion-icon>
+      </div>
+      <div class="notification-details">
+        <div class="notification-title">Material faltante: Cuaderno rojo A4</div>
+        <p>Dirígete a dirección para entregar el material que falta de la lista de Carlos</p>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-tabs>
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button tab="inicio" routerLink="/padre/inicio" routerDirection="root">
+          <ion-icon name="home-outline"></ion-icon>
+          <ion-label>Inicio</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="notificaciones" routerLink="/padre/notificaciones" routerDirection="root">
+          <ion-icon name="notifications-outline"></ion-icon>
+          <ion-label>Notificaciones</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="perfil" routerLink="/padre/perfil" routerDirection="root">
+          <ion-icon name="person-outline"></ion-icon>
+          <ion-label>Perfil</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-toolbar>
+</ion-footer>

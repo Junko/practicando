@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="padre-menu"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="profile-header">
+    <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="Profile Avatar" class="profile-avatar">
+    <ion-icon name="create-outline" class="edit-icon"></ion-icon>
+    <h1 class="profile-name">Rosa</h1>
+  </div>
+
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Información</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-icon name="mail-outline" slot="start" color="warning"></ion-icon>
+      <ion-label>Marisol@montessori.edu.pe</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="call-outline" slot="start" color="warning"></ion-icon>
+      <ion-label>952 111 005</ion-label>
+    </ion-item>
+
+    <ion-list-header>
+      <ion-label>Hijos</ion-label>
+    </ion-list-header>
+    <ion-card class="child-card">
+      <ion-card-content>
+        <div class="child-info">
+          <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="Child Avatar" class="child-avatar">
+          <div class="child-details">
+            <ion-card-title>Rafaela Lopez</ion-card-title>
+            <ion-card-subtitle>3º Primaria - C</ion-card-subtitle>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-item button (click)="changePassword()">
+      <ion-icon name="key-outline" slot="start"></ion-icon>
+      <ion-label>Cambiar Contraseña</ion-label>
+    </ion-item>
+    <ion-item button (click)="signOut()">
+      <ion-icon name="log-out-outline" slot="start"></ion-icon>
+      <ion-label>Cerrar Sesión</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-tabs>
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button tab="inicio" routerLink="/padre/inicio" routerDirection="root">
+          <ion-icon name="home-outline"></ion-icon>
+          <ion-label>Inicio</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="notificaciones" routerLink="/padre/notificaciones" routerDirection="root">
+          <ion-icon name="notifications-outline"></ion-icon>
+          <ion-label>Notificaciones</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="perfil" routerLink="/padre/perfil" routerDirection="root">
+          <ion-icon name="person-outline"></ion-icon>
+          <ion-label>Perfil</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-toolbar>
+</ion-footer>

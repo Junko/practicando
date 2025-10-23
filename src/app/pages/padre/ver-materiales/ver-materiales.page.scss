@@ -1,0 +1,48 @@
+.list-title {
+  font-size: 1.8em;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-left: 15px;
+  color: #333;
+}
+
+.material-card {
+  margin: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.material-card.missing-item {
+  background-color: #f8d7da; /* Light red for missing items */
+}
+
+.material-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.material-item span {
+  font-size: 1.1em;
+  color: #333;
+}
+
+.material-item ion-icon {
+  font-size: 1.5em;
+}
+
+ion-toolbar {
+  --background: #fff;
+  --color: #333;
+}
+
+ion-back-button {
+  color: #333;
+}
+
+ion-title {
+  color: #333;
+  font-weight: bold;
+}

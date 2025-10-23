@@ -3,6 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { padreGuard } from '../../guards/padre.guard';
 
 import { PadreInicioPage } from './inicio/padre-inicio.page';
+import { VerMaterialesPage } from './ver-materiales/ver-materiales.page';
+import { NotificacionesPage } from './notificaciones/notificaciones.page';
+import { PerfilPage } from './perfil/perfil.page';
 
 const routes: Routes = [
   {
@@ -14,7 +17,20 @@ const routes: Routes = [
     path: 'inicio',
     component: PadreInicioPage,
     canActivate: [padreGuard]
+  },
+  {
+    path: 'ver-materiales/:id',
+    component: VerMaterialesPage
+  },
+  {
+    path: 'notificaciones',
+    component: NotificacionesPage
+  },
+  {
+    path: 'perfil',
+    component: PerfilPage
   }
+
 ];
 
 @NgModule({
