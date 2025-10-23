@@ -1,6 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Firebase } from '../../../services/firebase';
 import { Utils } from '../../../services/utils';
+import { PADRE_TABS_CONFIG } from '../../../shared/configs/tabs-configs';
+import { TabsConfig } from '../../../shared/models/tab-config.model';
 
 @Component({
   selector: 'app-padre-inicio',
@@ -13,6 +15,7 @@ export class PadreInicioPage implements OnInit {
   userInfo: any = null;
   firebaseSvc = inject(Firebase);
   utilsSvc = inject(Utils);
+  tabsConfig: TabsConfig = PADRE_TABS_CONFIG;
 
   constructor() { }
 

@@ -1,19 +1,17 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
 
-import { HomePage } from './home.page';
+import { CustomTabsComponent } from './custom-tabs.component';
 
-describe('HomePage', () => {
-  let component: HomePage;
-  let fixture: ComponentFixture<HomePage>;
+describe('CustomTabsComponent', () => {
+  let component: CustomTabsComponent;
+  let fixture: ComponentFixture<CustomTabsComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomePage ],
-      imports: [IonicModule.forRoot()]
+      imports: [CustomTabsComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(HomePage);
+    fixture = TestBed.createComponent(CustomTabsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

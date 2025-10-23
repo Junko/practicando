@@ -1,0 +1,30 @@
+<ion-tabs>
+  <ion-tab *ngFor="let tab of config.tabs" [tab]="tab.id">
+    <div [id]="tab.id + '-page'">
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>{{ tab.label }}</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <div class="tab-content">
+          <ng-container *ngIf="tab.content; else dynamicContent">
+            {{ tab.content }}
+          </ng-container>
+          <ng-template #dynamicContent>
+            <div class="dynamic-content-placeholder">
+              Contenido dinámico para {{ tab.label }}
+            </div>
+          </ng-template>
+        </div>
+      </ion-content>
+    </div>
+  </ion-tab>
+
+  <ion-tab-bar [slot]="tabBarPosition">
+    <ion-tab-button *ngFor="let tab of config.tabs" [tab]="tab.id">
+      <ion-icon [name]="tab.icon"></ion-icon>
+      {{ tab.label }}
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

@@ -1,6 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Firebase } from '../../../services/firebase';
 import { Utils } from '../../../services/utils';
+import { ADMIN_TABS_CONFIG } from '../../../shared/configs/tabs-configs';
+import { TabsConfig } from '../../../shared/models/tab-config.model';
 
 @Component({
   selector: 'app-admin-inicio',
@@ -13,6 +15,7 @@ export class AdminInicioPage implements OnInit {
   userInfo: any = null;
   firebaseSvc = inject(Firebase);
   utilsSvc = inject(Utils);
+  tabsConfig: TabsConfig = ADMIN_TABS_CONFIG;
 
   constructor() { }
 

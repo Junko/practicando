@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Ejemplo de Tabs Personalizadas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="demo-controls">
+    <ion-button (click)="switchUserType()" fill="outline">
+      Cambiar a {{ userType === 'admin' ? 'Padre' : 'Admin' }}
+    </ion-button>
+    <p>Usuario actual: <strong>{{ userType | uppercase }}</strong></p>
+  </div>
+
+  <!-- Componente de tabs personalizado -->
+  <app-custom-tabs [config]="tabsConfig"></app-custom-tabs>
+</ion-content>

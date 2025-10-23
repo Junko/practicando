@@ -42,51 +42,6 @@
 <app-header title="Panel Padre" menuId="padre-menu"></app-header>
 
 <ion-content [fullscreen]="true" class="padre-content" id="padre-content">
-  <div class="welcome-section">
-    <h1>¡Bienvenido!</h1>
-    <p>Panel de padre de familia</p>
-    
-    <div class="user-info">
-      <h2>Información del padre:</h2>
-      <p><strong>Nombre:</strong> {{ userInfo?.nombres }} {{ userInfo?.apellidos }}</p>
-      <p><strong>Correo:</strong> {{ userInfo?.correo }}</p>
-      <p><strong>Teléfono:</strong> {{ userInfo?.telefono }}</p>
-    </div>
-    
-    <div class="padre-modules">
-      <h2>Opciones disponibles:</h2>
-      
-      <div class="module-grid">
-        <ion-card button routerLink="/padre/hijos">
-          <ion-card-header>
-            <ion-icon name="people-outline" size="large"></ion-icon>
-            <ion-card-title>Mis Hijos</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <p>Gestionar información de tus hijos</p>
-          </ion-card-content>
-        </ion-card>
-        
-        <ion-card button routerLink="/padre/notificaciones">
-          <ion-card-header>
-            <ion-icon name="notifications-outline" size="large"></ion-icon>
-            <ion-card-title>Notificaciones</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <p>Ver notificaciones sobre útiles olvidados</p>
-          </ion-card-content>
-        </ion-card>
-        
-        <ion-card button routerLink="/padre/perfil">
-          <ion-card-header>
-            <ion-icon name="person-outline" size="large"></ion-icon>
-            <ion-card-title>Mi Perfil</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <p>Actualizar información personal</p>
-          </ion-card-content>
-        </ion-card>
-      </div>
-    </div>
-  </div>
+  <!-- Componente de tabs personalizado para padre -->
+  <app-custom-tabs [config]="tabsConfig"></app-custom-tabs>
 </ion-content>

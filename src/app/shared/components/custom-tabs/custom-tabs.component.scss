@@ -1,0 +1,45 @@
+.tab-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 20px;
+}
+
+.dynamic-content-placeholder {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}
+
+// Estilos para las tabs
+ion-tab-bar {
+  --background: var(--ion-color-primary);
+  --color: var(--ion-color-primary-contrast);
+}
+
+ion-tab-button {
+  --color: var(--ion-color-medium);
+  --color-selected: var(--ion-color-primary-contrast);
+}
+
+// Estilos responsivos
+@media (max-width: 768px) {
+  ion-tab-button {
+    ion-icon {
+      font-size: 20px;
+    }
+    
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 769px) {
+  ion-tab-button {
+    ion-icon {
+      font-size: 24px;
+    }
+    
+    font-size: 14px;
+  }
+}
