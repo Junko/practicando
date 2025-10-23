@@ -143,17 +143,17 @@
 ion-tab-bar {
   --background: rgba(255, 197, 1);
   --border-color: transparent;
-  height: 70px;
-  padding-top: 8px;
-  padding-bottom: 8px;
+  height: 60px;
+  padding-top: 6px;
+  padding-bottom: 6px;
 }
 
 ion-tab-button {
   --color: rgba(27, 18, 19);
   --color-selected: rgba(27, 18, 19);
   font-weight: bold;
-  padding-top: 8px;
-  padding-bottom: 8px;
+  padding-top: 6px;
+  padding-bottom: 6px;
 }
 
 ion-tab-button ion-icon {
