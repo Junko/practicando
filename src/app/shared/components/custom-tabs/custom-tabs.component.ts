@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import {
   IonContent,
   IonHeader,
@@ -19,7 +20,7 @@ import { TabConfig, TabsConfig } from '../../models/tab-config.model';
   templateUrl: './custom-tabs.component.html',
   styleUrls: ['./custom-tabs.component.scss'],
   standalone: true,
-  imports: [CommonModule, IonContent, IonHeader, IonIcon, IonTab, IonTabBar, IonTabButton, IonTabs, IonTitle, IonToolbar],
+  imports: [CommonModule, RouterModule, IonContent, IonHeader, IonIcon, IonTab, IonTabBar, IonTabButton, IonTabs, IonTitle, IonToolbar],
 })
 export class CustomTabsComponent implements OnInit {
   @Input() config: TabsConfig = {

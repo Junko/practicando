@@ -39,25 +39,25 @@ export const PADRE_TABS_CONFIG: TabsConfig = {
       id: 'inicio',
       label: 'Inicio',
       icon: 'home',
-      content: 'Bienvenido al portal de padres'
+      route: '/padre/inicio'
     },
     {
       id: 'listas',
       label: 'Listas',
       icon: 'list',
-      content: 'Listas de útiles escolares para sus hijos'
+      route: '/padre/listas'
     },
     {
       id: 'hijos',
       label: 'Mis Hijos',
       icon: 'people',
-      content: 'Información de sus hijos registrados'
+      route: '/padre/hijos'
     },
     {
       id: 'perfil',
       label: 'Perfil',
       icon: 'person',
-      content: 'Configuración de su perfil de usuario'
+      route: '/padre/perfil'
     }
   ],
   tabBarPosition: 'bottom',
