@@ -20,3 +20,4 @@ import { PadreInicioPage } from './inicio/padre-inicio.page';
   ]
 })
 export class PadreModule {}
+

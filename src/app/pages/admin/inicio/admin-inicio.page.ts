@@ -36,3 +36,4 @@ export class AdminInicioPage implements OnInit {
   }
 
 }
+

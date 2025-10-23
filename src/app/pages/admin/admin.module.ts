@@ -20,3 +20,4 @@ import { AdminInicioPage } from './inicio/admin-inicio.page';
   ]
 })
 export class AdminModule {}
+
