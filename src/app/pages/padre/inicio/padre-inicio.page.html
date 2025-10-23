@@ -42,6 +42,84 @@
 <app-header title="Panel Padre" menuId="padre-menu"></app-header>
 
 <ion-content [fullscreen]="true" class="padre-content" id="padre-content">
-  <!-- Componente de tabs personalizado para padre -->
-  <app-custom-tabs [config]="tabsConfig"></app-custom-tabs>
+  <div id="container">
+    <h1 class="greeting">Hola, {{ userInfo?.nombres }}!</h1>
+    <p class="children-title">Mis Hijos</p>
+
+    <ion-card class="child-card">
+      <ion-card-content>
+        <div class="child-info">
+          <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="Child Avatar" class="child-avatar">
+          <div class="child-details">
+            <ion-card-title>Rafaela Lopez</ion-card-title>
+            <ion-card-subtitle>3º Primaria - C</ion-card-subtitle>
+            <p class="items-delivered">Items entregados - 4/4</p>
+            <div class="progress-bar-container">
+              <div class="progress-bar" style="width: 100%;"></div>
+            </div>
+          </div>
+        </div>
+        <ion-button expand="block" class="view-materials-button" routerLink="/padre/ver-materiales/1">
+          <ion-icon name="checkbox-outline" slot="start"></ion-icon>
+          Ver los materiales
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="child-card">
+      <ion-card-content>
+        <div class="child-info">
+          <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="Child Avatar" class="child-avatar">
+          <div class="child-details">
+            <ion-card-title>Carlos Lopez</ion-card-title>
+            <ion-card-subtitle>5º Inicial - A</ion-card-subtitle>
+            <p class="items-delivered">Items entregados - 1/4</p>
+            <div class="progress-bar-container">
+              <div class="progress-bar" style="width: 25%;"></div>
+            </div>
+          </div>
+        </div>
+        <ion-button expand="block" class="view-materials-button" routerLink="/padre/ver-materiales/2">
+          <ion-icon name="checkbox-outline" slot="start"></ion-icon>
+          Ver los materiales
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <div class="welcome-section">
+      <h2>Opciones disponibles:</h2>
+
+      <div class="module-grid">
+        <ion-card button routerLink="/padre/hijos">
+          <ion-card-header>
+            <ion-icon name="people-outline" size="large"></ion-icon>
+            <ion-card-title>Mis Hijos</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>Gestionar información de tus hijos</p>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card button routerLink="/padre/notificaciones">
+          <ion-card-header>
+            <ion-icon name="notifications-outline" size="large"></ion-icon>
+            <ion-card-title>Notificaciones</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>Ver notificaciones sobre útiles olvidados</p>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card button routerLink="/padre/perfil">
+          <ion-card-header>
+            <ion-icon name="person-outline" size="large"></ion-icon>
+            <ion-card-title>Mi Perfil</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>Actualizar información personal</p>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+  </div>
 </ion-content>
