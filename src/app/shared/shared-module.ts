@@ -14,18 +14,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CustomInputComponent,
     LogoComponent,
   ],
+  imports: [
+    CommonModule,
+    IonicModule,
+    ReactiveFormsModule,
+    FormsModule,
+    CustomTabsComponent
+  ],
   exports: [
     HeaderComponent,
     CustomInputComponent,
     LogoComponent,
     CustomTabsComponent,
     ReactiveFormsModule
-  ],
-  imports: [
-    CommonModule,
-    IonicModule,
-    ReactiveFormsModule,
-    FormsModule
   ]
 })
 export class SharedModule { }

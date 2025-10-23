@@ -6,12 +6,7 @@ import { MainPage } from './main.page';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },
-  {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    component: MainPage
   },
   {
     path: 'perfil',
