@@ -16,11 +16,16 @@
 ion-tab-bar {
   --background: rgba(255, 197, 1);
   --color: rgba(27, 18, 19);
+  height: 70px;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 ion-tab-button {
   --color: rgba(27, 18, 19);
   --color-selected: rgba(27, 18, 19);
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 // Estilos responsivos
