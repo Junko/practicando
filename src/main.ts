@@ -13,18 +13,32 @@ initializeApp(environment.firebaseConfig);
 defineCustomElements(window);
 
 // Registrar iconos globalmente
+import { 
+  homeOutline, 
+  libraryOutline, 
+  notificationsOutline, 
+  personCircleOutline,
+  home,
+  list,
+  people,
+  person,
+  barChart,
+  checkboxOutline,
+  menu
+} from 'ionicons/icons';
+
 addIcons({
-  'home-outline': 'home-outline',
-  'library-outline': 'library-outline',
-  'notifications-outline': 'notifications-outline',
-  'person-circle-outline': 'person-circle-outline',
-  'home': 'home',
-  'list': 'list',
-  'people': 'people',
-  'person': 'person',
-  'bar-chart': 'bar-chart',
-  'checkbox-outline': 'checkbox-outline',
-  'menu': 'menu'
+  'home-outline': homeOutline,
+  'library-outline': libraryOutline,
+  'notifications-outline': notificationsOutline,
+  'person-circle-outline': personCircleOutline,
+  'home': home,
+  'list': list,
+  'people': people,
+  'person': person,
+  'bar-chart': barChart,
+  'checkbox-outline': checkboxOutline,
+  'menu': menu
 });
 
 platformBrowserDynamic().bootstrapModule(AppModule)

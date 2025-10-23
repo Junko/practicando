@@ -2,15 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import {
-  IonContent,
-  IonHeader,
   IonIcon,
-  IonTab,
   IonTabBar,
   IonTabButton,
-  IonTabs,
-  IonTitle,
-  IonToolbar,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { TabConfig, TabsConfig } from '../../models/tab-config.model';
@@ -20,7 +14,7 @@ import { TabConfig, TabsConfig } from '../../models/tab-config.model';
   templateUrl: './custom-tabs.component.html',
   styleUrls: ['./custom-tabs.component.scss'],
   standalone: true,
-  imports: [CommonModule, RouterModule, IonContent, IonHeader, IonIcon, IonTab, IonTabBar, IonTabButton, IonTabs, IonTitle, IonToolbar],
+  imports: [CommonModule, RouterModule, IonIcon, IonTabBar, IonTabButton],
 })
 export class CustomTabsComponent implements OnInit {
   @Input() config: TabsConfig = {
@@ -40,18 +34,8 @@ export class CustomTabsComponent implements OnInit {
   }
 
   private registerIcons() {
-    // Registrar todos los iconos necesarios para las tabs
-    addIcons({
-      'home-outline': 'home-outline',
-      'library-outline': 'library-outline',
-      'notifications-outline': 'notifications-outline',
-      'person-circle-outline': 'person-circle-outline',
-      'home': 'home',
-      'list': 'list',
-      'people': 'people',
-      'person': 'person',
-      'bar-chart': 'bar-chart'
-    });
+    // Los iconos ya están registrados globalmente en main.ts
+    // No es necesario registrarlos aquí
   }
 
   get tabBarPosition(): string {
