@@ -14,13 +14,13 @@
 
 // Estilos para las tabs
 ion-tab-bar {
-  --background: var(--ion-color-primary);
-  --color: var(--ion-color-primary-contrast);
+  --background: rgba(255, 197, 1);
+  --color: rgba(27, 18, 19);
 }
 
 ion-tab-button {
-  --color: var(--ion-color-medium);
-  --color-selected: var(--ion-color-primary-contrast);
+  --color: rgba(27, 18, 19);
+  --color-selected: rgba(27, 18, 19);
 }
 
 // Estilos responsivos

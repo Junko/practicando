@@ -141,13 +141,13 @@
 }
 
 ion-tab-bar {
-  --background: #ffd700;
+  --background: rgba(255, 197, 1);
   --border-color: transparent;
 }
 
 ion-tab-button {
-  --color: #555;
-  --color-selected: #333;
+  --color: rgba(27, 18, 19);
+  --color-selected: rgba(27, 18, 19);
   font-weight: bold;
 }
 
