@@ -40,19 +40,18 @@ export class CustomTabsComponent implements OnInit {
   }
 
   private registerIcons() {
-    // Obtener todos los iconos únicos de la configuración
-    const icons = this.config.tabs.map(tab => tab.icon).filter((icon, index, self) => self.indexOf(icon) === index);
-    
-    // Crear objeto de iconos para addIcons
-    const iconsObj: any = {};
-    icons.forEach(icon => {
-      iconsObj[icon] = icon;
+    // Registrar todos los iconos necesarios para las tabs
+    addIcons({
+      'home-outline': 'home-outline',
+      'library-outline': 'library-outline',
+      'notifications-outline': 'notifications-outline',
+      'person-circle-outline': 'person-circle-outline',
+      'home': 'home',
+      'list': 'list',
+      'people': 'people',
+      'person': 'person',
+      'bar-chart': 'bar-chart'
     });
-
-    // Registrar iconos si hay alguno
-    if (Object.keys(iconsObj).length > 0) {
-      addIcons(iconsObj);
-    }
   }
 
   get tabBarPosition(): string {
