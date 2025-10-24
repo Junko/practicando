@@ -8,6 +8,7 @@ import { TabsConfig } from '../../../shared/models/tab-config.model';
   selector: 'app-notificaciones',
   templateUrl: './notificaciones.page.html',
   styleUrls: ['./notificaciones.page.scss'],
+  standalone: false
 })
 export class NotificacionesPage implements OnInit {
 
