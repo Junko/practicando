@@ -3,8 +3,6 @@ import { Firebase } from '../../../services/firebase';
 import { Utils } from '../../../services/utils';
 import { ADMIN_TABS_CONFIG } from '../../../shared/configs/tabs-configs';
 import { TabsConfig } from '../../../shared/models/tab-config.model';
-import { ADMIN_MENU_CONFIG } from '../../../shared/configs/menu-configs';
-import { MenuConfig } from '../../../shared/models/menu-config.model';
 
 @Component({
   selector: 'app-admin-inicio',
@@ -18,7 +16,6 @@ export class AdminInicioPage implements OnInit {
   firebaseSvc = inject(Firebase);
   utilsSvc = inject(Utils);
   tabsConfig: TabsConfig = ADMIN_TABS_CONFIG;
-  menuConfig: MenuConfig;
 
   // Contadores para los cuadros informativos
   totalPadres: number = 0;
@@ -30,18 +27,6 @@ export class AdminInicioPage implements OnInit {
   ngOnInit() {
     this.loadUserInfo();
     this.loadCounters();
-    this.setupMenuConfig();
-  }
-
-  setupMenuConfig() {
-    this.menuConfig = { ...ADMIN_MENU_CONFIG };
-    // Configurar la acción de logout
-    this.menuConfig.items = this.menuConfig.items.map(item => {
-      if (item.id === 'logout') {
-        return { ...item, action: () => this.signOut() };
-      }
-      return item;
-    });
   }
 
   loadUserInfo() {
