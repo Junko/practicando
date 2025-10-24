@@ -7,7 +7,7 @@ ion-card {
   margin: 10px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #FFD700; /* Dorado */
+  background: linear-gradient(to bottom, #ffde59, #ffeca1);
 }
 
 ion-card-content {
@@ -26,7 +26,8 @@ ion-card-content {
   width: 30px; /* Ajusta el tamaño del contenedor del icono */
   height: 30px;
   border-radius: 50%;
-  background-color: #FFD700; /* Dorado para el icono */
+  background-color: #ffd700;
+  border: 2px solid #ffd700;
 }
 
 ion-icon {
