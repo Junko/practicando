@@ -1,6 +1,6 @@
 <ion-app>
-  <!-- Menú global para Admin -->
-  <ion-menu side="start" menuId="admin-menu" contentId="admin-content">
+  <!-- Menú global para Admin - Solo visible cuando está autenticado como admin -->
+  <ion-menu side="start" menuId="admin-menu" contentId="admin-content" *ngIf="shouldShowAdminMenu()">
     <ion-header>
       <ion-toolbar style="--background: rgba(255, 197, 1); --color: rgba(27, 18, 19);">
         <ion-title>Menú Admin</ion-title>
@@ -57,8 +57,8 @@
     </ion-content>
   </ion-menu>
 
-  <!-- Menú global para Padre -->
-  <ion-menu side="start" menuId="padre-menu" contentId="padre-content">
+  <!-- Menú global para Padre - Solo visible cuando está autenticado como padre -->
+  <ion-menu side="start" menuId="padre-menu" contentId="padre-content" *ngIf="shouldShowPadreMenu()">
     <ion-header>
       <ion-toolbar style="--background: rgba(255, 197, 1); --color: rgba(27, 18, 19);">
         <ion-title>Menú Padre</ion-title>
@@ -95,6 +95,10 @@
     </ion-content>
   </ion-menu>
 
-  <ion-router-outlet id="admin-content"></ion-router-outlet>
-  <ion-router-outlet id="padre-content"></ion-router-outlet>
+  <!-- Router outlets para diferentes tipos de usuario -->
+  <ion-router-outlet id="admin-content" *ngIf="shouldShowAdminMenu()"></ion-router-outlet>
+  <ion-router-outlet id="padre-content" *ngIf="shouldShowPadreMenu()"></ion-router-outlet>
+  
+  <!-- Router outlet principal para login y otras páginas no autenticadas -->
+  <ion-router-outlet *ngIf="!shouldShowMenu()"></ion-router-outlet>
 </ion-app>
