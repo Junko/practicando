@@ -1,4 +1,4 @@
-<ion-menu side="start" menuId="padre-menu">
+<ion-menu side="start" menuId="padre-menu" contentId="main-content">
   <ion-header>
     <ion-toolbar style="--background: rgba(255, 197, 1); --color: rgba(27, 18, 19);">
       <ion-title>Menú Padre</ion-title>
@@ -35,6 +35,10 @@
   </ion-content>
 </ion-menu>
 
+
+<ion-app>
+  <ion-router-outlet id="main-content"></ion-router-outlet>
+</ion-app>
 
 <app-header title="Panel Padre" menuId="padre-menu"></app-header>
 

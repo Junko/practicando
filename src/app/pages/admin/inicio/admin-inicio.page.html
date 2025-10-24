@@ -1,4 +1,4 @@
-<ion-menu side="start" menuId="admin-menu">
+<ion-menu side="start" menuId="admin-menu" contentId="main-content">
   <ion-header>
     <ion-toolbar style="--background: rgba(255, 197, 1); --color: rgba(27, 18, 19);">
       <ion-title>Menú Admin</ion-title>
@@ -55,6 +55,10 @@
   </ion-content>
 </ion-menu>
 
+
+<ion-app>
+  <ion-router-outlet id="main-content"></ion-router-outlet>
+</ion-app>
 
 <app-header title="Panel Admin" menuId="admin-menu"></app-header>
 
