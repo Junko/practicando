@@ -45,22 +45,22 @@
 .info-card ion-card-content {
   display: flex;
   align-items: center;
-  padding: 20px;
+  padding: 15px;
 }
 
 .card-icon {
-  margin-right: 15px;
+  margin-right: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   background-color: rgba(255, 255, 255, 0.3);
   border-radius: 50%;
 }
 
 .card-icon ion-icon {
-  font-size: 1.8em;
+  font-size: 1.4em;
   color: #333;
 }
 
@@ -72,7 +72,7 @@
 }
 
 .card-number {
-  font-size: 2em;
+  font-size: 1.6em;
   font-weight: bold;
   color: #333;
   margin: 0;
@@ -92,7 +92,7 @@
 
 .options-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 15px;
 }
 
@@ -101,9 +101,9 @@
   --color: #333;
   --border-radius: 12px;
   --box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  height: 60px;
+  height: 70px;
   font-weight: 600;
-  font-size: 1.1em;
+  font-size: 1em;
   transition: all 0.3s ease;
 }
 
@@ -133,5 +133,16 @@ ion-tab-button {
   font-weight: bold;
   padding-top: 6px;
   padding-bottom: 6px;
+}
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 768px) {
+  .options-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .info-cards {
+    grid-template-columns: 1fr;
+  }
 }
 
