@@ -141,8 +141,78 @@ ion-tab-button {
     grid-template-columns: 1fr;
   }
   
+  .option-button {
+    height: 80px;
+    font-size: 1.1em;
+  }
+  
   .info-cards {
     grid-template-columns: 1fr;
+    margin: 10px 15px;
+  }
+  
+  .info-card ion-card-content {
+    padding: 12px;
+  }
+  
+  .card-icon {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .card-icon ion-icon {
+    font-size: 1.2em;
+  }
+  
+  .card-number {
+    font-size: 1.4em;
+  }
+}
+
+/* Para pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .option-button {
+    height: 85px;
+    font-size: 1.2em;
+  }
+  
+  .info-cards {
+    margin: 5px 10px;
+  }
+  
+  .info-card ion-card-content {
+    padding: 10px;
+  }
+  
+  .card-icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+  }
+  
+  .card-icon ion-icon {
+    font-size: 1em;
+  }
+  
+  .card-info h3 {
+    font-size: 1em;
+  }
+  
+  .card-number {
+    font-size: 1.2em;
+  }
+  
+  .greeting {
+    font-size: 2em;
+    margin-left: 10px;
+  }
+  
+  .admin-subtitle {
+    margin-left: 10px;
+  }
+  
+  .admin-options {
+    margin: 20px 10px;
   }
 }
 
