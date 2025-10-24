@@ -5,27 +5,27 @@ export const ADMIN_TABS_CONFIG: TabsConfig = {
   tabs: [
     {
       id: 'dashboard',
-      label: 'Dashboard',
-      icon: 'home',
-      content: 'Panel de administración - Dashboard'
+      label: 'Inicio',
+      icon: 'home-outline',
+      route: '/admin/inicio'
     },
     {
       id: 'usuarios',
       label: 'Usuarios',
-      icon: 'people',
-      content: 'Gestión de usuarios del sistema'
+      icon: 'people-outline',
+      route: '/usuarios-crud'
     },
     {
       id: 'listas',
       label: 'Listas',
-      icon: 'list',
-      content: 'Gestión de listas de útiles escolares'
+      icon: 'list-outline',
+      route: '/listas-crud'
     },
     {
       id: 'reportes',
       label: 'Reportes',
-      icon: 'bar-chart',
-      content: 'Reportes y estadísticas del sistema'
+      icon: 'bar-chart-outline',
+      route: '/admin/reportes'
     }
   ],
   tabBarPosition: 'bottom',
