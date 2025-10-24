@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { SharedModule } from '../../shared/shared-module';
 
 import { AdminRoutingModule } from './admin-routing.module';
+import { AdminLayoutComponent } from './admin-layout.component';
 import { AdminInicioPage } from './inicio/admin-inicio.page';
 
 @NgModule({
@@ -16,6 +17,7 @@ import { AdminInicioPage } from './inicio/admin-inicio.page';
     SharedModule
   ],
   declarations: [
+    AdminLayoutComponent,
     AdminInicioPage
   ]
 })

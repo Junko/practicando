@@ -13,13 +13,13 @@ export const ADMIN_TABS_CONFIG: TabsConfig = {
       id: 'usuarios',
       label: 'Usuarios',
       icon: 'people-outline',
-      route: '/usuarios-crud'
+      route: '/admin/usuarios-crud'
     },
     {
       id: 'listas',
       label: 'Listas',
       icon: 'list-outline',
-      route: '/listas-crud'
+      route: '/admin/listas-crud'
     },
     {
       id: 'reportes',
