@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { ListasCrudPageRoutingModule } from './listas-crud-routing.module';
+import { SharedModule } from '../../shared/shared-module';
 
 import { ListasCrudPage } from './listas-crud.page';
 
@@ -13,7 +14,8 @@ import { ListasCrudPage } from './listas-crud.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    ListasCrudPageRoutingModule
+    ListasCrudPageRoutingModule,
+    SharedModule
   ],
   declarations: [ListasCrudPage]
 })

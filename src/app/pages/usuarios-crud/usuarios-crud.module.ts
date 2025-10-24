@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { UsuariosCrudPageRoutingModule } from './usuarios-crud-routing.module';
+import { SharedModule } from '../../shared/shared-module';
 
 import { UsuariosCrudPage } from './usuarios-crud.page';
 
@@ -13,7 +14,8 @@ import { UsuariosCrudPage } from './usuarios-crud.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    UsuariosCrudPageRoutingModule
+    UsuariosCrudPageRoutingModule,
+    SharedModule
   ],
   declarations: [UsuariosCrudPage]
 })
