@@ -62,6 +62,87 @@
 <app-header title="Panel Admin" menuId="admin-menu"></app-header>
 
 <ion-content [fullscreen]="true" class="admin-content" id="admin-content">
+  <div id="container">
+    <h1 class="greeting">¡Bienvenido, {{ userInfo?.nombres }}!</h1>
+    <p class="admin-subtitle">Panel de Administración</p>
+
+    <!-- Cuadros informativos -->
+    <div class="info-cards">
+      <ion-card class="info-card">
+        <ion-card-content>
+          <div class="card-icon">
+            <ion-icon name="people-outline"></ion-icon>
+          </div>
+          <div class="card-info">
+            <h3>Padres Registrados</h3>
+            <p class="card-number">{{ totalPadres }}</p>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="info-card">
+        <ion-card-content>
+          <div class="card-icon">
+            <ion-icon name="list-outline"></ion-icon>
+          </div>
+          <div class="card-info">
+            <h3>Listas Registradas</h3>
+            <p class="card-number">{{ totalListas }}</p>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="info-card">
+        <ion-card-content>
+          <div class="card-icon">
+            <ion-icon name="business-outline"></ion-icon>
+          </div>
+          <div class="card-info">
+            <h3>Salones Registrados</h3>
+            <p class="card-number">{{ totalSalones }}</p>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <!-- Botones de opciones CRUD -->
+    <div class="admin-options">
+      <h2 class="options-title">Opciones de Administración</h2>
+      
+      <div class="options-grid">
+        <ion-button expand="block" class="option-button" routerLink="/usuarios-crud" routerDirection="root">
+          <ion-icon name="people-outline" slot="start"></ion-icon>
+          CRUD Usuarios
+        </ion-button>
+
+        <ion-button expand="block" class="option-button" routerLink="/listas-crud" routerDirection="root">
+          <ion-icon name="list-outline" slot="start"></ion-icon>
+          CRUD Listas
+        </ion-button>
+
+        <ion-button expand="block" class="option-button" routerLink="/salones-crud" routerDirection="root">
+          <ion-icon name="business-outline" slot="start"></ion-icon>
+          CRUD Salones
+        </ion-button>
+
+        <ion-button expand="block" class="option-button" routerLink="/listas-cumplidas" routerDirection="root">
+          <ion-icon name="checkmark-circle-outline" slot="start"></ion-icon>
+          Verificar Listas
+        </ion-button>
+
+        <ion-button expand="block" class="option-button" routerLink="/evaluar-salones" routerDirection="root">
+          <ion-icon name="clipboard-outline" slot="start"></ion-icon>
+          Inspección de Aulas
+        </ion-button>
+
+        <ion-button expand="block" class="option-button" routerLink="/admin/perfil" routerDirection="root">
+          <ion-icon name="person-outline" slot="start"></ion-icon>
+          Perfil
+        </ion-button>
+      </div>
+    </div>
+  </div>
+
   <!-- Componente de tabs personalizado para admin -->
   <app-custom-tabs [config]="tabsConfig"></app-custom-tabs>
 </ion-content>
