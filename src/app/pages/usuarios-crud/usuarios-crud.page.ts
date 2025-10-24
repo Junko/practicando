@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { Firebase } from '../../services/firebase';
+import { Utils } from '../../services/utils';
+import { ADMIN_TABS_CONFIG } from '../../shared/configs/tabs-configs';
+import { TabsConfig } from '../../shared/models/tab-config.model';
 
 interface User {
   id: string;
@@ -20,6 +24,10 @@ export class UsuariosCrudPage implements OnInit {
   searchTerm: string = '';
   selectedFilter: string = 'padres';
   currentPage: string = 'usuario';
+  
+  firebaseSvc = inject(Firebase);
+  utilsSvc = inject(Utils);
+  tabsConfig: TabsConfig = ADMIN_TABS_CONFIG;
   
   
   users: User[] = [
@@ -115,5 +123,10 @@ export class UsuariosCrudPage implements OnInit {
     console.log('Navegar a:', page);
     // Aquí puedes implementar la navegación real
     // this.router.navigate([`/${page}`]);
+  }
+
+  signOut() {
+    this.firebaseSvc.signOut();
+    this.utilsSvc.routerLink('/login');
   }
 }

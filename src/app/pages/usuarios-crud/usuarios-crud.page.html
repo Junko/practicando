@@ -1,96 +1,138 @@
-<ion-content [fullscreen]="true" class="usuarios-content">
+<ion-menu side="start" menuId="admin-menu" contentId="admin-content">
+  <ion-header>
+    <ion-toolbar style="--background: rgba(255, 197, 1); --color: rgba(27, 18, 19);">
+      <ion-title>Menú Admin</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <ion-list>
+      <ion-item button routerLink="/admin/inicio" routerDirection="root">
+        <ion-icon name="home-outline" slot="start"></ion-icon>
+        <ion-label>Inicio</ion-label>
+      </ion-item>
+      
+      <ion-item button routerLink="/usuarios-crud" routerDirection="root">
+        <ion-icon name="people-outline" slot="start"></ion-icon>
+        <ion-label>Gestionar Usuarios</ion-label>
+      </ion-item>
+      
+      <ion-item button routerLink="/listas-crud" routerDirection="root">
+        <ion-icon name="list-outline" slot="start"></ion-icon>
+        <ion-label>Gestionar Listas</ion-label>
+      </ion-item>
+      
+      <ion-item button routerLink="/salones-crud" routerDirection="root">
+        <ion-icon name="business-outline" slot="start"></ion-icon>
+        <ion-label>Gestionar Salones</ion-label>
+      </ion-item>
+      
+      <ion-item button routerLink="/listas-cumplidas" routerDirection="root">
+        <ion-icon name="checkmark-circle-outline" slot="start"></ion-icon>
+        <ion-label>Listas Cumplidas</ion-label>
+      </ion-item>
+      
+      <ion-item button routerLink="/evaluar-salones" routerDirection="root">
+        <ion-icon name="clipboard-outline" slot="start"></ion-icon>
+        <ion-label>Evaluar Salones</ion-label>
+      </ion-item>
+      
+      <ion-item button routerLink="/resumen-evaluacion" routerDirection="root">
+        <ion-icon name="analytics-outline" slot="start"></ion-icon>
+        <ion-label>Resumen Evaluación</ion-label>
+      </ion-item>
+      
+      <ion-item button routerLink="/admin/perfil" routerDirection="root">
+        <ion-icon name="person-outline" slot="start"></ion-icon>
+        <ion-label>Mi Perfil</ion-label>
+      </ion-item>
+      
+      <ion-item button (click)="signOut()">
+        <ion-icon name="log-out-outline" slot="start"></ion-icon>
+        <ion-label>Cerrar Sesión</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-app>
+  <ion-router-outlet id="admin-content"></ion-router-outlet>
+</ion-app>
+
+<app-header title="Gestión de Usuarios" menuId="admin-menu"></app-header>
+
+<ion-content [fullscreen]="true" class="usuarios-content" id="admin-content">
   <div class="content-wrapper">
     <!-- Título -->
     <div class="title-container">
       <h1 class="page-title">Usuarios</h1>
     </div>
 
-  <!-- Barra de búsqueda -->
-  <div class="search-container">
-    <ion-searchbar 
-      [(ngModel)]="searchTerm" 
-      (ionInput)="onSearchChange($event)"
-      placeholder="Buscar usuarios..."
-      class="custom-searchbar">
-    </ion-searchbar>
-  </div>
-
-  <!-- Filtros -->
-  <div class="filters-container">
-    <span class="filters-label">Filtros:</span>
-    <div class="filter-buttons">
-      <ion-button 
-        [class.active]="selectedFilter === 'padres'"
-        (click)="setFilter('padres')"
-        class="filter-btn">
-        Padres
-      </ion-button>
-      <ion-button 
-        [class.active]="selectedFilter === 'admins'"
-        (click)="setFilter('admins')"
-        class="filter-btn">
-        Admins
-      </ion-button>
+    <!-- Barra de búsqueda -->
+    <div class="search-container">
+      <ion-searchbar 
+        [(ngModel)]="searchTerm" 
+        (ionInput)="onSearchChange($event)"
+        placeholder="Buscar usuarios..."
+        class="custom-searchbar">
+      </ion-searchbar>
     </div>
-  </div>
 
-  <!-- Lista de usuarios -->
-  <div class="users-list">
-    <div 
-      *ngFor="let user of filteredUsers" 
-      class="user-card">
-      <div class="user-info">
-        <div class="user-avatar">
-          <img [src]="user.avatar" [alt]="user.name" class="avatar-img">
-        </div>
-        <div class="user-details">
-          <h3 class="user-name">{{ user.name }}</h3>
-          <p class="user-email">{{ user.email }}</p>
-        </div>
-      </div>
-      <div class="user-actions">
-        <ion-button fill="clear" (click)="editUser(user)" class="action-btn">
-          <ion-icon name="create-outline"></ion-icon>
+    <!-- Filtros -->
+    <div class="filters-container">
+      <span class="filters-label">Filtros:</span>
+      <div class="filter-buttons">
+        <ion-button 
+          [class.active]="selectedFilter === 'padres'"
+          (click)="setFilter('padres')"
+          class="filter-btn">
+          Padres
         </ion-button>
-        <ion-button fill="clear" (click)="deleteUser(user)" class="action-btn">
-          <ion-icon name="trash-outline"></ion-icon>
+        <ion-button 
+          [class.active]="selectedFilter === 'admins'"
+          (click)="setFilter('admins')"
+          class="filter-btn">
+          Admins
         </ion-button>
       </div>
     </div>
-  </div>
 
-  <!-- Botón crear usuario -->
-  <div class="create-user-container">
-    <ion-button 
-      (click)="createUser()" 
-      class="create-user-btn"
-      expand="block">
-      + Crear Nuevo Usuario
-    </ion-button>
-  </div>
+    <!-- Lista de usuarios -->
+    <div class="users-list">
+      <div 
+        *ngFor="let user of filteredUsers" 
+        class="user-card">
+        <div class="user-info">
+          <div class="user-avatar">
+            <img [src]="user.avatar" [alt]="user.name" class="avatar-img">
+          </div>
+          <div class="user-details">
+            <h3 class="user-name">{{ user.name }}</h3>
+            <p class="user-email">{{ user.email }}</p>
+          </div>
+        </div>
+        <div class="user-actions">
+          <ion-button fill="clear" (click)="editUser(user)" class="action-btn">
+            <ion-icon name="create-outline"></ion-icon>
+          </ion-button>
+          <ion-button fill="clear" (click)="deleteUser(user)" class="action-btn">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+    </div>
 
-  <!-- Navegación inferior -->
-  <div class="bottom-navigation">
-    <div class="nav-item" [class.active]="currentPage === 'inicio'" (click)="navigateTo('inicio')">
-      <ion-icon name="home-outline"></ion-icon>
-      <span>Inicio</span>
+    <!-- Botón crear usuario -->
+    <div class="create-user-container">
+      <ion-button 
+        (click)="createUser()" 
+        class="create-user-btn"
+        expand="block">
+        + Crear Nuevo Usuario
+      </ion-button>
     </div>
-    <div class="nav-item" [class.active]="currentPage === 'usuario'" (click)="navigateTo('usuario')">
-      <ion-icon name="people-outline"></ion-icon>
-      <span>Usuario</span>
-    </div>
-    <div class="nav-item" [class.active]="currentPage === 'utilidades'" (click)="navigateTo('utilidades')">
-      <ion-icon name="construct-outline"></ion-icon>
-      <span>Utilidades</span>
-    </div>
-    <div class="nav-item" [class.active]="currentPage === 'aulas'" (click)="navigateTo('aulas')">
-      <ion-icon name="grid-outline"></ion-icon>
-      <span>Aulas</span>
-    </div>
-    <div class="nav-item" [class.active]="currentPage === 'reportes'" (click)="navigateTo('reportes')">
-      <ion-icon name="document-text-outline"></ion-icon>
-      <span>Reportes</span>
-    </div>
-  </div>
   </div>
 </ion-content>
+
+<!-- Componente de tabs personalizado para admin -->
+<app-custom-tabs [config]="tabsConfig"></app-custom-tabs>
