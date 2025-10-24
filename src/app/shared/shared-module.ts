@@ -15,15 +15,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HeaderComponent,
     CustomInputComponent,
     LogoComponent,
+    AdminMenuComponent,
+    PadreMenuComponent
   ],
   imports: [
     CommonModule,
     IonicModule,
     ReactiveFormsModule,
     FormsModule,
-    CustomTabsComponent,
-    AdminMenuComponent,
-    PadreMenuComponent
+    CustomTabsComponent
   ],
   exports: [
     HeaderComponent,
