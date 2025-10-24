@@ -14,6 +14,10 @@ const routes: Routes = [
     path: 'inicio',
     component: AdminInicioPage,
     canActivate: [adminGuard]
+  },
+  {
+    path: 'perfil',
+    loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
   }
 ];
 

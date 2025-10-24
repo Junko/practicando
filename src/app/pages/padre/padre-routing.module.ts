@@ -14,9 +14,14 @@ const routes: Routes = [
     path: 'inicio',
     component: PadreInicioPage,
     canActivate: [padreGuard]
-  },  {
+  },
+  {
     path: 'notificaciones',
     loadChildren: () => import('./notificaciones/notificaciones.module').then( m => m.NotificacionesPageModule)
+  },
+  {
+    path: 'perfil',
+    loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
   }
 
 ];
