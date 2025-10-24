@@ -45,7 +45,7 @@
 .info-card ion-card-content {
   display: flex;
   align-items: center;
-  padding: 15px;
+  padding: 18px 15px;
 }
 
 .card-icon {
@@ -93,7 +93,8 @@
 .options-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
+  gap: 12px;
+  max-width: 100%;
 }
 
 .option-button {
@@ -103,8 +104,9 @@
   --box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   height: 70px;
   font-weight: 600;
-  font-size: 1em;
+  font-size: 0.95em;
   transition: all 0.3s ease;
+  padding: 0 8px;
 }
 
 .option-button:hover {
@@ -138,12 +140,14 @@ ion-tab-button {
 /* Responsive para pantallas pequeñas */
 @media (max-width: 768px) {
   .options-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
   }
   
   .option-button {
     height: 80px;
-    font-size: 1.1em;
+    font-size: 0.9em;
+    padding: 0 6px;
   }
   
   .info-cards {
@@ -171,9 +175,15 @@ ion-tab-button {
 
 /* Para pantallas muy pequeñas */
 @media (max-width: 480px) {
+  .options-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  
   .option-button {
     height: 85px;
-    font-size: 1.2em;
+    font-size: 0.85em;
+    padding: 0 4px;
   }
   
   .info-cards {
@@ -213,6 +223,24 @@ ion-tab-button {
   
   .admin-options {
     margin: 20px 10px;
+  }
+}
+
+/* Para Android con pantallas muy pequeñas */
+@media (max-width: 360px) {
+  .options-grid {
+    gap: 6px;
+  }
+  
+  .option-button {
+    height: 80px;
+    font-size: 0.8em;
+    padding: 0 2px;
+  }
+  
+  .option-button ion-icon {
+    font-size: 1em;
+    margin-right: 5px;
   }
 }
 
