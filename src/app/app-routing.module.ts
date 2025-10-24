@@ -31,6 +31,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/crear-usuario/crear-usuario-hijo/crear-usuario-hijo.module').then( m => m.CrearUsuarioHijoPageModule)
   },
   {
+    path: 'usuarios-crud',
+    loadChildren: () => import('./pages/usuarios-crud/usuarios-crud.module').then( m => m.UsuariosCrudPageModule),
+    canActivate: [authGuard]
+  },
+  {
     path: 'admin',
     loadChildren: () => import('./pages/admin/admin.module').then( m => m.AdminModule),
     canActivate: [authGuard]
@@ -43,6 +48,11 @@ const routes: Routes = [
   {
     path: 'main',
     loadChildren: () => import('./pages/main/main.module').then( m => m.MainPageModule),
+    canActivate: [authGuard]
+  },
+  {
+    path: 'listas-crud',
+    loadChildren: () => import('./pages/listas-crud/listas-crud.module').then( m => m.ListasCrudPageModule),
     canActivate: [authGuard]
   },
   {
