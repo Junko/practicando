@@ -46,7 +46,7 @@
 .info-card ion-card-content {
   display: flex;
   align-items: center;
-  padding: 8px 10px;
+  padding: 15px 18px;
 }
 
 .card-icon {
@@ -103,7 +103,7 @@
   --color: #333;
   --border-radius: 12px;
   --box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  height: 70px;
+  height: 85px;
   font-weight: 600;
   font-size: 0.95em;
   transition: all 0.3s ease;
@@ -172,7 +172,7 @@ ion-tab-button {
   }
   
   .info-card ion-card-content {
-    padding: 6px;
+    padding: 12px;
   }
   
   .card-icon {
@@ -222,7 +222,7 @@ ion-tab-button {
   }
   
   .info-card ion-card-content {
-    padding: 4px;
+    padding: 10px;
   }
   
   .card-icon {
