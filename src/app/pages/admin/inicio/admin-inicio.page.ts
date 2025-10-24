@@ -46,6 +46,10 @@ export class AdminInicioPage implements OnInit {
     this.totalSalones = 8;
   }
 
+  signOut() {
+    this.firebaseSvc.signOut();
+    this.utilsSvc.routerLink('/login');
+  }
 
 }
 

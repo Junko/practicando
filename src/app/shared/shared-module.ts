@@ -5,6 +5,7 @@ import { CustomInputComponent } from './components/custom-input/custom-input.com
 import { LogoComponent } from './components/logo/logo.component';
 import { CustomTabsComponent } from './components/custom-tabs/custom-tabs.component';
 import { AdminMenuComponent } from './components/admin-menu/admin-menu.component';
+import { PadreMenuComponent } from './components/padre-menu/padre-menu.component';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -21,7 +22,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     FormsModule,
     CustomTabsComponent,
-    AdminMenuComponent
+    AdminMenuComponent,
+    PadreMenuComponent
   ],
   exports: [
     HeaderComponent,
@@ -29,6 +31,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     LogoComponent,
     CustomTabsComponent,
     AdminMenuComponent,
+    PadreMenuComponent,
     ReactiveFormsModule
   ]
 })

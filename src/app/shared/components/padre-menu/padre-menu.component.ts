@@ -18,9 +18,9 @@ import { Firebase } from '../../../services/firebase';
 import { Utils } from '../../../services/utils';
 
 @Component({
-  selector: 'app-admin-menu',
-  templateUrl: './admin-menu.component.html',
-  styleUrls: ['./admin-menu.component.scss'],
+  selector: 'app-padre-menu',
+  templateUrl: './padre-menu.component.html',
+  styleUrls: ['./padre-menu.component.scss'],
   standalone: true,
   imports: [
     CommonModule,
@@ -38,7 +38,7 @@ import { Utils } from '../../../services/utils';
     IonRouterOutlet
   ]
 })
-export class AdminMenuComponent {
+export class PadreMenuComponent {
   firebaseSvc = inject(Firebase);
   utilsSvc = inject(Utils);
 

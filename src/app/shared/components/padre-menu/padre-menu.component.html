@@ -1,0 +1,40 @@
+<ion-menu side="start" menuId="padre-menu" contentId="padre-content">
+  <ion-header>
+    <ion-toolbar style="--background: rgba(255, 197, 1); --color: rgba(27, 18, 19);">
+      <ion-title>Menú Padre</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <ion-list>
+      <ion-item button routerLink="/padre/inicio" routerDirection="root">
+        <ion-icon name="home-outline" slot="start"></ion-icon>
+        <ion-label>Inicio</ion-label>
+      </ion-item>
+      
+      <ion-item button routerLink="/padre/hijos" routerDirection="root">
+        <ion-icon name="people-outline" slot="start"></ion-icon>
+        <ion-label>Mis Hijos</ion-label>
+      </ion-item>
+      
+      <ion-item button routerLink="/padre/notificaciones" routerDirection="root">
+        <ion-icon name="notifications-outline" slot="start"></ion-icon>
+        <ion-label>Notificaciones</ion-label>
+      </ion-item>
+      
+      <ion-item button routerLink="/padre/perfil" routerDirection="root">
+        <ion-icon name="person-outline" slot="start"></ion-icon>
+        <ion-label>Mi Perfil</ion-label>
+      </ion-item>
+      
+      <ion-item button (click)="signOut()">
+        <ion-icon name="log-out-outline" slot="start"></ion-icon>
+        <ion-label>Cerrar Sesión</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-app>
+  <ion-router-outlet id="padre-content"></ion-router-outlet>
+</ion-app>
