@@ -1,11 +1,12 @@
 .admin-content {
   --background: #f8f9fa;
-  padding: 20px;
+  padding: 15px;
 }
 
 #container {
   max-width: 1200px;
   margin: 0 auto;
+  padding-bottom: 80px; /* Espacio para el tab */
 }
 
 .greeting {
@@ -26,7 +27,7 @@
 /* Cuadros informativos */
 .info-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 12px;
   margin: 20px 15px;
 }
@@ -139,6 +140,20 @@ ion-tab-button {
 
 /* Responsive para pantallas pequeñas */
 @media (max-width: 768px) {
+  .admin-content {
+    padding: 10px;
+  }
+  
+  .greeting {
+    font-size: 2em;
+    margin-left: 10px;
+  }
+  
+  .admin-subtitle {
+    margin-left: 10px;
+    margin-bottom: 15px;
+  }
+  
   .options-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
@@ -153,7 +168,7 @@ ion-tab-button {
   .info-cards {
     grid-template-columns: 1fr;
     gap: 10px;
-    margin: 15px 15px;
+    margin: 15px 10px;
   }
   
   .info-card ion-card-content {
@@ -176,6 +191,20 @@ ion-tab-button {
 
 /* Para pantallas muy pequeñas */
 @media (max-width: 480px) {
+  .admin-content {
+    padding: 8px;
+  }
+  
+  .greeting {
+    font-size: 1.8em;
+    margin-left: 8px;
+  }
+  
+  .admin-subtitle {
+    margin-left: 8px;
+    margin-bottom: 12px;
+  }
+  
   .options-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 8px;
@@ -189,7 +218,7 @@ ion-tab-button {
   
   .info-cards {
     gap: 8px;
-    margin: 12px 10px;
+    margin: 12px 8px;
   }
   
   .info-card ion-card-content {
@@ -214,17 +243,8 @@ ion-tab-button {
     font-size: 1.2em;
   }
   
-  .greeting {
-    font-size: 2em;
-    margin-left: 10px;
-  }
-  
-  .admin-subtitle {
-    margin-left: 10px;
-  }
-  
   .admin-options {
-    margin: 20px 10px;
+    margin: 20px 8px;
   }
 }
 
