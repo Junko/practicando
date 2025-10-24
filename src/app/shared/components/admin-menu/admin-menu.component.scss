@@ -1,0 +1,20 @@
+// Estilos específicos para el menú admin si son necesarios
+ion-menu {
+  --width: 280px;
+}
+
+ion-toolbar {
+  --background: rgba(255, 197, 1);
+  --color: rgba(27, 18, 19);
+}
+
+ion-item {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --min-height: 48px;
+}
+
+ion-icon {
+  margin-right: 12px;
+  font-size: 20px;
+}

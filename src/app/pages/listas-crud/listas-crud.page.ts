@@ -62,9 +62,5 @@ export class ListasCrudPage implements OnInit {
     // Aquí irá la lógica para eliminar
   }
 
-  signOut() {
-    this.firebaseSvc.signOut();
-    this.utilsSvc.routerLink('/login');
-  }
 
 }

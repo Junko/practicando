@@ -125,8 +125,4 @@ export class UsuariosCrudPage implements OnInit {
     // this.router.navigate([`/${page}`]);
   }
 
-  signOut() {
-    this.firebaseSvc.signOut();
-    this.utilsSvc.routerLink('/login');
-  }
 }
