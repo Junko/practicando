@@ -4,6 +4,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { CustomInputComponent } from './components/custom-input/custom-input.component';
 import { LogoComponent } from './components/logo/logo.component';
 import { CustomTabsComponent } from './components/custom-tabs/custom-tabs.component';
+import { CustomMenuComponent } from './components/custom-menu/custom-menu.component';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -19,13 +20,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     IonicModule,
     ReactiveFormsModule,
     FormsModule,
-    CustomTabsComponent
+    CustomTabsComponent,
+    CustomMenuComponent
   ],
   exports: [
     HeaderComponent,
     CustomInputComponent,
     LogoComponent,
     CustomTabsComponent,
+    CustomMenuComponent,
     ReactiveFormsModule
   ]
 })
