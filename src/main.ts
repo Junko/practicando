@@ -24,7 +24,8 @@ import {
   person,
   barChart,
   checkboxOutline,
-  menu
+  menu,
+  closeCircle
 } from 'ionicons/icons';
 
 addIcons({
@@ -38,7 +39,8 @@ addIcons({
   'person': person,
   'bar-chart': barChart,
   'checkbox-outline': checkboxOutline,
-  'menu': menu
+  'menu': menu,
+  'close-circle': closeCircle
 });
 
 platformBrowserDynamic().bootstrapModule(AppModule)

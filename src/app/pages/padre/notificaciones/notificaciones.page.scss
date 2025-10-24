@@ -1,0 +1,88 @@
+.padre-content {
+  --background: #f8f9fa;
+  padding: 20px;
+}
+
+ion-card {
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #FFD700; /* Dorado */
+}
+
+ion-card-content {
+  display: flex;
+  align-items: flex-start; /* Alineación al inicio para el icono y el texto */
+  padding: 15px;
+  font-size: 1.1em;
+  color: #333;
+}
+
+.notification-icon-container {
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px; /* Ajusta el tamaño del contenedor del icono */
+  height: 30px;
+  border-radius: 50%;
+  background-color: #FFD700; /* Dorado para el icono */
+}
+
+ion-icon {
+  font-size: 1.5em; /* Tamaño del icono */
+  color: #000000; /* Color rojo para el icono de error */
+}
+
+.notification-details {
+  flex-grow: 1;
+}
+
+.notification-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+p {
+  margin-top: 0;
+  font-size: 0.9em;
+  color: #666;
+}
+
+ion-tab-bar {
+  --background: rgba(255, 197, 1);
+  --border-color: transparent;
+  height: 60px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+ion-tab-button {
+  --color: rgba(27, 18, 19);
+  --color-selected: rgba(27, 18, 19);
+  font-weight: bold;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+ion-tab-button ion-icon {
+  font-size: 1.5em;
+}
+
+ion-tab-button ion-label {
+  font-size: 0.8em;
+}
+
+ion-toolbar {
+  --background: #fff;
+  --color: #333;
+}
+
+ion-title {
+  color: #333;
+  font-weight: bold;
+}
+
+ion-back-button {
+  color: #333;
+}
