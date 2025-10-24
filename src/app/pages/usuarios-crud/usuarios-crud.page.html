@@ -1,4 +1,4 @@
-<ion-menu side="start" menuId="admin-menu" contentId="admin-content">
+<ion-menu side="start" menuId="usuarios-menu" contentId="usuarios-content">
   <ion-header>
     <ion-toolbar style="--background: rgba(255, 197, 1); --color: rgba(27, 18, 19);">
       <ion-title>Menú Admin</ion-title>
@@ -56,12 +56,12 @@
 </ion-menu>
 
 <ion-app>
-  <ion-router-outlet id="admin-content"></ion-router-outlet>
+  <ion-router-outlet id="usuarios-content"></ion-router-outlet>
 </ion-app>
 
-<app-header title="Gestión de Usuarios" menuId="admin-menu"></app-header>
+<app-header title="Gestión de Usuarios" menuId="usuarios-menu"></app-header>
 
-<ion-content [fullscreen]="true" class="usuarios-content" id="admin-content">
+<ion-content [fullscreen]="true" class="usuarios-content" id="usuarios-content">
   <div class="content-wrapper">
     <!-- Título -->
     <div class="title-container">

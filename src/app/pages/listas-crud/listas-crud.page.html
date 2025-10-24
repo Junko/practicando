@@ -1,4 +1,4 @@
-<ion-menu side="start" menuId="admin-menu" contentId="admin-content">
+<ion-menu side="start" menuId="listas-menu" contentId="listas-content">
   <ion-header>
     <ion-toolbar style="--background: rgba(255, 197, 1); --color: rgba(27, 18, 19);">
       <ion-title>Menú Admin</ion-title>
@@ -56,12 +56,12 @@
 </ion-menu>
 
 <ion-app>
-  <ion-router-outlet id="admin-content"></ion-router-outlet>
+  <ion-router-outlet id="listas-content"></ion-router-outlet>
 </ion-app>
 
-<app-header title="Gestión de Listas" menuId="admin-menu"></app-header>
+<app-header title="Gestión de Listas" menuId="listas-menu"></app-header>
 
-<ion-content [fullscreen]="true" class="listas-crud-content" id="admin-content">
+<ion-content [fullscreen]="true" class="listas-crud-content" id="listas-content">
 
   <div class="content-container">
     <h2 class="page-title">Listas de Útiles</h2>
