@@ -1,0 +1,20 @@
+ion-card.recurso-card {
+  background-color: #fff9c4; // amarillo claro
+  margin-bottom: 1rem;
+
+  ion-card-header {
+    background-color: #fff176; // amarillo más fuerte
+    ion-card-title {
+      font-weight: bold;
+    }
+  }
+
+  ion-item {
+    --background: #e0f7fa; // color de input/radio si quieres
+    margin-bottom: 0.5rem;
+  }
+}
+
+ion-button {
+  margin-top: 1rem;
+}

@@ -1,0 +1,54 @@
+<app-header title="Panel Admin" menuId="admin-menu"></app-header>
+
+<ion-content class="ion-padding" [fullscreen]="true">
+  <p class="admin-subtitle">Seleccionar aula</p>
+  <div *ngFor="let nivel of niveles" class="nivel-container">
+    <!-- BOTÓN DE NIVEL -->
+    <ion-button
+      expand="block"
+      color="warning"
+      (click)="toggleNivel(nivel.nombre)"
+      
+    >
+      <ion-label>{{ nivel.nombre }}</ion-label>
+      <ion-icon
+        [name]="nivel.expandido ? 'chevron-up' : 'chevron-down'"
+        slot="end"
+      ></ion-icon>
+    </ion-button>
+    <div *ngIf="nivel.expandido">
+        <!-- LISTA DE GRADOS -->
+      <div *ngFor="let grado of nivel.grados">
+        <!-- Botón del grado -->
+        <ion-button
+          expand="block"
+          fill="solid"
+          color="light"
+          (click)="toggleGrado(nivel.nombre, grado.nombre)"
+        >
+          <ion-label>{{ grado.nombre }}</ion-label>
+          <ion-icon
+            [name]="grado.expandido ? 'chevron-up' : 'chevron-down'"
+            slot="end"
+          ></ion-icon>
+        </ion-button>
+
+        <!-- 🔽 Aquí dentro, justo debajo del grado -->
+        <div *ngIf="grado.expandido" class="secciones-container">
+          <ion-button 
+            *ngFor="let seccion of grado.secciones"
+            expand="block"            
+            fill="outline"
+          >
+            {{ seccion.nombre }}
+          </ion-button>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+</ion-content>
+
+ <ion-router-outlet></ion-router-outlet>
+
+<app-custom-tabs [config]="tabsConfig"></app-custom-tabs>

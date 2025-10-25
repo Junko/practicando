@@ -1,14 +1,19 @@
 import { inject, Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, sendPasswordResetEmail } from 'firebase/auth';
-import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, addDoc, doc, setDoc, getDoc } from 'firebase/firestore';
 import { User, CrearUsuario } from '../models/user.model';
+import { Firestore } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class Firebase {
-  auth = inject(AngularFireAuth);
+  // auth = inject(AngularFireAuth);
+  private db = getFirestore();
+  // constructor(private firestore: Firestore){}
+   private auth = getAuth();
+  
 
   //=== FIRESTORE ===
   
@@ -251,4 +256,13 @@ export class Firebase {
     // La redirección se manejará en el componente
     return this.auth.signOut();
   }
+// función genérica para leer una colección una sola vez
+  async getCollectionOnce(nombreColeccion: string){
+    const ref = collection(this.db, nombreColeccion);
+    const snapshot = await getDocs(ref);
+    return snapshot.docs.map(doc=>({id: doc.id, ...doc.data()}));
+  }
+
+
+
 }

@@ -3,7 +3,7 @@ import { initializeApp } from 'firebase/app';
 import { environment } from './environments/environment';
 import { defineCustomElements } from '@ionic/pwa-elements/loader';
 import { addIcons } from 'ionicons';
-
+import { getFirestore } from 'firebase/firestore';
 import { AppModule } from './app/app.module';
 
 // Inicializar Firebase

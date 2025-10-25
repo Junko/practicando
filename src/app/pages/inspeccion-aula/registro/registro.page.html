@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="warning">
+    <ion-title>Registro de inspección</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <h2>Recursos</h2>
+
+  <ion-card *ngFor="let recurso of recursos" class="recurso-card">
+    <ion-card-header>
+      <ion-card-title>{{ recurso.nombre }}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let estado of estados">
+          <ion-label>{{ estado.label }}</ion-label>
+          <ion-radio slot="start" [value]="estado.value" [(ngModel)]="recurso.estado"></ion-radio>
+        </ion-item>
+      </ion-list>
+
+      <ion-item>
+        <ion-input placeholder="Motivo de la falta / daño" [(ngModel)]="recurso.motivo"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input placeholder="Observación" [(ngModel)]="recurso.observacion"></ion-input>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="full" color="warning" (click)="guardarInspeccion()">Guardar inspección</ion-button>
+</ion-content>

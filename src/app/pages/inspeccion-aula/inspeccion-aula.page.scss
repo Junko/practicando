@@ -1,0 +1,35 @@
+ion-content {
+  --background: #ffffff;
+}
+
+.nivel-btn {
+  --border-radius: 12px;
+  --color: #000;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.grado-btn {
+  --border-radius: 10px;
+  margin-top: 6px;
+  --color: #000;
+  font-weight: 500;
+  text-transform: none;
+}
+.secciones-container{
+  // background: #f7ebcd;
+  --color: #000000 !important;
+  --border-style:none;
+}
+.ion-color-light {
+    --ion-color-base: #f5e85c !important;
+}
+
+.grados-container {
+  padding-left: 8px;
+}
+.button-outline{
+  background: #f3ff89 !important;
+  color: #000 !important;
+  --border-style:none !important;
+}
