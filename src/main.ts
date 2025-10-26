@@ -25,7 +25,8 @@ import {
   barChart,
   checkboxOutline,
   menu,
-  closeCircle
+  closeCircle,
+  clipboardOutline
 } from 'ionicons/icons';
 
 addIcons({
@@ -40,7 +41,8 @@ addIcons({
   'bar-chart': barChart,
   'checkbox-outline': checkboxOutline,
   'menu': menu,
-  'close-circle': closeCircle
+  'close-circle': closeCircle,
+  'clipboard-outline': clipboardOutline
 });
 
 platformBrowserDynamic().bootstrapModule(AppModule)

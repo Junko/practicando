@@ -22,10 +22,10 @@ export const ADMIN_TABS_CONFIG: TabsConfig = {
       route: '/listas-crud'
     },
     {
-      id: 'reportes',
-      label: 'Reportes',
-      icon: 'bar-chart-outline',
-      route: '/admin/reportes'
+      id: 'inspeccion',
+      label: 'Inspección',
+      icon: 'clipboard-outline',
+      route: '/inspeccion-aula'
     }
   ],
   tabBarPosition: 'bottom',
