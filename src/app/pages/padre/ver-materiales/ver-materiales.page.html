@@ -15,39 +15,59 @@
     <!-- Contenedor amarillo para las tarjetas -->
     <div class="materiales-container">
       
-      <div class="material-card" *ngFor="let material of lista?.materiales; let i = index">
+      <div class="material-accordion" *ngFor="let material of lista?.materiales; let i = index">
         
-        <!-- Header del card con título y estado -->
-        <div class="material-header">
-          <h3 class="material-nombre">{{ material.nombre_material }}</h3>
+        <!-- Header del acordeón (siempre visible) -->
+        <div class="accordion-header" (click)="toggleMaterial(material)">
           
-          <!-- Checkbox circular -->
-          <div class="status-indicator">
-            <ion-checkbox [(ngModel)]="material.entregado" (ionChange)="onMaterialToggle(material)"></ion-checkbox>
+          <div class="header-left">
+            <h3 class="material-nombre">{{ material.nombre_material }}</h3>
           </div>
+          
+          <div class="header-right">
+            <!-- Icono de flecha -->
+            <ion-icon 
+              [name]="material.isOpen ? 'chevron-up' : 'chevron-down'" 
+              class="accordion-icon">
+            </ion-icon>
+            
+            <!-- Checkbox circular -->
+            <div class="status-indicator">
+              <ion-checkbox 
+                [(ngModel)]="material.entregado" 
+                (ionChange)="onMaterialToggle(material)"
+                (click)="$event.stopPropagation()">
+              </ion-checkbox>
+            </div>
+          </div>
+          
         </div>
 
-        <!-- Contenido del material con imagen y detalles -->
-        <div class="material-body">
+        <!-- Contenido del acordeón (expande/colapsa) -->
+        <div class="accordion-content" *ngIf="material.isOpen">
           
-          <!-- Imagen del material (más pequeña) -->
-          <div class="material-imagen-small" *ngIf="material.imagen">
-            <img [src]="material.imagen" [alt]="material.nombre_material">
-          </div>
-
-          <!-- Información del material -->
-          <div class="material-info">
+          <div class="material-body">
             
-            <div class="material-descripcion" *ngIf="material.descripcion">
-              <strong>Descripción:</strong> {{ material.descripcion }}
+            <!-- Imagen del material -->
+            <div class="material-imagen-small" *ngIf="material.imagen">
+              <img [src]="material.imagen" [alt]="material.nombre_material">
             </div>
-            
-            <div class="material-cantidad" *ngIf="material.cantidad">
-              <strong>Cantidad:</strong> {{ material.cantidad }}
-            </div>
-            
-          </div>
 
+            <!-- Información del material -->
+            <div class="material-info">
+              
+              <div class="material-descripcion" *ngIf="material.descripcion">
+                <strong>Descripción:</strong> {{ material.descripcion }}
+              </div>
+              
+              <div class="material-cantidad" *ngIf="material.cantidad">
+                <strong>Cantidad:</strong> {{ material.cantidad }}
+              </div>
+              
+            </div>
+
+          </div>
+          
         </div>
 
       </div>

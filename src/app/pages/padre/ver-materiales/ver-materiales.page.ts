@@ -67,6 +67,15 @@ export class VerMaterialesPage implements OnInit {
           this.estudiante.grado,
           this.estudiante.nivel
         );
+        
+        // Inicializar estado de los acordeones
+        if (this.lista && this.lista.materiales) {
+          this.lista.materiales = this.lista.materiales.map((material: any) => ({
+            ...material,
+            isOpen: false,
+            entregado: material.entregado || false
+          }));
+        }
       }
 
       await loading.dismiss();
@@ -86,6 +95,10 @@ export class VerMaterialesPage implements OnInit {
       });
       this.router.navigate(['/padre/inicio']);
     }
+  }
+
+  toggleMaterial(material: any) {
+    material.isOpen = !material.isOpen;
   }
 
   goBack() {

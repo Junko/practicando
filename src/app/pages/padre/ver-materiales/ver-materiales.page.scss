@@ -21,19 +21,40 @@
   min-height: calc(100vh - 250px);
 }
 
-.material-card {
+.material-accordion {
   background: white;
   border-radius: 12px;
-  padding: 16px;
   margin-bottom: 16px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
-.material-header {
+.accordion-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  padding: 16px;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: #f8f9fa;
+  }
+
+  &:active {
+    background-color: #e9ecef;
+  }
+}
+
+.header-left {
+  flex: 1;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .material-nombre {
@@ -41,13 +62,34 @@
   font-weight: bold;
   color: #1b1213;
   margin: 0;
-  flex: 1;
+}
+
+.accordion-icon {
+  font-size: 1.2rem;
+  color: #666;
+  transition: transform 0.3s ease;
+}
+
+.accordion-content {
+  padding: 0 16px 16px 16px;
+  animation: slideDown 0.3s ease;
 }
 
 .material-body {
   display: flex;
   gap: 16px;
   align-items: flex-start;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 500px;
+  }
 }
 
 .status-indicator {
