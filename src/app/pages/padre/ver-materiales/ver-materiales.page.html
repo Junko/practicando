@@ -1,0 +1,71 @@
+<app-header title="Lista de Materiales" menuId="padre-menu"></app-header>
+
+<ion-content [fullscreen]="true" class="ver-materiales-content">
+
+  <div *ngIf="loading" class="loading-container">
+    <ion-spinner></ion-spinner>
+    <p>Cargando información...</p>
+  </div>
+
+  <div *ngIf="!loading" class="content-container">
+    
+    <!-- Información del estudiante -->
+    <div *ngIf="estudiante" class="estudiante-header">
+      <h1 class="estudiante-nombre">{{ estudiante.nombre }} {{ estudiante.apellido }}</h1>
+      <p class="estudiante-nivel">{{ estudiante.grado }} {{ estudiante.nivel }}</p>
+    </div>
+
+    <!-- Lista de materiales -->
+    <div *ngIf="lista && lista.materiales" class="materiales-container">
+      <h2>Materiales Requeridos</h2>
+      
+      <div class="material-card" *ngFor="let material of lista.materiales; let i = index">
+        
+        <!-- Imagen del material -->
+        <div class="material-imagen" *ngIf="material.imagen">
+          <img [src]="material.imagen" [alt]="material.nombre_material">
+        </div>
+
+        <!-- Información del material -->
+        <div class="material-info">
+          <h3>{{ i + 1 }}. {{ material.nombre_material }}</h3>
+          
+          <p class="material-cantidad" *ngIf="material.cantidad">
+            <strong>Cantidad:</strong> {{ material.cantidad }}
+          </p>
+          
+          <p class="material-descripcion" *ngIf="material.descripcion">
+            {{ material.descripcion }}
+          </p>
+
+          <!-- Checkbox para marcar como entregado -->
+          <ion-item>
+            <ion-checkbox [checked]="false"></ion-checkbox>
+            <ion-label>Material entregado</ion-label>
+          </ion-item>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Mensaje si no hay lista -->
+    <div *ngIf="!lista" class="empty-state">
+      <ion-icon name="document-text-outline" size="large" color="medium"></ion-icon>
+      <h3>No hay lista disponible</h3>
+      <p>No se ha asignado una lista de útiles para este grado y nivel</p>
+    </div>
+
+  </div>
+
+</ion-content>
+
+<!-- Botón de volver -->
+<div class="back-button-container">
+  <ion-button (click)="goBack()" fill="clear" class="back-button">
+    <ion-icon name="arrow-back" slot="start"></ion-icon>
+    Volver
+  </ion-button>
+</div>
+
+<!-- Componente de tabs personalizado para padre -->
+<app-custom-tabs [config]="tabsConfig"></app-custom-tabs>
