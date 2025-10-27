@@ -92,4 +92,9 @@ export class VerMaterialesPage implements OnInit {
     this.router.navigate(['/padre/inicio']);
   }
 
+  onMaterialToggle(material: any) {
+    console.log('Material toggled:', material.nombre_material, 'Entregado:', material.entregado);
+    // Aquí puedes agregar lógica para guardar el estado en Firebase
+  }
+
 }

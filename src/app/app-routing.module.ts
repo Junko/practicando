@@ -46,11 +46,6 @@ const routes: Routes = [
     canActivate: [authGuard]
   },
   {
-    path: 'main',
-    loadChildren: () => import('./pages/main/main.module').then( m => m.MainPageModule),
-    canActivate: [authGuard]
-  },
-   {
     path: 'inspeccion-aula',
     loadChildren: () => import('./pages/inspeccion-aula/inspeccion-aula.module').then( m => m.InspeccionAulaPageModule),
     canActivate: [authGuard]
