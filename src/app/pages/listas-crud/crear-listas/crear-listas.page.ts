@@ -224,6 +224,7 @@ export class CrearListasPage implements OnInit {
       };
       
       // Si hay imagen, intentar subirla a Firebase Storage
+      // NOTA: Si Firebase Storage no está habilitado, se guardará como base64
       if (material.imagen) {
         try {
           console.log(`Intentando subir imagen para: ${material.nombre_material}`);
@@ -232,14 +233,15 @@ export class CrearListasPage implements OnInit {
           
           const downloadURL = await this.firebaseSvc.uploadImage(imagePath, material.imagen);
           materialData.imagen = downloadURL;
-          console.log(`✓ Imagen subida exitosamente. URL: ${downloadURL}`);
+          console.log(`✓ Imagen subida exitosamente a Firebase Storage. URL: ${downloadURL}`);
         } catch (error: any) {
           console.error('Error al subir imagen del material:', error);
           console.error('Detalles del error:', error.message);
           
-          // Si falla la subida, guardar como base64 como respaldo
+          // Si falla la subida (Storage no habilitado o error de CORS), guardar como base64
           materialData.imagen = material.imagen;
-          console.log('Imagen guardada como base64 como respaldo');
+          console.log('⚠ Imagen guardada como base64 (Firebase Storage no disponible)');
+          console.log('💡 Para habilitar Firebase Storage: https://console.firebase.google.com/project/montesorri-app-v1/storage');
         }
       }
       
