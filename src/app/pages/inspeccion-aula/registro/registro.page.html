@@ -1,33 +1,44 @@
 <ion-header>
-  <ion-toolbar color="warning">
+  <ion-toolbar class="toolbar-yellow">
     <ion-title>Registro de inspección</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
-  <h2>Recursos</h2>
+<ion-content class="ion-padding" [fullscreen]="true">
+  <h2 class="seccion-titulo">Recursos</h2>
 
-  <ion-card *ngFor="let recurso of recursos" class="recurso-card">
+  <ion-card class="recurso-card" *ngFor="let recurso of recursos">
     <ion-card-header>
       <ion-card-title>{{ recurso.nombre }}</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
-      <ion-list>
-        <ion-item *ngFor="let estado of estados">
-          <ion-label>{{ estado.label }}</ion-label>
-          <ion-radio slot="start" [value]="estado.value" [(ngModel)]="recurso.estado"></ion-radio>
-        </ion-item>
-      </ion-list>
+      <!-- grupo de radios: asegura solo 1 seleccionado por recurso -->
+      <ion-radio-group [(ngModel)]="recurso.estado">
+        <div
+          *ngFor="let e of estados"
+          class="estado-item"
+          [class.seleccionado]="recurso.estado === e.value"
+          (click)="recurso.estado = e.value"
+        >
+          <ion-radio [value]="e.value"></ion-radio>
+          <ion-label>{{ e.label }}</ion-label>
+        </div>
+      </ion-radio-group>
 
-      <ion-item>
-        <ion-input placeholder="Motivo de la falta / daño" [(ngModel)]="recurso.motivo"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-input placeholder="Observación" [(ngModel)]="recurso.observacion"></ion-input>
-      </ion-item>
+      <!-- mostrar inputs solo si no está en buen estado -->
+      <div *ngIf="recurso.estado === 'faltante' || recurso.estado === 'danado'" class="detalles">
+        <ion-item>
+          <ion-input placeholder="Motivo de la falta / daño" [(ngModel)]="recurso.motivo"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input placeholder="Observación" [(ngModel)]="recurso.observacion"></ion-input>
+        </ion-item>
+      </div>
     </ion-card-content>
   </ion-card>
 
-  <ion-button expand="full" color="warning" (click)="guardarInspeccion()">Guardar inspección</ion-button>
+  <ion-button expand="full" class="guardar-btn" (click)="guardarInspeccion()">Guardar inspección</ion-button>
+
+
 </ion-content>

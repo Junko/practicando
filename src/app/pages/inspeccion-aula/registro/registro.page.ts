@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-registro',
@@ -9,8 +10,8 @@ import { Component, OnInit } from '@angular/core';
 export class RegistroPage implements OnInit {
 
   recursos = [
-    { nombre: 'Pupitre H1005', estado: 'bueno', motivo: '', observacion: '' },
-    { nombre: '1 pizarra', estado: 'bueno', motivo: '', observacion: '' }
+    { id: 1, nombre: 'Pupitre H1005', estado: 'bueno', motivo: '', observacion: '' },
+    { id: 2, nombre: '1 pizarra', estado: 'bueno', motivo: '', observacion: '' }
   ];
 
   estados = [
@@ -19,12 +20,27 @@ export class RegistroPage implements OnInit {
     { label: 'Dañada', value: 'danado' }
   ];
 
-  constructor() { }
+  nivel!: string;
+  grado!: string;
+  seccion!: string;
 
-  ngOnInit() {}
+  constructor(private route: ActivatedRoute) {}
+  
+
+
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.nivel = params['nivel'];
+      this.grado = params['grado'];
+      this.seccion = params['seccion'];
+
+      console.log('Datos recibidos:', this.nivel, this.grado, this.seccion);
+    });
+  }
 
   guardarInspeccion() {
-    console.log('Datos de inspección:', this.recursos);
-    // aquí podrías enviar los datos a tu API o servicio
+    console.log('Guardar inspección ->', this.recursos);
+    // aquí envías a tu API o servicio
   }
+
 }

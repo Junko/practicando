@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Firebase } from '../../services/firebase';
 import { ADMIN_TABS_CONFIG } from '../../shared/configs/tabs-configs';
 import { TabsConfig } from '../../shared/models/tab-config.model';
+import { Router } from '@angular/router';
 
 interface Seccion {
   nombre: string;
@@ -32,7 +33,7 @@ export class InspeccionAulaPage implements OnInit, OnDestroy {
   unsubscrube: any;
    tabsConfig: TabsConfig = ADMIN_TABS_CONFIG;
 
-  constructor(private firebaseSvc: Firebase) {}
+  constructor(private firebaseSvc: Firebase, private router: Router) {}
 
   async ngOnInit() {
     
@@ -73,4 +74,14 @@ export class InspeccionAulaPage implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.unsubscrube) this.unsubscrube();
   }
+
+  abrirRegistro(nivel: string, grado: string, seccion: string) {
+    const seleccion = { nivel, grado, seccion };
+    console.log('Enviando selección:', seleccion);
+
+    // navegar a la página "registro" con los parámetros
+    this.router.navigate(['inspeccion-aula/registro'], { queryParams: seleccion });
+  }
+
+
 }

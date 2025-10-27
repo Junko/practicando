@@ -1,20 +1,102 @@
-ion-card.recurso-card {
-  background-color: #fff9c4; // amarillo claro
-  margin-bottom: 1rem;
+/* colores base parecidos a la imagen */
+.toolbar-yellow {
+  --background: #f7c600;
+  color: #000;
+  font-weight: 700;
+}
+
+.seccion-titulo {
+  margin: 8px 0 16px;
+  font-size: 1.05rem;
+}
+
+/* Card amarillo claro */
+.recurso-card {
+  background: #fff7b5; /* fondo tarjeta */
+  border-radius: 10px;
+  margin-bottom: 16px;
+  --padding-start: 12px;
+  --padding-end: 12px;
 
   ion-card-header {
-    background-color: #fff176; // amarillo más fuerte
+    padding-top: 12px;
+    padding-bottom: 4px;
     ion-card-title {
-      font-weight: bold;
+      font-weight: 700;
+      font-size: 0.95rem;
     }
-  }
-
-  ion-item {
-    --background: #e0f7fa; // color de input/radio si quieres
-    margin-bottom: 0.5rem;
   }
 }
 
-ion-button {
-  margin-top: 1rem;
+/* estilos de las opciones (simulan el recuadro verde cuando está seleccionado 'bueno') */
+ion-item.option-bueno {
+  --background: transparent;
+}
+
+/* ajustar apariencia del radio y label cuando la opción es 'bueno' */
+ion-radio {
+  transform: scale(1); /* tamaño radio */
+}
+
+/* resaltado para la opción seleccionada 'bueno' */
+.recurso-card ion-radio-group ion-item {
+  --background: transparent;
+}
+
+/* aplicamos estilo condicional por estado usando ngModel en el item no es directo en css,
+   pero podemos resaltar el item seleccionado con un selector cuando el ion-radio está checked.
+   Ionic marca aria-checked="true" en ion-radio cuando está seleccionado. */
+.recurso-card ion-radio[aria-checked="true"] + ion-label {
+  background: rgba(214, 255, 244, 0.8); /* verde pálido */
+  padding: 10px;
+  border-radius: 6px;
+  display: block;
+  margin-left: 6px;
+}
+
+/* inputs dentro de detalles */
+.detalles ion-item {
+  margin-top: 10px;
+  --background: #ffffff;
+  border-radius: 6px;
+  padding: 6px;
+}
+
+/* botón guardar */
+.guardar-btn {
+  margin-top: 12px;
+  --background: #f7c600;
+  color: #000;
+  font-weight: 600;
+}
+
+/* Permite que se pueda hacer clic en toda la zona del item */
+.estado-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+/* Efecto visual al pasar el mouse (en web) */
+.estado-item:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* Ion-radio se separa un poco del texto */
+.estado-item ion-radio {
+  margin-right: 10px;
+}
+
+/* Color de fondo cuando el estado está seleccionado */
+.estado-item.seleccionado {
+  background: #d7fbe8; /* verde claro */
+}
+
+/* Ajuste visual del label */
+.estado-item ion-label {
+  font-size: 15px;
 }

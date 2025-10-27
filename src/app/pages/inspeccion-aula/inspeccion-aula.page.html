@@ -39,6 +39,7 @@
             *ngFor="let seccion of grado.secciones"
             expand="block"            
             fill="outline"
+            (click)="abrirRegistro(nivel.nombre, grado.nombre, seccion.nombre)"
           >
             {{ seccion.nombre }}
           </ion-button>
@@ -49,6 +50,5 @@
  
 </ion-content>
 
- <ion-router-outlet></ion-router-outlet>
 
 <app-custom-tabs [config]="tabsConfig"></app-custom-tabs>
