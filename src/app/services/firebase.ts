@@ -354,27 +354,27 @@ export class Firebase {
   //=== Obtener estudiantes de un padre ===
   async getEstudiantesByPadreUid(padreUid: string) {
     try {
-      console.log('🔍 Buscando estudiantes con padreUid:', padreUid);
+      console.log('Buscando estudiantes con padreUid:', padreUid);
       
       const q = query(
         collection(getFirestore(), 'estudiantes'),
         where('padreUid', '==', padreUid)
       );
       
-      console.log('📝 Query creada, obteniendo documentos...');
+      console.log('Query creada, obteniendo documentos...');
       const snapshot = await getDocs(q);
       
-      console.log('📊 Total documentos encontrados:', snapshot.size);
+      console.log('Total documentos encontrados:', snapshot.size);
       
       const estudiantes = snapshot.docs.map(doc => {
         const data = doc.data();
-        console.log('👤 Estudiante encontrado:', { id: doc.id, data });
+        console.log('Estudiante encontrado:', { id: doc.id, data });
         return { id: doc.id, ...data };
       });
       
       return estudiantes;
     } catch (error) {
-      console.error('❌ Error al obtener estudiantes del padre:', error);
+      console.error('Error al obtener estudiantes del padre:', error);
       throw error;
     }
   }
