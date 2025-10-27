@@ -27,22 +27,27 @@
           </div>
         </div>
 
-        <!-- Imagen del material -->
-        <div class="material-imagen" *ngIf="material.imagen">
-          <img [src]="material.imagen" [alt]="material.nombre_material">
-        </div>
+        <!-- Contenido del material con imagen y detalles -->
+        <div class="material-body">
+          
+          <!-- Imagen del material (más pequeña) -->
+          <div class="material-imagen-small" *ngIf="material.imagen">
+            <img [src]="material.imagen" [alt]="material.nombre_material">
+          </div>
 
-        <!-- Información del material -->
-        <div class="material-info">
-          
-          <div class="material-descripcion" *ngIf="material.descripcion">
-            <strong>Descripción:</strong> {{ material.descripcion }}
+          <!-- Información del material -->
+          <div class="material-info">
+            
+            <div class="material-descripcion" *ngIf="material.descripcion">
+              <strong>Descripción:</strong> {{ material.descripcion }}
+            </div>
+            
+            <div class="material-cantidad" *ngIf="material.cantidad">
+              <strong>Cantidad:</strong> {{ material.cantidad }}
+            </div>
+            
           </div>
-          
-          <div class="material-cantidad" *ngIf="material.cantidad">
-            <strong>Cantidad:</strong> {{ material.cantidad }}
-          </div>
-          
+
         </div>
 
       </div>
