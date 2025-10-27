@@ -13,6 +13,9 @@ import { TabsConfig } from '../../../shared/models/tab-config.model';
 export class PadreInicioPage implements OnInit {
 
   userInfo: any = null;
+  hijos: any[] = [];
+  loading = true;
+
   firebaseSvc = inject(Firebase);
   utilsSvc = inject(Utils);
   tabsConfig: TabsConfig = PADRE_TABS_CONFIG;
@@ -21,6 +24,7 @@ export class PadreInicioPage implements OnInit {
 
   ngOnInit() {
     this.loadUserInfo();
+    this.loadHijos();
   }
 
   loadUserInfo() {
@@ -30,6 +34,23 @@ export class PadreInicioPage implements OnInit {
       console.log('Padre cargado:', this.userInfo);
     } else {
       console.error('No se encontró información del padre');
+    }
+  }
+
+  async loadHijos() {
+    try {
+      if (!this.userInfo || !this.userInfo.uid) {
+        console.error('No hay información del padre');
+        this.loading = false;
+        return;
+      }
+
+      this.hijos = await this.firebaseSvc.getEstudiantesByPadreUid(this.userInfo.uid);
+      console.log('Hijos cargados:', this.hijos);
+      this.loading = false;
+    } catch (error) {
+      console.error('Error al cargar hijos:', error);
+      this.loading = false;
     }
   }
 

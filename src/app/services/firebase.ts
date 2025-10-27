@@ -351,4 +351,19 @@ export class Firebase {
     }
   }
 
+  //=== Obtener estudiantes de un padre ===
+  async getEstudiantesByPadreUid(padreUid: string) {
+    try {
+      const q = query(
+        collection(getFirestore(), 'estudiantes'),
+        where('padreUid', '==', padreUid)
+      );
+      const snapshot = await getDocs(q);
+      return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    } catch (error) {
+      console.error('Error al obtener estudiantes del padre:', error);
+      throw error;
+    }
+  }
+
 }

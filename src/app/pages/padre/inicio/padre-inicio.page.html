@@ -2,50 +2,44 @@
 <app-header title="Panel Padre" menuId="padre-menu"></app-header>
 
 <ion-content [fullscreen]="true" class="padre-content" id="padre-content">
-  <div id="container">
+  <div id="container" *ngIf="!loading">
     <h1 class="greeting">Hola, {{ userInfo?.nombres }}!</h1>
     <p class="children-title">Mis Hijos</p>
 
-    <ion-card class="child-card">
+    <!-- Lista de hijos reales desde Firebase -->
+    <ion-card class="child-card" *ngFor="let hijo of hijos">
       <ion-card-content>
         <div class="child-info">
           <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="Child Avatar" class="child-avatar">
           <div class="child-details">
-            <ion-card-title>Rafaela Lopez</ion-card-title>
-            <ion-card-subtitle>3º Primaria - C</ion-card-subtitle>
-            <p class="items-delivered">Items entregados - 4/4</p>
+            <ion-card-title>{{ hijo.nombre }} {{ hijo.apellido }}</ion-card-title>
+            <ion-card-subtitle>{{ hijo.grado }} {{ hijo.nivel }} - {{ hijo.seccion }}</ion-card-subtitle>
+            <p class="items-delivered">Items entregados - 0/0</p>
             <div class="progress-bar-container">
-              <div class="progress-bar" style="width: 100%;"></div>
+              <div class="progress-bar" style="width: 0%;"></div>
             </div>
           </div>
         </div>
-        <ion-button expand="block" class="view-materials-button" routerLink="/padre/ver-materiales/1">
+        <ion-button expand="block" class="view-materials-button" [routerLink]="['/padre/ver-materiales', hijo.id]">
           <ion-icon name="checkbox-outline" slot="start"></ion-icon>
           Ver los materiales
         </ion-button>
       </ion-card-content>
     </ion-card>
 
-    <ion-card class="child-card">
-      <ion-card-content>
-        <div class="child-info">
-          <img src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="Child Avatar" class="child-avatar">
-          <div class="child-details">
-            <ion-card-title>Carlos Lopez</ion-card-title>
-            <ion-card-subtitle>5º Inicial - A</ion-card-subtitle>
-            <p class="items-delivered">Items entregados - 1/4</p>
-            <div class="progress-bar-container">
-              <div class="progress-bar" style="width: 25%;"></div>
-            </div>
-          </div>
-        </div>
-        <ion-button expand="block" class="view-materials-button" routerLink="/padre/ver-materiales/2">
-          <ion-icon name="checkbox-outline" slot="start"></ion-icon>
-          Ver los materiales
-        </ion-button>
-      </ion-card-content>
-    </ion-card>
+    <!-- Mensaje cuando no hay hijos -->
+    <div *ngIf="hijos.length === 0" class="empty-state">
+      <ion-icon name="people-outline" size="large" color="medium"></ion-icon>
+      <h3>No hay hijos registrados</h3>
+      <p>Agrega tus hijos para ver sus listas de materiales</p>
+    </div>
 
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="loading-container">
+    <ion-spinner></ion-spinner>
+    <p>Cargando hijos...</p>
   </div>
 </ion-content>
 
