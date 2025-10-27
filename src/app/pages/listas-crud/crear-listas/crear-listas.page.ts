@@ -1,6 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Utils } from 'src/app/services/utils';
+import { Firebase } from 'src/app/services/firebase';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-crear-listas',
@@ -34,8 +36,9 @@ export class CrearListasPage implements OnInit {
   materiales: any[] = []; // Array para almacenar los materiales
 
   utilsSvc = inject(Utils);
+  firebaseSvc = inject(Firebase);
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     // Establecer año actual por defecto
@@ -141,18 +144,88 @@ export class CrearListasPage implements OnInit {
   // Crear la lista completa
   async submit() {
     if (this.form.valid && this.materiales.length > 0) {
-      const listaData = {
-        ...this.form.value,
-        titulo: this.getListaTitle(),
-        materiales: this.materiales
-      };
-      
-      console.log('Lista completa:', listaData);
-      // Aquí irá la lógica para crear la lista en Firebase
+      let loading: any;
+      try {
+        loading = await this.utilsSvc.loading();
+        await loading.present();
+        
+        // Preparar datos de la lista
+        const listaData = {
+          nivel: this.form.get('nivel')?.value,
+          grado: this.form.get('grado')?.value,
+          anio: this.form.get('anio')?.value,
+          titulo: this.getListaTitle(),
+          materiales: await this.procesarMateriales() // Procesar materiales con imágenes
+        };
+        
+        // Guardar la lista en Firebase
+        const listaId = await this.firebaseSvc.guardarListaUtiles(listaData);
+        
+        console.log('Lista guardada exitosamente con ID:', listaId);
+        
+        if (loading) await loading.dismiss();
+        
+        await this.utilsSvc.presentToast({
+          message: 'Lista creada exitosamente',
+          duration: 2000,
+          color: 'success'
+        });
+        
+        // Navegar de vuelta a la lista de listas
+        this.router.navigate(['/listas-crud']);
+        
+      } catch (error) {
+        console.error('Error al crear lista:', error);
+        if (loading) await loading.dismiss();
+        await this.utilsSvc.presentToast({
+          message: 'Error al crear la lista',
+          duration: 2000,
+          color: 'danger'
+        });
+      }
     } else {
       console.log('Formulario inválido o sin materiales');
       this.form.markAllAsTouched();
+      await this.utilsSvc.presentToast({
+        message: 'Por favor completa todos los campos y agrega al menos un material',
+        duration: 2000,
+        color: 'warning'
+      });
     }
+  }
+
+  // Procesar materiales y subir imágenes a Firebase Storage
+  async procesarMateriales() {
+    const materialesProcesados = [];
+    
+    for (let i = 0; i < this.materiales.length; i++) {
+      const material = this.materiales[i];
+      
+      // Preparar datos del material
+      const materialData = {
+        nombre_material: material.nombre_material,
+        descripcion: material.descripcion || '',
+        cantidad: material.cantidad,
+        imagen: '' // Se agregará después si hay imagen
+      };
+      
+      // Si hay imagen, subirla a Firebase Storage
+      if (material.imagen) {
+        try {
+          const timestamp = Date.now();
+          const imagePath = `materiales/${material.nombre_material}_${timestamp}.jpg`;
+          const downloadURL = await this.firebaseSvc.uploadImage(imagePath, material.imagen);
+          materialData.imagen = downloadURL;
+        } catch (error) {
+          console.error('Error al subir imagen del material:', error);
+          // Continuar sin imagen si falla
+        }
+      }
+      
+      materialesProcesados.push(materialData);
+    }
+    
+    return materialesProcesados;
   }
 
 }

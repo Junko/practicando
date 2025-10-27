@@ -1,9 +1,10 @@
 import { inject, Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, sendPasswordResetEmail } from 'firebase/auth';
-import { getFirestore, collection, getDocs, addDoc, doc, setDoc, getDoc } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, addDoc, doc, setDoc, getDoc, query, where } from 'firebase/firestore';
 import { User, CrearUsuario } from '../models/user.model';
 import { Firestore } from '@angular/fire/firestore';
+import { getStorage, ref, uploadString, getDownloadURL } from 'firebase/storage';
 
 @Injectable({
   providedIn: 'root'
@@ -263,6 +264,57 @@ export class Firebase {
     return snapshot.docs.map(doc=>({id: doc.id, ...doc.data()}));
   }
 
+  //=== Agregar documento con auto-generación de ID ===
+  async addDocument(path: string, data: any) {
+    return addDoc(collection(getFirestore(), path), data);
+  }
 
+  //=== Subir imagen a Firebase Storage ===
+  async uploadImage(path: string, data_url: string) {
+    try {
+      await uploadString(ref(getStorage(), path), data_url, 'data_url');
+      const downloadURL = await getDownloadURL(ref(getStorage(), path));
+      return downloadURL;
+    } catch (error) {
+      console.error('Error al subir imagen:', error);
+      throw error;
+    }
+  }
+
+  //=== Obtener listas de útiles por nivel ===
+  async getListasUtilesByNivel(nivel: string) {
+    const q = query(
+      collection(getFirestore(), 'listas_utiles'),
+      where('nivel', '==', nivel)
+    );
+    const snapshot = await getDocs(q);
+    return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  }
+
+  //=== Obtener lista de útiles por ID ===
+  async getListaUtilesById(listaId: string) {
+    return await this.getDocument(`listas_utiles/${listaId}`);
+  }
+
+  //=== Guardar lista de útiles completa ===
+  async guardarListaUtiles(data: any) {
+    try {
+      // Guardar la lista principal
+      const docRef = await this.addDocument('listas_utiles', {
+        nivel: data.nivel,
+        grado: data.grado,
+        anio: data.anio,
+        materiales: data.materiales || [],
+        creadoEn: new Date(),
+        actualizadoEn: new Date()
+      });
+      
+      console.log('Lista guardada con ID:', docRef.id);
+      return docRef.id;
+    } catch (error) {
+      console.error('Error al guardar lista de útiles:', error);
+      throw error;
+    }
+  }
 
 }
