@@ -1,10 +1,12 @@
 import { inject, Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, sendPasswordResetEmail } from 'firebase/auth';
-import { getFirestore, collection, getDocs, addDoc, doc, setDoc, getDoc, query, where } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, addDoc, doc, setDoc, getDoc, query, where, CollectionReference, Query } from 'firebase/firestore';
 import { User, CrearUsuario } from '../models/user.model';
 import { Firestore } from '@angular/fire/firestore';
 import { getStorage, ref, uploadString, getDownloadURL } from 'firebase/storage';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -313,6 +315,38 @@ export class Firebase {
       return docRef.id;
     } catch (error) {
       console.error('Error al guardar lista de útiles:', error);
+      throw error;
+    }
+  }
+
+  //=== Obtener todas las listas de útiles (para admin) ===
+  async getAllListasUtiles() {
+    try {
+      const ref = collection(getFirestore(), 'listas_utiles');
+      const snapshot = await getDocs(ref);
+      return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    } catch (error) {
+      console.error('Error al obtener listas de útiles:', error);
+      throw error;
+    }
+  }
+
+  //=== Obtener lista de útiles por grado y nivel (para padres) ===
+  async getListaByGradoYNivel(grado: string, nivel: string) {
+    try {
+      const q = query(
+        collection(getFirestore(), 'listas_utiles'),
+        where('grado', '==', grado),
+        where('nivel', '==', nivel)
+      );
+      const snapshot = await getDocs(q);
+      if (!snapshot.empty) {
+        const doc = snapshot.docs[0];
+        return { id: doc.id, ...doc.data() };
+      }
+      return null;
+    } catch (error) {
+      console.error('Error al obtener lista por grado y nivel:', error);
       throw error;
     }
   }

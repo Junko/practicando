@@ -1,0 +1,65 @@
+<app-header title="Detalle de Lista" menuId="admin-menu"></app-header>
+
+<ion-content [fullscreen]="true" class="ver-lista-content">
+
+  <div *ngIf="loading" class="loading-container">
+    <ion-spinner></ion-spinner>
+    <p>Cargando lista...</p>
+  </div>
+
+  <div *ngIf="!loading && lista" class="content-container">
+    
+    <!-- Header de la lista -->
+    <div class="lista-header">
+      <h1 class="lista-titulo">{{ lista.grado }} {{ lista.nivel }}</h1>
+      <p class="lista-subtitulo">Año: {{ lista.anio }}</p>
+      <p class="lista-materiales-count">
+        {{ lista.materiales?.length || 0 }} {{ lista.materiales?.length === 1 ? 'material' : 'materiales' }}
+      </p>
+    </div>
+
+    <!-- Lista de materiales -->
+    <div class="materiales-container" *ngIf="lista.materiales && lista.materiales.length > 0">
+      <h2>Materiales Requeridos</h2>
+      
+      <div class="material-card" *ngFor="let material of lista.materiales; let i = index">
+        
+        <!-- Imagen del material -->
+        <div class="material-imagen" *ngIf="material.imagen">
+          <img [src]="material.imagen" [alt]="material.nombre_material">
+        </div>
+
+        <!-- Información del material -->
+        <div class="material-info">
+          <h3>{{ i + 1 }}. {{ material.nombre_material }}</h3>
+          
+          <p class="material-cantidad" *ngIf="material.cantidad">
+            <strong>Cantidad:</strong> {{ material.cantidad }}
+          </p>
+          
+          <p class="material-descripcion" *ngIf="material.descripcion">
+            {{ material.descripcion }}
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Mensaje si no hay materiales -->
+    <div *ngIf="!lista.materiales || lista.materiales.length === 0" class="empty-state">
+      <ion-icon name="document-text-outline" size="large" color="medium"></ion-icon>
+      <h3>No hay materiales en esta lista</h3>
+      <p>Esta lista aún no tiene materiales agregados</p>
+    </div>
+
+  </div>
+
+</ion-content>
+
+<!-- Botón de volver -->
+<div class="back-button-container">
+  <ion-button (click)="goBack()" fill="clear" class="back-button">
+    <ion-icon name="arrow-back" slot="start"></ion-icon>
+    Volver a Listas
+  </ion-button>
+</div>

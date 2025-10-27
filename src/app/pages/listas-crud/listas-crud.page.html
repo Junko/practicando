@@ -19,14 +19,17 @@
     <div class="lists-container">
       <ion-card *ngFor="let lista of listas" class="lista-card">
         <ion-card-header>
-          <ion-card-title>{{ lista.name }}</ion-card-title>
-          <ion-card-subtitle>{{ lista.nivel }} - {{ lista.grado }}</ion-card-subtitle>
+          <ion-card-title>{{ lista.grado }} {{ lista.nivel }}</ion-card-title>
+          <ion-card-subtitle>Año: {{ lista.anio }}</ion-card-subtitle>
         </ion-card-header>
         <ion-card-content>
-          <p><strong>Año:</strong> {{ lista.anio }}</p>
           <p><strong>Materiales:</strong> {{ lista.materiales?.length || 0 }} items</p>
         </ion-card-content>
-        <ion-card-content>
+        <ion-card-content class="buttons-container">
+          <ion-button fill="outline" size="small" (click)="verDetalleLista(lista)">
+            <ion-icon name="eye" slot="start"></ion-icon>
+            Ver
+          </ion-button>
           <ion-button fill="outline" size="small" (click)="editLista(lista)">
             <ion-icon name="create" slot="start"></ion-icon>
             Editar

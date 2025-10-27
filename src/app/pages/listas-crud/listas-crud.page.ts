@@ -25,31 +25,32 @@ export class ListasCrudPage implements OnInit {
     this.loadListas();
   }
 
-  loadListas() {
-    // Aquí se cargarán las listas desde Firebase
-    // Por ahora, datos de ejemplo
-    this.listas = [
-      {
-        id: '1',
-        name: 'Lista de Útiles Primaria',
-        nivel: 'Primaria',
-        grado: '1er Grado',
-        anio: '2024',
-        materiales: []
-      },
-      {
-        id: '2', 
-        name: 'Lista de Útiles Secundaria',
-        nivel: 'Secundaria',
-        grado: '1er Año',
-        anio: '2024',
-        materiales: []
-      }
-    ];
+  async loadListas() {
+    try {
+      const loading = await this.utilsSvc.loading();
+      await loading.present();
+      
+      this.listas = await this.firebaseSvc.getAllListasUtiles();
+      
+      await loading.dismiss();
+      
+      console.log('Listas cargadas:', this.listas);
+    } catch (error) {
+      console.error('Error al cargar listas:', error);
+      await this.utilsSvc.presentToast({
+        message: 'Error al cargar las listas',
+        duration: 2000,
+        color: 'danger'
+      });
+    }
   }
 
   navigateToCreate() {
     this.router.navigate(['/listas-crud/crear-listas']);
+  }
+
+  async verDetalleLista(lista: any) {
+    this.router.navigate(['/listas-crud/ver-lista', lista.id]);
   }
 
   editLista(lista: any) {
