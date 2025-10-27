@@ -15,7 +15,7 @@ export class CrearListasPage implements OnInit {
   form = new FormGroup({
     id: new FormControl(''),
     nivel: new FormControl('', [Validators.required]),
-    grado: new FormControl('', [Validators.required]),
+    grado: new FormControl({ value: '', disabled: true }, [Validators.required]),
     anio: new FormControl('', [Validators.required]),
   });
 
@@ -49,6 +49,13 @@ export class CrearListasPage implements OnInit {
       this.updateGradosOptions(nivel);
       // Limpiar grado cuando cambie el nivel
       this.form.get('grado')?.setValue('');
+      
+      // Habilitar/deshabilitar el campo grado según si hay nivel seleccionado
+      if (nivel) {
+        this.form.get('grado')?.enable();
+      } else {
+        this.form.get('grado')?.disable();
+      }
     });
   }
 

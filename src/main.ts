@@ -26,7 +26,8 @@ import {
   checkboxOutline,
   menu,
   closeCircle,
-  clipboardOutline
+  clipboardOutline,
+  addCircleOutline
 } from 'ionicons/icons';
 
 addIcons({
@@ -42,7 +43,8 @@ addIcons({
   'checkbox-outline': checkboxOutline,
   'menu': menu,
   'close-circle': closeCircle,
-  'clipboard-outline': clipboardOutline
+  'clipboard-outline': clipboardOutline,
+  'add-circle-outline': addCircleOutline
 });
 
 platformBrowserDynamic().bootstrapModule(AppModule)

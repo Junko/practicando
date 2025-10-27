@@ -7,6 +7,14 @@
     <h2 class="page-title">Listas de Útiles</h2>
     <p class="page-subtitle">Gestiona las listas de útiles escolares</p>
 
+    <!-- Botón para crear nueva lista -->
+    <div class="create-button-container">
+      <ion-button (click)="navigateToCreate()" expand="block" class="create-button">
+        <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+        Crear Nueva Lista
+      </ion-button>
+    </div>
+
     <!-- Lista de listas existentes -->
     <div class="lists-container">
       <ion-card *ngFor="let lista of listas" class="lista-card">

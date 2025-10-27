@@ -26,7 +26,7 @@
 
       <div class="config-row">
         <label class="config-label">Grado:</label>
-        <ion-select [formControl]="form.controls.grado" placeholder="3°" [disabled]="!form.get('nivel')?.value" class="config-select">
+        <ion-select [formControl]="form.controls.grado" placeholder="3°" class="config-select">
           <ion-select-option *ngFor="let grado of gradosOptions" [value]="grado.value">
             {{ grado.label }}
           </ion-select-option>
