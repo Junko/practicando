@@ -110,7 +110,7 @@ export class CrearListasPage implements OnInit {
   addMaterial() {
     if (this.materialForm.valid) {
       const material = {
-        id: Date.now().toString(), // ID temporal
+        id: `${Date.now()}_${Math.random().toString(36).substr(2, 9)}`, // ID único más robusto
         id_lista: '', // Se asignará cuando se cree la lista
         nombre_material: this.materialForm.get('nombre_material')?.value,
         descripcion: this.materialForm.get('descripcion')?.value || '',
@@ -119,6 +119,8 @@ export class CrearListasPage implements OnInit {
       };
       
       this.materiales.push(material);
+      console.log('Material agregado:', material);
+      console.log('Total materiales:', this.materiales.length);
       this.materialForm.reset();
     } else {
       this.materialForm.markAllAsTouched();
@@ -127,14 +129,19 @@ export class CrearListasPage implements OnInit {
 
   // Editar material
   editMaterial(material: any) {
+    // Eliminar el material del array antes de editarlo
+    this.deleteMaterial(material);
+    // Cargar los datos en el formulario
     this.materialForm.patchValue(material);
   }
 
   // Eliminar material
   deleteMaterial(material: any) {
-    const index = this.materiales.indexOf(material);
+    const index = this.materiales.findIndex(m => m.id === material.id);
     if (index > -1) {
       this.materiales.splice(index, 1);
+      console.log('Material eliminado:', material.nombre_material);
+      console.log('Total materiales:', this.materiales.length);
     }
   }
 
