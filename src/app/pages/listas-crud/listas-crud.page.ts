@@ -14,6 +14,7 @@ import { TabsConfig } from '../../shared/models/tab-config.model';
 export class ListasCrudPage implements OnInit {
 
   listas: any[] = []; // Aquí se cargarán las listas desde Firebase
+  loading = false;
   
   firebaseSvc = inject(Firebase);
   utilsSvc = inject(Utils);
@@ -27,16 +28,16 @@ export class ListasCrudPage implements OnInit {
 
   async loadListas() {
     try {
-      const loading = await this.utilsSvc.loading();
-      await loading.present();
+      this.loading = true;
       
       this.listas = await this.firebaseSvc.getAllListasUtiles();
       
-      await loading.dismiss();
+      this.loading = false;
       
       console.log('Listas cargadas:', this.listas);
     } catch (error) {
       console.error('Error al cargar listas:', error);
+      this.loading = false;
       await this.utilsSvc.presentToast({
         message: 'Error al cargar las listas',
         duration: 2000,

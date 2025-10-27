@@ -24,63 +24,47 @@ export class UsuariosCrudPage implements OnInit {
   searchTerm: string = '';
   selectedFilter: string = 'padres';
   currentPage: string = 'usuario';
+  loading = true;
   
   firebaseSvc = inject(Firebase);
   utilsSvc = inject(Utils);
   tabsConfig: TabsConfig = ADMIN_TABS_CONFIG;
   
-  
-  users: User[] = [
-    {
-      id: '1',
-      name: 'Paquito De Tal',
-      email: 'paquito03@gmail.com',
-      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
-      type: 'padres'
-    },
-    {
-      id: '2',
-      name: 'Sofia Lopez',
-      email: 'sofialoz@gmail.com',
-      avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
-      type: 'padres'
-    },
-    {
-      id: '3',
-      name: 'Margarita Huscar',
-      email: 'margaretdias@gmail.com',
-      avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
-      type: 'padres'
-    },
-    {
-      id: '4',
-      name: 'Rodolfo Romero',
-      email: 'romerjorocajas@gmail.com',
-      avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
-      type: 'admins'
-    },
-    {
-      id: '5',
-      name: 'María García',
-      email: 'maria.garcia@admin.com',
-      avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face',
-      type: 'admins'
-    },
-    {
-      id: '6',
-      name: 'Carlos Mendoza',
-      email: 'carlos.mendoza@gmail.com',
-      avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face',
-      type: 'padres'
-    }
-  ];
-  
+  users: User[] = [];
   filteredUsers: User[] = [];
 
   constructor(private router: Router) { }
 
-  ngOnInit() {
-    this.filterUsers();
+  async ngOnInit() {
+    await this.loadUsers();
+  }
+
+  async loadUsers() {
+    try {
+      this.loading = true;
+      const usersData = await this.firebaseSvc.getAllUsers();
+      
+      // Mapear los datos de Firebase al formato esperado
+      this.users = usersData.map((user: any) => ({
+        id: user.id || user.uid,
+        name: `${user.nombres} ${user.apellidos}`,
+        email: user.correo,
+        avatar: 'https://ionicframework.com/docs/img/demos/avatar.svg',
+        type: user.rol === 'padre' ? 'padres' : 'admins'
+      }));
+      
+      this.filterUsers();
+      this.loading = false;
+      
+    } catch (error) {
+      console.error('Error al cargar usuarios:', error);
+      this.loading = false;
+      await this.utilsSvc.presentToast({
+        message: 'Error al cargar los usuarios',
+        duration: 2000,
+        color: 'danger'
+      });
+    }
   }
 
   onSearchChange(event: any) {

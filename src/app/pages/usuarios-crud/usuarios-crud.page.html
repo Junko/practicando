@@ -37,8 +37,23 @@
       </div>
     </div>
 
+    <!-- Loading -->
+    <div *ngIf="loading" class="loading-container">
+      <ion-spinner></ion-spinner>
+      <p>Cargando usuarios...</p>
+    </div>
+
     <!-- Lista de usuarios -->
-    <div class="users-list">
+    <div *ngIf="!loading" class="users-list">
+      
+      <!-- Mensaje si no hay usuarios -->
+      <div *ngIf="filteredUsers.length === 0" class="empty-state">
+        <ion-icon name="people-outline" size="large" color="medium"></ion-icon>
+        <h3>No hay usuarios</h3>
+        <p>No se encontraron usuarios con los filtros aplicados</p>
+      </div>
+
+      <!-- Lista de usuarios -->
       <div 
         *ngFor="let user of filteredUsers" 
         class="user-card">

@@ -379,4 +379,16 @@ export class Firebase {
     }
   }
 
+  //=== Obtener todos los usuarios (para admin) ===
+  async getAllUsers() {
+    try {
+      const ref = collection(getFirestore(), 'users');
+      const snapshot = await getDocs(ref);
+      return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    } catch (error) {
+      console.error('Error al obtener usuarios:', error);
+      throw error;
+    }
+  }
+
 }
