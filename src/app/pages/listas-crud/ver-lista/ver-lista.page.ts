@@ -7,6 +7,7 @@ import { Utils } from 'src/app/services/utils';
   selector: 'app-ver-lista',
   templateUrl: './ver-lista.page.html',
   styleUrls: ['./ver-lista.page.scss'],
+  standalone: false,
 })
 export class VerListaPage implements OnInit {
   
