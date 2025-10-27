@@ -22,9 +22,9 @@ export class PadreInicioPage implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-    this.loadUserInfo();
-    this.loadHijos();
+  async ngOnInit() {
+    await this.loadUserInfo();
+    await this.loadHijos();
   }
 
   loadUserInfo() {
@@ -32,6 +32,7 @@ export class PadreInicioPage implements OnInit {
     if (user) {
       this.userInfo = JSON.parse(user);
       console.log('Padre cargado:', this.userInfo);
+      console.log('UID del padre:', this.userInfo?.uid);
     } else {
       console.error('No se encontró información del padre');
     }
@@ -40,13 +41,18 @@ export class PadreInicioPage implements OnInit {
   async loadHijos() {
     try {
       if (!this.userInfo || !this.userInfo.uid) {
-        console.error('No hay información del padre');
+        console.error('No hay información del padre o UID no encontrado');
         this.loading = false;
         return;
       }
 
+      console.log('Buscando estudiantes para padre UID:', this.userInfo.uid);
+      
       this.hijos = await this.firebaseSvc.getEstudiantesByPadreUid(this.userInfo.uid);
+      
       console.log('Hijos cargados:', this.hijos);
+      console.log('Cantidad de hijos:', this.hijos.length);
+      
       this.loading = false;
     } catch (error) {
       console.error('Error al cargar hijos:', error);
