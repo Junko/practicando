@@ -220,21 +220,11 @@ export class CrearListasPage implements OnInit {
         nombre_material: material.nombre_material,
         descripcion: material.descripcion || '',
         cantidad: material.cantidad,
-        imagen: '' // Se agregará después si hay imagen
+        imagen: material.imagen || '' // Guardamos directamente el base64 por ahora
       };
       
-      // Si hay imagen, subirla a Firebase Storage
-      if (material.imagen) {
-        try {
-          const timestamp = Date.now();
-          const imagePath = `materiales/${material.nombre_material}_${timestamp}.jpg`;
-          const downloadURL = await this.firebaseSvc.uploadImage(imagePath, material.imagen);
-          materialData.imagen = downloadURL;
-        } catch (error) {
-          console.error('Error al subir imagen del material:', error);
-          // Continuar sin imagen si falla
-        }
-      }
+      // TODO: Configurar reglas de Firebase Storage para permitir uploads
+      // Por ahora, guardamos las imágenes como base64 directamente
       
       materialesProcesados.push(materialData);
     }
