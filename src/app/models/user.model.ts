@@ -16,9 +16,9 @@ export enum RolUsuario {
 }
 
 export enum NivelEducativo {
-    INICIAL = 'inicial',
-    PRIMARIA = 'primaria',
-    SECUNDARIA = 'secundaria'
+    INICIAL = 'Inicial',
+    PRIMARIA = 'Primaria',
+    SECUNDARIA = 'Secundaria'
 }
 
 export enum TipoAula {

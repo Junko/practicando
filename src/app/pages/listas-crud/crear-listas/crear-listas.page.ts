@@ -62,14 +62,14 @@ export class CrearListasPage implements OnInit {
   // Actualizar opciones de grados según el nivel
   updateGradosOptions(nivel: string) {
     switch(nivel) {
-      case 'inicial':
+      case 'Inicial':
         this.gradosOptions = [
           { value: '3 años', label: '3 años' },
           { value: '4 años', label: '4 años' },
           { value: '5 años', label: '5 años' }
         ];
         break;
-      case 'primaria':
+      case 'Primaria':
         this.gradosOptions = [
           { value: '1°', label: '1°' },
           { value: '2°', label: '2°' },
@@ -79,7 +79,7 @@ export class CrearListasPage implements OnInit {
           { value: '6°', label: '6°' }
         ];
         break;
-      case 'secundaria':
+      case 'Secundaria':
         this.gradosOptions = [
           { value: '1°', label: '1°' },
           { value: '2°', label: '2°' },

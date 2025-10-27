@@ -91,13 +91,13 @@ export class CrearUsuarioHijoPage implements OnInit {
 
   actualizarGradosDisponibles() {
     switch (this.hijo.nivel) {
-      case 'inicial':
+      case 'Inicial':
         this.gradosDisponibles = ['3 años', '4 años', '5 años'];
         break;
-      case 'primaria':
+      case 'Primaria':
         this.gradosDisponibles = ['1°', '2°', '3°', '4°', '5°', '6°'];
         break;
-      case 'secundaria':
+      case 'Secundaria':
         this.gradosDisponibles = ['1°', '2°', '3°', '4°', '5°'];
         break;
       default:
