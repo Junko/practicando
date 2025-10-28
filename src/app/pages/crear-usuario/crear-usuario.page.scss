@@ -50,43 +50,29 @@
   margin: 2px 0;
 }
 
-// Sección de Datos Personales - Diseño completamente renovado
+// Sección de Datos Personales - Diseño simple como en la imagen
 .personal-data-section {
   background: rgba(255, 197, 1, 1);
-  border-radius: 20px 20px 0 0;
-  padding: 30px 20px;
+  border-radius: 20px;
+  padding: 20px;
   margin: 20px 0 0 0;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   position: relative;
-  overflow: hidden;
 }
 
 .personal-data-title {
-  font-size: 22px;
-  font-weight: 600;
-  color: #1a1a1a;
-  margin: 0 0 25px 0;
-  text-align: center;
-  position: relative;
-  
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 50px;
-    height: 3px;
-    background: #1a1a1a;
-    border-radius: 2px;
-  }
+  font-size: 18px;
+  font-weight: bold;
+  color: #000;
+  margin: 0 0 20px 0;
+  text-align: left;
 }
 
-// Estilos mejorados para inputs y select
+// Estilos simples para inputs como en la imagen
 .input-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
   margin-bottom: 15px;
   
   &:last-child {
@@ -96,38 +82,30 @@
 
 .input-label {
   font-size: 14px;
-  font-weight: 600;
-  color: #1a1a1a;
-  margin: 0 0 6px 0;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  font-weight: bold;
+  color: #000;
+  margin: 0 0 5px 0;
 }
 
-// Estilos para el select de tipo de usuario
+// Estilos simples para el select como en la imagen
 ion-select {
   --background: white;
-  --color: #1a1a1a;
+  --color: #000;
   --placeholder-color: #666;
-  --border-radius: 12px;
-  --padding-start: 16px;
-  --padding-end: 16px;
-  --padding-top: 14px;
-  --padding-bottom: 14px;
-  border: 2px solid #e0e0e0;
-  border-radius: 12px;
-  min-height: 50px;
+  --border-radius: 8px;
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  min-height: 48px;
   width: 100%;
   margin: 0;
   font-size: 16px;
-  transition: all 0.3s ease;
-  
-  &:focus-within {
-    border-color: #1a1a1a;
-    box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.1);
-  }
 }
 
-// Estilos para custom inputs
+// Estilos simples para custom inputs como en la imagen
 app-custom-input {
   display: block;
   width: 100%;
@@ -136,29 +114,23 @@ app-custom-input {
   
   ion-input {
     --background: white;
-    --color: #1a1a1a;
-    --padding-start: 16px;
-    --padding-end: 16px;
-    --padding-top: 14px;
-    --padding-bottom: 14px;
+    --color: #000;
+    --padding-start: 12px;
+    --padding-end: 12px;
+    --padding-top: 12px;
+    --padding-bottom: 12px;
     font-size: 16px;
     width: 100%;
     margin: 0;
     padding: 0;
-    border: 2px solid #e0e0e0;
-    border-radius: 12px;
-    min-height: 50px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    min-height: 48px;
     box-sizing: border-box;
-    transition: all 0.3s ease;
-    
-    &:focus-within {
-      border-color: #1a1a1a;
-      box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.1);
-    }
   }
 }
 
-// Contenedor del botón después del cuadro
+// Contenedor del botón simple como en la imagen
 .button-container {
   padding: 20px;
   background: rgba(255, 197, 1, 1);
@@ -166,32 +138,19 @@ app-custom-input {
   width: 100%;
   box-sizing: border-box;
   border-radius: 0 0 20px 20px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-// Botón Continuar - Diseño renovado
+// Botón Continuar - Diseño simple como en la imagen
 .continue-button {
   margin: 0;
-  --background: #1a1a1a;
-  --color: white;
-  --border-radius: 12px;
+  --background: white;
+  --color: #000;
+  --border-radius: 20px;
   --padding-top: 16px;
   --padding-bottom: 16px;
-  font-weight: 600;
+  font-weight: bold;
   font-size: 16px;
-  border: none;
-  box-shadow: 0 4px 12px rgba(26, 26, 26, 0.3);
-  transition: all 0.3s ease;
-  
-  &:hover {
-    --background: #333;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(26, 26, 26, 0.4);
-  }
-  
-  &:active {
-    transform: translateY(0);
-  }
+  border: 1px solid #ccc;
 }
 
 // Responsive
