@@ -199,39 +199,6 @@
   }
 }
 
-// Dark mode support
-@media (prefers-color-scheme: dark) {
-  .admin-content {
-    --background: #121212;
-  }
-  
-  .greeting {
-    color: #ffffff;
-  }
-  
-  .admin-subtitle {
-    color: #b0b0b0;
-  }
-  
-  .options-title {
-    color: #ffffff;
-  }
-  
-  .option-button {
-    --background: #1e1e1e;
-    --color: #ffffff;
-    border-color: #333333;
-    
-    &:hover {
-      --background: #2a2a2a;
-      border-color: #444444;
-    }
-    
-    ion-icon {
-      color: #b0b0b0;
-    }
-  }
-}
 
 // iOS specific adjustments
 .ios .option-button {
