@@ -1,3 +1,35 @@
 :host {
   font-family: 'Poppins', 'Raleway', sans-serif;
 }
+
+ion-toolbar {
+  --background: #fff;
+  --color: #333;
+  --border-width: 0;
+  --border-style: none;
+  --border-color: transparent;
+}
+
+ion-menu-button {
+  color: #333;
+  --background: transparent;
+  --border-radius: 0;
+  --box-shadow: none;
+  margin: 0;
+  padding: 0;
+}
+
+ion-back-button {
+  color: #333;
+  --background: transparent;
+  --border-radius: 0;
+  --box-shadow: none;
+  margin: 0;
+  padding: 0;
+}
+
+ion-title {
+  color: #333;
+  font-weight: bold;
+  text-align: left;
+}
