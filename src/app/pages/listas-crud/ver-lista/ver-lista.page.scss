@@ -59,18 +59,20 @@
 
 // Tarjetas de materiales
 .material-card {
-  background: #ffffff;
-  border: 1px solid #e9ecef;
-  border-radius: 8px;
+  background: linear-gradient(to bottom, #ffde59, #ffeca1);
+  border: none;
+  border-radius: 12px;
   margin-bottom: 20px;
   padding: 16px;
   display: flex;
   gap: 16px;
   align-items: flex-start;
-  transition: border-color 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   
   &:hover {
-    border-color: #dee2e6;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
   
   &:last-child {
@@ -81,10 +83,12 @@
 .material-imagen {
   width: 80px;
   height: 80px;
-  border-radius: 6px;
+  border-radius: 8px;
   overflow: hidden;
   flex-shrink: 0;
-  background: #f8f9fa;
+  background: #ffffff;
+  border: 2px solid #ffd700;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   
   img {
     width: 100%;
@@ -99,8 +103,8 @@
   
   h3 {
     font-size: 1rem;
-    font-weight: 500;
-    color: #212529;
+    font-weight: 600;
+    color: #1b1213;
     margin: 0 0 8px 0;
     line-height: 1.4;
   }
@@ -124,21 +128,22 @@
       font-size: 0.9rem;
       margin-top: 1px;
       flex-shrink: 0;
-      color: #6c757d;
+      color: #1b1213;
     }
   }
   
   .material-cantidad {
-    color: #6c757d;
+    color: #1b1213;
     
     strong {
-      color: #495057;
-      font-weight: 500;
+      color: #1b1213;
+      font-weight: 600;
     }
   }
   
   .material-descripcion {
-    color: #6c757d;
+    color: #1b1213;
+    opacity: 0.8;
   }
 }
 
