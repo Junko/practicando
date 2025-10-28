@@ -102,7 +102,7 @@
   min-width: 0;
   
   h3 {
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 600;
     color: #1b1213;
     margin: 0 0 8px 0;
@@ -128,8 +128,15 @@
       font-size: 0.9rem;
       margin-top: 1px;
       flex-shrink: 0;
-      color: #1b1213;
     }
+  }
+  
+  .material-cantidad ion-icon {
+    color: #1b1213;
+  }
+  
+  .material-descripcion ion-icon {
+    color: #2c3e50;
   }
   
   .material-cantidad {
@@ -142,8 +149,8 @@
   }
   
   .material-descripcion {
-    color: #1b1213;
-    opacity: 0.8;
+    color: #2c3e50;
+    font-weight: 500;
   }
 }
 
