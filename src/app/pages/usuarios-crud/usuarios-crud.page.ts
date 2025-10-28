@@ -1,5 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { Firebase } from '../../services/firebase';
 import { Utils } from '../../services/utils';
 import { ADMIN_TABS_CONFIG } from '../../shared/configs/tabs-configs';
@@ -33,7 +34,7 @@ export class UsuariosCrudPage implements OnInit {
   users: User[] = [];
   filteredUsers: User[] = [];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private alertCtrl: AlertController) { }
 
   async ngOnInit() {
     await this.loadUsers();
@@ -96,10 +97,49 @@ export class UsuariosCrudPage implements OnInit {
     // this.router.navigate(['/editar-usuario', user.id]);
   }
 
-  deleteUser(user: User) {
-    console.log('Eliminar usuario:', user);
-    // Aquí puedes mostrar un modal de confirmación y eliminar el usuario
-    // this.presentDeleteConfirm(user);
+  async deleteUser(user: User) {
+    const alert = await this.alertCtrl.create({
+      header: '⚠️ Eliminar usuario',
+      message: `¿Estás seguro de que deseas eliminar a <strong>${user.name}</strong>?<br><br>
+                <small>• Se eliminará el perfil del usuario<br>
+                • Se eliminarán todos los estudiantes asociados (si es padre)<br>
+                • Esta acción no se puede deshacer</small>`,
+      cssClass: 'alert-delete',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel'
+        },
+        {
+          text: 'Eliminar',
+          role: 'destructive',
+          handler: async () => {
+            try {
+              this.loading = true;
+              await this.firebaseSvc.deleteUserComplete(user.id);
+              this.users = this.users.filter(u => u.id !== user.id);
+              this.filterUsers();
+              this.loading = false;
+              await this.utilsSvc.presentToast({
+                message: 'Usuario eliminado completamente',
+                duration: 2000,
+                color: 'success'
+              });
+            } catch (error) {
+              console.error('Error al eliminar usuario:', error);
+              this.loading = false;
+              await this.utilsSvc.presentToast({
+                message: 'No se pudo eliminar el usuario',
+                duration: 2000,
+                color: 'danger'
+              });
+            }
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   navigateTo(page: string) {

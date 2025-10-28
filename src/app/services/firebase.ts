@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, sendPasswordResetEmail } from 'firebase/auth';
-import { getFirestore, collection, getDocs, addDoc, doc, setDoc, getDoc, query, where, CollectionReference, Query } from 'firebase/firestore';
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, sendPasswordResetEmail, deleteUser } from 'firebase/auth';
+import { getFirestore, collection, getDocs, addDoc, doc, setDoc, getDoc, query, where, CollectionReference, Query, deleteDoc } from 'firebase/firestore';
 import { User, CrearUsuario } from '../models/user.model';
 import { Firestore } from '@angular/fire/firestore';
 import { getStorage, ref, uploadString, getDownloadURL } from 'firebase/storage';
@@ -269,6 +269,42 @@ export class Firebase {
   //=== Agregar documento con auto-generación de ID ===
   async addDocument(path: string, data: any) {
     return addDoc(collection(getFirestore(), path), data);
+  }
+
+  //=== Eliminar documento por ruta ===
+  async deleteDocument(path: string) {
+    return deleteDoc(doc(getFirestore(), path));
+  }
+
+  //=== Eliminar usuario completo (Firestore + Authentication) ===
+  async deleteUserComplete(userId: string) {
+    try {
+      // 1. Obtener el usuario actual para verificar permisos
+      const currentUser = getAuth().currentUser;
+      if (!currentUser) {
+        throw new Error('No hay usuario autenticado');
+      }
+
+      // 2. Eliminar documento de Firestore
+      await this.deleteDocument(`users/${userId}`);
+
+      // 3. Eliminar también estudiantes asociados si es un padre
+      const estudiantes = await this.getEstudiantesByPadreUid(userId);
+      for (const estudiante of estudiantes) {
+        await this.deleteDocument(`estudiantes/${estudiante.id}`);
+      }
+
+      console.log('Usuario eliminado completamente de Firestore y estudiantes asociados');
+      
+      return {
+        success: true,
+        message: 'Usuario eliminado correctamente'
+      };
+
+    } catch (error) {
+      console.error('Error al eliminar usuario completo:', error);
+      throw error;
+    }
   }
 
   //=== Subir imagen a Firebase Storage ===
