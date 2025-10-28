@@ -6,6 +6,7 @@
 .login-section {
   background: white;
   padding: 20px 20px 0 20px; // Sin padding inferior para que la sección amarilla se conecte
+  margin: 0 -20px; // Extender hasta los bordes laterales
 }
 
 .section-subtitle {
@@ -20,7 +21,9 @@
 .create-user-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 0; // Sin gap para evitar espacios
+  margin: 0;
+  padding: 0;
 }
 
 .input-group {
@@ -106,6 +109,7 @@ ion-select {
 @media (max-width: 768px) {
   .login-section {
     padding: 15px 15px 0 15px;
+    margin: 0 -15px;
   }
   
   .personal-data-section {
@@ -123,6 +127,7 @@ ion-select {
 @media (max-width: 480px) {
   .login-section {
     padding: 10px 10px 0 10px;
+    margin: 0 -10px;
   }
   
   .personal-data-section {

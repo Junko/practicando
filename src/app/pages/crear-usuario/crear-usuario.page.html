@@ -11,11 +11,11 @@
 
 <ion-content [fullscreen]="true" class="crear-usuario-content">
 
-  <!-- Sección de Datos de Login (Fondo blanco) -->
-  <div class="login-section">
-    <h2 class="section-subtitle">Ingrese los datos para el Login:</h2>
+  <form [formGroup]="form" class="create-user-form" (ngSubmit)="submit()">
     
-    <form [formGroup]="form" class="create-user-form" (ngSubmit)="submit()">
+    <!-- Sección de Datos de Login (Fondo blanco) -->
+    <div class="login-section">
+      <h2 class="section-subtitle">Ingrese los datos para el Login:</h2>
       
       <div class="input-group">
         <label class="input-label">CORREO</label>
@@ -46,74 +46,74 @@
           <div *ngIf="form.controls.contrasena.errors?.['minlength']">Mínimo 6 caracteres</div>
         </div>
       </div>
+    </div>
 
-      <!-- Sección de Datos Personales (Fondo amarillo) -->
-      <div class="personal-data-section">
-        <h2 class="personal-data-title">Datos Personales</h2>
-        
-        <div class="input-group">
-          <label class="input-label">NOMBRE</label>
-          <app-custom-input 
-            [control]="form.controls.nombres"
-            type="text"
-            label=""
-            icon=""
-            autocomplete="given-name">
-          </app-custom-input>
-          <div class="validators" *ngIf="form.controls.nombres.errors && form.controls.nombres.touched">
-            <div *ngIf="form.controls.nombres.errors?.['required']">El nombre es requerido</div>
-          </div>
+    <!-- Sección de Datos Personales (Fondo amarillo) -->
+    <div class="personal-data-section">
+      <h2 class="personal-data-title">Datos Personales</h2>
+      
+      <div class="input-group">
+        <label class="input-label">NOMBRE</label>
+        <app-custom-input 
+          [control]="form.controls.nombres"
+          type="text"
+          label=""
+          icon=""
+          autocomplete="given-name">
+        </app-custom-input>
+        <div class="validators" *ngIf="form.controls.nombres.errors && form.controls.nombres.touched">
+          <div *ngIf="form.controls.nombres.errors?.['required']">El nombre es requerido</div>
         </div>
-
-        <div class="input-group">
-          <label class="input-label">APELLIDO</label>
-          <app-custom-input 
-            [control]="form.controls.apellidos"
-            type="text"
-            label=""
-            icon=""
-            autocomplete="family-name">
-          </app-custom-input>
-          <div class="validators" *ngIf="form.controls.apellidos.errors && form.controls.apellidos.touched">
-            <div *ngIf="form.controls.apellidos.errors?.['required']">El apellido es requerido</div>
-          </div>
-        </div>
-
-        <div class="input-group">
-          <label class="input-label">TELÉFONO</label>
-          <app-custom-input 
-            [control]="form.controls.telefono"
-            type="tel"
-            label=""
-            icon=""
-            autocomplete="tel">
-          </app-custom-input>
-          <div class="validators" *ngIf="form.controls.telefono.errors && form.controls.telefono.touched">
-            <div *ngIf="form.controls.telefono.errors?.['required']">El teléfono es requerido</div>
-          </div>
-        </div>
-
-        <div class="input-group">
-          <label class="input-label">TIPO DE USUARIO</label>
-          <ion-select [formControl]="form.controls.rol" placeholder="Seleccione el tipo">
-            <ion-select-option value="padre">Padre</ion-select-option>
-            <ion-select-option value="admin">Admin</ion-select-option>
-          </ion-select>
-          <div class="validators" *ngIf="form.controls.rol.errors && form.controls.rol.touched">
-            <div *ngIf="form.controls.rol.errors?.['required']">El tipo de usuario es requerido</div>
-          </div>
-        </div>
-
-        <!-- Botón Continuar dentro del cuadro amarillo -->
-        <div class="button-container">
-          <ion-button expand="block" mode="ios" fill="solid" color="dark" type="submit" class="continue-button">
-            Continuar
-          </ion-button>
-        </div>
-
       </div>
 
-    </form>
-  </div>
+      <div class="input-group">
+        <label class="input-label">APELLIDO</label>
+        <app-custom-input 
+          [control]="form.controls.apellidos"
+          type="text"
+          label=""
+          icon=""
+          autocomplete="family-name">
+        </app-custom-input>
+        <div class="validators" *ngIf="form.controls.apellidos.errors && form.controls.apellidos.touched">
+          <div *ngIf="form.controls.apellidos.errors?.['required']">El apellido es requerido</div>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">TELÉFONO</label>
+        <app-custom-input 
+          [control]="form.controls.telefono"
+          type="tel"
+          label=""
+          icon=""
+          autocomplete="tel">
+        </app-custom-input>
+        <div class="validators" *ngIf="form.controls.telefono.errors && form.controls.telefono.touched">
+          <div *ngIf="form.controls.telefono.errors?.['required']">El teléfono es requerido</div>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label">TIPO DE USUARIO</label>
+        <ion-select [formControl]="form.controls.rol" placeholder="Seleccione el tipo">
+          <ion-select-option value="padre">Padre</ion-select-option>
+          <ion-select-option value="admin">Admin</ion-select-option>
+        </ion-select>
+        <div class="validators" *ngIf="form.controls.rol.errors && form.controls.rol.touched">
+          <div *ngIf="form.controls.rol.errors?.['required']">El tipo de usuario es requerido</div>
+        </div>
+      </div>
+
+      <!-- Botón Continuar dentro del cuadro amarillo -->
+      <div class="button-container">
+        <ion-button expand="block" mode="ios" fill="solid" color="dark" type="submit" class="continue-button">
+          Continuar
+        </ion-button>
+      </div>
+
+    </div>
+
+  </form>
 
 </ion-content>
