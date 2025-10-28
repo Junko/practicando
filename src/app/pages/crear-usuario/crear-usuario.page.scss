@@ -50,11 +50,12 @@
 // Sección de Datos Personales (Fondo amarillo)
 .personal-data-section {
   background: rgba(255, 197, 1, 1); // Color exacto especificado
-  border-radius: 20px; // Esquinas redondeadas en todos los lados
+  border-radius: 20px 20px 0 0; // Solo esquinas redondeadas arriba
   padding: 25px 25px 25px 25px; // Padding uniforme
   margin: 20px -20px 0 -20px; // Extender hasta los bordes laterales
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   position: relative;
+  min-height: calc(100vh - 200px); // Asegurar que ocupe toda la pantalla
 }
 
 .personal-data-title {
@@ -110,6 +111,7 @@ ion-select {
   .personal-data-section {
     padding: 20px 20px 20px 20px;
     margin: 15px -15px 0 -15px;
+    min-height: calc(100vh - 180px);
   }
   
   .button-container {
@@ -126,6 +128,7 @@ ion-select {
   .personal-data-section {
     padding: 15px 15px 15px 15px;
     margin: 10px -10px 0 -10px;
+    min-height: calc(100vh - 160px);
   }
   
   .personal-data-title {
@@ -141,6 +144,7 @@ ion-select {
 @media (min-width: 1024px) {
   .personal-data-section {
     padding: 25px 25px 25px 25px;
+    min-height: calc(100vh - 220px);
   }
   
   .button-container {
