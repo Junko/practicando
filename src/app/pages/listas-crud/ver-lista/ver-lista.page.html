@@ -1,4 +1,4 @@
-<app-header title="Detalle de Lista" menuId="admin-menu"></app-header>
+<app-header title="Detalle de Lista" [showBackButton]="true"></app-header>
 
 <ion-content [fullscreen]="true" class="ver-lista-content">
 
@@ -20,7 +20,7 @@
 
     <!-- Lista de materiales -->
     <div class="materiales-container" *ngIf="lista.materiales && lista.materiales.length > 0">
-      <h2>Materiales Requeridos</h2>
+      <h2>📋 Materiales Requeridos</h2>
       
       <div class="material-card" *ngFor="let material of lista.materiales; let i = index">
         
@@ -33,13 +33,17 @@
         <div class="material-info">
           <h3>{{ i + 1 }}. {{ material.nombre_material }}</h3>
           
-          <p class="material-cantidad" *ngIf="material.cantidad">
-            <strong>Cantidad:</strong> {{ material.cantidad }}
-          </p>
-          
-          <p class="material-descripcion" *ngIf="material.descripcion">
-            {{ material.descripcion }}
-          </p>
+          <div class="material-details">
+            <p class="material-cantidad" *ngIf="material.cantidad">
+              <ion-icon name="layers-outline" color="primary"></ion-icon>
+              <strong>Cantidad:</strong> {{ material.cantidad }}
+            </p>
+            
+            <p class="material-descripcion" *ngIf="material.descripcion">
+              <ion-icon name="information-circle-outline" color="medium"></ion-icon>
+              {{ material.descripcion }}
+            </p>
+          </div>
         </div>
 
       </div>
@@ -56,9 +60,9 @@
 
 </ion-content>
 
-<!-- Botón de volver -->
+<!-- Botón de volver flotante -->
 <div class="back-button-container">
-  <ion-button (click)="goBack()" fill="clear" class="back-button">
+  <ion-button (click)="goBack()" expand="block" class="back-button">
     <ion-icon name="arrow-back" slot="start"></ion-icon>
     Volver a Listas
   </ion-button>
