@@ -31,6 +31,7 @@
   flex-direction: column;
   gap: 8px;
   padding: 0 20px; // Más padding lateral para mejor espaciado
+  margin-bottom: 20px; // Espacio entre grupos de inputs
 }
 
 .input-label {
@@ -88,7 +89,7 @@ ion-select {
 // Contenedor del botón dentro del cuadro amarillo
 .button-container {
   padding: 20px 20px 0 20px; // Padding superior y lateral
-  margin-top: 20px; // Espacio antes del botón
+  margin-top: 30px; // Más espacio antes del botón
   display: flex;
   justify-content: center; // Centrar el botón
   align-items: center;
@@ -128,7 +129,7 @@ ion-select {
   
   .button-container {
     padding: 15px 15px 0 15px;
-    margin-top: 15px;
+    margin-top: 25px;
   }
 }
 
@@ -150,7 +151,7 @@ ion-select {
   
   .button-container {
     padding: 10px 10px 0 10px;
-    margin-top: 10px;
+    margin-top: 20px;
   }
 }
 
@@ -162,6 +163,6 @@ ion-select {
   
   .button-container {
     padding: 25px 25px 0 25px;
-    margin-top: 25px;
+    margin-top: 35px;
   }
 }
