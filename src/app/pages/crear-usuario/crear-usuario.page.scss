@@ -54,12 +54,22 @@
 .personal-data-section {
   background: rgba(255, 197, 1, 1); // Color exacto especificado
   border-radius: 20px 20px 0 0; // Solo esquinas redondeadas arriba
-  padding: 25px 25px 25px 25px; // Padding uniforme
+  padding: 25px 25px 0 25px; // Sin padding inferior
   margin: 20px -20px 0 -20px; // Extender hasta los bordes laterales
-  min-height: calc(100vh - 400px); // Reducir altura para dar espacio al botón fijo
+  min-height: calc(100vh - 450px); // Ajustar altura
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   position: relative;
-  padding-bottom: 100px; // Espacio extra para el botón fijo
+  // Extender el fondo amarillo hasta el botón
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; // Extender hacia abajo
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: rgba(255, 197, 1, 1);
+    z-index: -1;
+  }
 }
 
 .personal-data-title {
@@ -173,9 +183,13 @@ ion-input {
   }
   
   .personal-data-section {
-    padding: 20px 20px 100px 20px; // Espacio extra para el botón fijo
+    padding: 20px 20px 0 20px; // Sin padding inferior
     margin: 15px -15px 0 -15px;
-    min-height: calc(100vh - 320px); // Ajustar para botón fijo
+    min-height: calc(100vh - 350px); // Ajustar para botón fijo
+    &::after {
+      height: 80px; // Ajustar altura del pseudo-elemento
+      bottom: -80px;
+    }
   }
   
   .button-container {
@@ -189,9 +203,13 @@ ion-input {
   }
   
   .personal-data-section {
-    padding: 15px 15px 100px 15px; // Espacio extra para el botón fijo
+    padding: 15px 15px 0 15px; // Sin padding inferior
     margin: 10px -10px 0 -10px;
-    min-height: calc(100vh - 290px); // Ajustar para botón fijo
+    min-height: calc(100vh - 320px); // Ajustar para botón fijo
+    &::after {
+      height: 70px; // Ajustar altura del pseudo-elemento
+      bottom: -70px;
+    }
   }
   
   .personal-data-title {
@@ -205,8 +223,12 @@ ion-input {
 
 @media (min-width: 1024px) {
   .personal-data-section {
-    padding: 25px 25px 100px 25px; // Espacio extra para el botón fijo
-    min-height: calc(100vh - 400px); // Ajustar para botón fijo
+    padding: 25px 25px 0 25px; // Sin padding inferior
+    min-height: calc(100vh - 450px); // Ajustar para botón fijo
+    &::after {
+      height: 100px; // Ajustar altura del pseudo-elemento
+      bottom: -100px;
+    }
   }
   
   .button-container {
