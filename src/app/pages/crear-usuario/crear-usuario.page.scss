@@ -15,7 +15,7 @@
   margin: 0 0 20px 0;
   font-weight: normal;
   padding-top: 30px; // Más padding superior
-  padding-left: 10px; // Mismo padding que los campos de entrada
+  padding-left: 20px; // Mismo padding que los campos de entrada
 }
 
 .create-user-form {
@@ -30,7 +30,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 0 10px; // Padding lateral para que no estén pegados a los lados
+  padding: 0 20px; // Más padding lateral para mejor espaciado
 }
 
 .input-label {
@@ -87,7 +87,7 @@ ion-select {
 
 // Contenedor del botón dentro del cuadro amarillo
 .button-container {
-  padding: 20px 0 0 0; // Solo padding superior
+  padding: 20px 20px 0 20px; // Padding superior y lateral
   margin-top: 20px; // Espacio antes del botón
 }
 
@@ -119,7 +119,7 @@ ion-select {
   }
   
   .button-container {
-    padding: 15px 0 0 0;
+    padding: 15px 15px 0 15px;
     margin-top: 15px;
   }
 }
@@ -141,7 +141,7 @@ ion-select {
   }
   
   .button-container {
-    padding: 10px 0 0 0;
+    padding: 10px 10px 0 10px;
     margin-top: 10px;
   }
 }
@@ -153,7 +153,7 @@ ion-select {
   }
   
   .button-container {
-    padding: 25px 0 0 0;
+    padding: 25px 25px 0 25px;
     margin-top: 25px;
   }
 }
