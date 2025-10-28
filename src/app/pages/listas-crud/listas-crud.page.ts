@@ -51,14 +51,8 @@ export class ListasCrudPage implements OnInit {
   }
 
   async verDetalleLista(lista: any) {
-    console.log('=== NAVEGANDO A VER LISTA ===');
-    console.log('Lista seleccionada:', lista);
-    console.log('ID de la lista:', lista.id);
-    console.log('Ruta a navegar:', `/listas-crud/ver-lista/${lista.id}`);
-    
     try {
       await this.router.navigate(['/listas-crud/ver-lista', lista.id]);
-      console.log('Navegación exitosa');
     } catch (error) {
       console.error('Error en navegación:', error);
       await this.utilsSvc.presentToast({
