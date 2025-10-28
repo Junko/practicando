@@ -19,9 +19,9 @@ export const noAuthGuard: CanActivateFn = (
     console.log('No-Auth Guard - PERMITIDO (no autenticado)');
     return true;
   } else {
-    console.log('No-Auth Guard - BLOQUEADO - Redirigiendo a main');
+    console.log('No-Auth Guard - BLOQUEADO - Redirigiendo a admin');
     // Usar window.location en lugar de router para evitar bucles
-    window.location.href = '/main/home';
+    window.location.href = '/admin/inicio';
     return false;
   }
 };

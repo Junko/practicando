@@ -118,8 +118,8 @@ export class LoginPage implements OnInit {
           } else if (user.rol === 'padre') {
             this.utilsSvc.routerLink('/padre/inicio');
           } else {
-            // Rol no reconocido, ir a main como fallback
-            this.utilsSvc.routerLink('/main/home');
+            // Rol no reconocido, ir a admin como fallback
+            this.utilsSvc.routerLink('/admin/inicio');
           }
         } else {
           console.error('Error: Usuario no se guardó en localStorage');
