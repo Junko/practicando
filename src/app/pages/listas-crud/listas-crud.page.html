@@ -32,7 +32,7 @@
           <p><strong>Materiales:</strong> {{ lista.materiales?.length || 0 }} items</p>
         </ion-card-content>
         <ion-card-content class="buttons-container">
-          <ion-button fill="outline" size="small" (click)="verDetalleLista(lista)">
+          <ion-button fill="outline" size="small" (click)="verDetalleLista(lista)" [routerLink]="['/listas-crud/ver-lista', lista.id]">
             <ion-icon name="eye" slot="start"></ion-icon>
             Ver
           </ion-button>

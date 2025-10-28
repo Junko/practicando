@@ -51,17 +51,21 @@ export class ListasCrudPage implements OnInit {
   }
 
   async verDetalleLista(lista: any) {
-    console.log('=== VER DETALLE LISTA ===');
+    console.log('=== NAVEGANDO A VER LISTA ===');
     console.log('Lista seleccionada:', lista);
     console.log('ID de la lista:', lista.id);
-    console.log('Navegando a:', `/listas-crud/ver-lista/${lista.id}`);
+    console.log('Ruta a navegar:', `/listas-crud/ver-lista/${lista.id}`);
     
     try {
-      // Usar navigateByUrl para navegación absoluta
-      await this.router.navigateByUrl(`/listas-crud/ver-lista/${lista.id}`);
+      await this.router.navigate(['/listas-crud/ver-lista', lista.id]);
       console.log('Navegación exitosa');
     } catch (error) {
       console.error('Error en navegación:', error);
+      await this.utilsSvc.presentToast({
+        message: 'Error al abrir la lista',
+        duration: 2000,
+        color: 'danger'
+      });
     }
   }
 
