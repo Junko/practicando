@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/salones"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Crear</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <h2 class="titulo">Crear</h2>
+
+    <form [formGroup]="crearForm" (ngSubmit)="crear()">
+
+      <div class="campo">
+        <label>Nombre del Aula *</label>
+        <ion-input
+          formControlName="nombreAula"
+          placeholder="Ej: 1A, Aula Computación 201, 301">
+        </ion-input>
+      </div>
+
+      <div class="campo">
+        <label>Tipo de Aula</label>
+        <ion-select formControlName="tipoAula">
+          <ion-select-option value="General">General</ion-select-option>
+          <ion-select-option value="Computación">Computación</ion-select-option>
+          <ion-select-option value="Laboratorio">Laboratorio</ion-select-option>
+          <ion-select-option value="Secretaría">Secretaría</ion-select-option>
+        </ion-select>
+      </div>
+
+      <div class="campo">
+        <label>Piso</label>
+        <ion-input formControlName="piso" placeholder="1, 2, 3..."></ion-input>
+      </div>
+
+      <div class="fila">
+        <div class="columna">
+          <label>Grado:</label>
+          <ion-select formControlName="grado">
+            <ion-select-option value="1°">1°</ion-select-option>
+            <ion-select-option value="2°">2°</ion-select-option>
+            <ion-select-option value="3°">3°</ion-select-option>
+          </ion-select>
+        </div>
+
+        <div class="columna">
+          <label>Nivel:</label>
+          <ion-select formControlName="nivel">
+            <ion-select-option value="Inicial">Inicial</ion-select-option>
+            <ion-select-option value="Primaria">Primaria</ion-select-option>
+            <ion-select-option value="Secundaria">Secundaria</ion-select-option>
+          </ion-select>
+        </div>
+      </div>
+
+      <div class="tarjeta">
+        <div class="tarjeta-header">
+          <h3>
+            Salón: {{ crearForm.value.grado }} {{ crearForm.value.nivel }} - 2025
+          </h3>
+        </div>
+
+        <div class="tarjeta-body">
+          <div class="muebles-header">
+            <h4>Muebles:</h4>
+            <ion-button color="dark" size="small" (click)="agregarMueble()">
+              + Añadir Mueble
+            </ion-button>
+          </div>
+
+          <div *ngFor="let m of muebles" class="mueble">
+            <div>
+              <label>Nombre:</label>
+              <div class="valor">{{ m.nombre }}</div>
+            </div>
+            <div>
+              <label>Estado:</label>
+              <div class="valor estado">{{ m.estado }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <ion-button expand="block" color="dark" class="btn-crear" type="submit">
+        Crear
+      </ion-button>
+    </form>
+  </div>
+</ion-content>
