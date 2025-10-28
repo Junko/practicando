@@ -1,10 +1,11 @@
 .crear-usuario-content {
   --background: #ffffff;
   padding: 0;
-  min-height: 100vh;
+  height: 100vh;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding-bottom: 0; // Eliminar padding inferior
+  padding-bottom: 0;
+  position: relative;
 }
 
 .login-section {
@@ -51,11 +52,11 @@
   margin: 2px 0;
 }
 
-// Sección de Datos Personales - Conectada al botón
+// Sección de Datos Personales - Con espacio para botón fijo
 .personal-data-section {
   background: rgba(255, 197, 1, 1); // Color original de la marca
-  border-radius: 25px 25px 0 0;
-  padding: 30px 25px 0 25px; // Sin padding inferior
+  border-radius: 25px;
+  padding: 30px 25px 100px 25px; // Espacio para el botón fijo
   margin: 20px -20px 0 -20px; // Expandir hasta los lados
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   position: relative;
@@ -133,7 +134,7 @@ app-custom-input {
   }
 }
 
-// Contenedor del botón conectado al formulario
+// Contenedor del botón fijo en la parte inferior
 .button-container {
   padding: 20px 25px 25px 25px;
   background: rgba(255, 197, 1, 1); // Color original de la marca
@@ -142,8 +143,11 @@ app-custom-input {
   box-sizing: border-box;
   border-radius: 0 0 25px 25px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  position: relative;
-  z-index: 10;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
 
 // Botón Continuar - Diseño suave como en la imagen
@@ -168,15 +172,19 @@ app-custom-input {
   }
   
   .personal-data-section {
-    padding: 25px 20px 0 20px; // Sin padding inferior
+    padding: 25px 20px 80px 20px; // Espacio para botón fijo
     margin: 15px -15px 0 -15px; // Expandir hasta los lados
-    border-radius: 20px 20px 0 0;
+    border-radius: 20px;
   }
   
   .button-container {
     padding: 15px 20px 20px 20px; // Ajustar padding
     margin: 0 -15px; // Expandir hasta los lados
     width: calc(100% + 30px); // Ajustar ancho
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
   }
 }
 
@@ -186,9 +194,9 @@ app-custom-input {
   }
   
   .personal-data-section {
-    padding: 20px 15px 0 15px; // Sin padding inferior
+    padding: 20px 15px 70px 15px; // Espacio para botón fijo
     margin: 10px -10px 0 -10px; // Expandir hasta los lados
-    border-radius: 20px 20px 0 0;
+    border-radius: 20px;
   }
   
   .personal-data-title {
@@ -199,19 +207,27 @@ app-custom-input {
     padding: 10px 15px 15px 15px; // Ajustar padding
     margin: 0 -10px; // Expandir hasta los lados
     width: calc(100% + 20px); // Ajustar ancho
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
   }
 }
 
 @media (min-width: 1024px) {
   .personal-data-section {
-    padding: 35px 30px 0 30px; // Sin padding inferior
+    padding: 35px 30px 120px 30px; // Espacio para botón fijo
     margin: 30px -25px 0 -25px; // Expandir hasta los lados
-    border-radius: 30px 30px 0 0;
+    border-radius: 30px;
   }
   
   .button-container {
     padding: 20px 25px 25px 25px; // Ajustar padding
     margin: 0 -25px; // Expandir hasta los lados
     width: calc(100% + 50px); // Ajustar ancho
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
   }
 }
