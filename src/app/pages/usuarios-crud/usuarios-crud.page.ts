@@ -100,10 +100,7 @@ export class UsuariosCrudPage implements OnInit {
   async deleteUser(user: User) {
     const alert = await this.alertCtrl.create({
       header: '⚠️ Eliminar usuario',
-      message: `¿Estás seguro de que deseas eliminar a <strong>${user.name}</strong>?<br><br>
-                <small>• Se eliminará el perfil del usuario<br>
-                • Se eliminarán todos los estudiantes asociados (si es padre)<br>
-                • Esta acción no se puede deshacer</small>`,
+      message: `¿Estás seguro de que deseas eliminar a "${user.name}"?\n\n• Se eliminará el perfil del usuario\n• Se eliminarán todos los estudiantes asociados (si es padre)\n• Esta acción no se puede deshacer`,
       cssClass: 'alert-delete',
       buttons: [
         {
