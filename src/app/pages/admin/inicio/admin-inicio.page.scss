@@ -1,268 +1,289 @@
 .admin-content {
-  --background: #f8f9fa;
-  padding: 15px;
+  --background: #ffffff;
+  padding: 0;
 }
 
 #container {
-  max-width: 1200px;
+  padding: 20px 16px 100px 16px;
+  max-width: 100%;
   margin: 0 auto;
-  padding-bottom: 80px; /* Espacio para el tab */
 }
 
+// Header section
 .greeting {
-  font-size: 2.5em;
-  font-weight: bold;
-  margin-top: 20px;
-  margin-left: 15px;
-  color: #333;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1b1213;
+  margin: 0 0 8px 0;
+  line-height: 1.2;
 }
 
 .admin-subtitle {
-  font-size: 1.2em;
-  color: #666;
-  margin-left: 15px;
-  margin-bottom: 20px;
+  font-size: 1rem;
+  color: #6c757d;
+  margin: 0 0 24px 0;
+  font-weight: 400;
 }
 
-/* Cuadros informativos */
+// Info cards - Modern grid
 .info-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 12px;
-  margin: 20px 15px;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-bottom: 32px;
 }
 
 .info-card {
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  background: linear-gradient(to bottom, #ffde59, #ffeca1);
-  transition: transform 0.3s ease;
-}
-
-.info-card:hover {
-  transform: translateY(-3px);
+  background: linear-gradient(135deg, #ffde59, #ffeca1);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: none;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  }
 }
 
 .info-card ion-card-content {
   display: flex;
   align-items: center;
-  padding: 15px 18px;
+  padding: 20px;
+  gap: 16px;
 }
 
 .card-icon {
-  margin-right: 12px;
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  background-color: rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
+  flex-shrink: 0;
+  
+  ion-icon {
+    font-size: 1.5rem;
+    color: #1b1213;
+  }
 }
 
-.card-icon ion-icon {
-  font-size: 1.4em;
-  color: #333;
+.card-info {
+  flex: 1;
+  min-width: 0;
+  
+  h3 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #1b1213;
+    margin: 0 0 4px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .card-number {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1b1213;
+    margin: 0;
+    line-height: 1;
+  }
 }
 
-.card-info h3 {
-  margin: 0 0 5px 0;
-  font-size: 1.1em;
-  color: #333;
-  font-weight: 600;
-}
-
-.card-number {
-  font-size: 1.6em;
-  font-weight: bold;
-  color: #333;
-  margin: 0;
-}
-
-/* Opciones de administración */
+// Admin options section
 .admin-options {
-  margin: 30px 15px;
+  margin-bottom: 24px;
 }
 
 .options-title {
-  font-size: 1.8em;
-  color: #333;
-  margin-bottom: 20px;
-  font-weight: bold;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1b1213;
+  margin: 0 0 20px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .options-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
   gap: 12px;
-  max-width: 100%;
 }
 
 .option-button {
-  --background: #fff;
-  --color: #333;
+  --background: #ffffff;
+  --color: #1b1213;
   --border-radius: 12px;
-  --box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  height: 85px;
-  font-weight: 600;
-  font-size: 0.95em;
-  transition: all 0.3s ease;
-  padding: 0 8px;
-}
-
-.option-button:hover {
-  --background: #f8f9fa;
-  transform: translateY(-2px);
-  --box-shadow: 0 6px 16px rgba(0,0,0,0.15);
-}
-
-.option-button ion-icon {
-  margin-right: 10px;
-  font-size: 1.2em;
-}
-
-/* Tabs */
-ion-tab-bar {
-  --background: rgba(255, 197, 1);
-  --border-color: transparent;
-  height: 60px;
-  padding-top: 6px;
-  padding-bottom: 6px;
-}
-
-ion-tab-button {
-  --color: rgba(27, 18, 19);
-  --color-selected: rgba(27, 18, 19);
-  font-weight: bold;
-  padding-top: 6px;
-  padding-bottom: 6px;
-}
-
-/* Responsive para pantallas pequeñas */
-@media (max-width: 768px) {
-  .admin-content {
-    padding: 10px;
+  --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --padding-start: 20px;
+  --padding-end: 20px;
+  --padding-top: 16px;
+  --padding-bottom: 16px;
+  height: auto;
+  min-height: 60px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  border: 1px solid #e9ecef;
+  text-align: left;
+  justify-content: flex-start;
+  
+  &:hover {
+    --background: #f8f9fa;
+    transform: translateY(-1px);
+    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-color: #dee2e6;
   }
   
-  .greeting {
-    font-size: 2em;
-    margin-left: 10px;
+  &:active {
+    transform: translateY(0);
   }
   
-  .admin-subtitle {
-    margin-left: 10px;
-    margin-bottom: 15px;
+  ion-icon {
+    font-size: 1.2rem;
+    margin-right: 12px;
+    color: #6c757d;
+  }
+}
+
+// Responsive design
+@media (min-width: 480px) {
+  .info-cards {
+    grid-template-columns: repeat(2, 1fr);
   }
   
   .options-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-  }
-  
-  .option-button {
-    height: 80px;
-    font-size: 0.9em;
-    padding: 0 6px;
-  }
-  
-  .info-cards {
-    grid-template-columns: 1fr;
-    gap: 10px;
-    margin: 15px 10px;
-  }
-  
-  .info-card ion-card-content {
-    padding: 12px;
-  }
-  
-  .card-icon {
-    width: 35px;
-    height: 35px;
-  }
-  
-  .card-icon ion-icon {
-    font-size: 1.2em;
-  }
-  
-  .card-number {
-    font-size: 1.4em;
   }
 }
 
-/* Para pantallas muy pequeñas */
-@media (max-width: 480px) {
-  .admin-content {
-    padding: 8px;
+@media (min-width: 768px) {
+  #container {
+    padding: 24px 20px 100px 20px;
   }
   
   .greeting {
-    font-size: 1.8em;
-    margin-left: 8px;
+    font-size: 2.2rem;
   }
   
   .admin-subtitle {
-    margin-left: 8px;
-    margin-bottom: 12px;
-  }
-  
-  .options-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
-  }
-  
-  .option-button {
-    height: 85px;
-    font-size: 0.85em;
-    padding: 0 4px;
+    font-size: 1.1rem;
   }
   
   .info-cards {
-    gap: 8px;
-    margin: 12px 8px;
+    grid-template-columns: repeat(3, 1fr);
   }
   
-  .info-card ion-card-content {
-    padding: 10px;
-  }
-  
-  .card-icon {
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
-  }
-  
-  .card-icon ion-icon {
-    font-size: 1em;
-  }
-  
-  .card-info h3 {
-    font-size: 1em;
-  }
-  
-  .card-number {
-    font-size: 1.2em;
-  }
-  
-  .admin-options {
-    margin: 20px 8px;
+  .options-grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
-/* Para Android con pantallas muy pequeñas */
-@media (max-width: 360px) {
+@media (min-width: 1024px) {
+  #container {
+    max-width: 1200px;
+    padding: 32px 24px 100px 24px;
+  }
+  
+  .greeting {
+    font-size: 2.5rem;
+  }
+  
+  .admin-subtitle {
+    font-size: 1.2rem;
+  }
+  
   .options-grid {
-    gap: 6px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+// Dark mode support
+@media (prefers-color-scheme: dark) {
+  .admin-content {
+    --background: #121212;
+  }
+  
+  .greeting {
+    color: #ffffff;
+  }
+  
+  .admin-subtitle {
+    color: #b0b0b0;
+  }
+  
+  .options-title {
+    color: #ffffff;
   }
   
   .option-button {
-    height: 80px;
-    font-size: 0.8em;
-    padding: 0 2px;
-  }
-  
-  .option-button ion-icon {
-    font-size: 1em;
-    margin-right: 5px;
+    --background: #1e1e1e;
+    --color: #ffffff;
+    border-color: #333333;
+    
+    &:hover {
+      --background: #2a2a2a;
+      border-color: #444444;
+    }
+    
+    ion-icon {
+      color: #b0b0b0;
+    }
   }
 }
 
+// iOS specific adjustments
+.ios .option-button {
+  --border-radius: 8px;
+}
+
+.ios .info-card {
+  border-radius: 12px;
+}
+
+// Android specific adjustments
+.md .option-button {
+  --border-radius: 12px;
+}
+
+.md .info-card {
+  border-radius: 16px;
+}
+
+// Loading states
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+// Animation for cards
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.info-card {
+  animation: fadeInUp 0.3s ease forwards;
+  
+  &:nth-child(1) { animation-delay: 0.1s; }
+  &:nth-child(2) { animation-delay: 0.2s; }
+  &:nth-child(3) { animation-delay: 0.3s; }
+}
+
+.option-button {
+  animation: fadeInUp 0.3s ease forwards;
+  
+  &:nth-child(1) { animation-delay: 0.1s; }
+  &:nth-child(2) { animation-delay: 0.15s; }
+  &:nth-child(3) { animation-delay: 0.2s; }
+  &:nth-child(4) { animation-delay: 0.25s; }
+  &:nth-child(5) { animation-delay: 0.3s; }
+  &:nth-child(6) { animation-delay: 0.35s; }
+}
