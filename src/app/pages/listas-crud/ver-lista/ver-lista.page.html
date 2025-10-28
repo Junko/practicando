@@ -20,7 +20,7 @@
 
     <!-- Lista de materiales -->
     <div class="materiales-container" *ngIf="lista.materiales && lista.materiales.length > 0">
-      <h2>📋 Materiales Requeridos</h2>
+      <h2>Materiales</h2>
       
       <div class="material-card" *ngFor="let material of lista.materiales; let i = index">
         
@@ -35,12 +35,12 @@
           
           <div class="material-details">
             <p class="material-cantidad" *ngIf="material.cantidad">
-              <ion-icon name="layers-outline" color="primary"></ion-icon>
+              <ion-icon name="layers-outline"></ion-icon>
               <strong>Cantidad:</strong> {{ material.cantidad }}
             </p>
             
             <p class="material-descripcion" *ngIf="material.descripcion">
-              <ion-icon name="information-circle-outline" color="medium"></ion-icon>
+              <ion-icon name="information-circle-outline"></ion-icon>
               {{ material.descripcion }}
             </p>
           </div>

@@ -1,163 +1,169 @@
 .ver-lista-content {
-  --background: #f8f9fa;
+  --background: #ffffff;
   padding: 0;
 }
 
 .content-container {
-  padding: 16px;
+  padding: 20px;
   max-width: 100%;
   margin: 0 auto;
 }
 
 // Header de la lista
 .lista-header {
-  background: linear-gradient(135deg, #ffde59, #ffeca1);
-  border-radius: 16px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  text-align: center;
+  background: #ffffff;
+  border-bottom: 1px solid #e9ecef;
+  padding: 24px 0 20px 0;
+  margin-bottom: 32px;
+  text-align: left;
 }
 
 .lista-titulo {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #1b1213;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #212529;
   margin: 0 0 8px 0;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  line-height: 1.3;
 }
 
 .lista-subtitulo {
-  font-size: 1rem;
-  color: #666;
+  font-size: 0.9rem;
+  color: #6c757d;
   margin: 0 0 12px 0;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .lista-materiales-count {
-  font-size: 0.9rem;
-  color: #1b1213;
-  background: rgba(255, 255, 255, 0.3);
-  padding: 6px 12px;
-  border-radius: 20px;
+  font-size: 0.85rem;
+  color: #6c757d;
+  background: #f8f9fa;
+  padding: 4px 8px;
+  border-radius: 4px;
   display: inline-block;
-  font-weight: 600;
+  font-weight: 500;
   margin: 0;
 }
 
 // Contenedor de materiales
 .materiales-container {
   h2 {
-    font-size: 1.3rem;
-    font-weight: bold;
-    color: #1b1213;
-    margin: 0 0 16px 0;
-    padding: 0 4px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #495057;
+    margin: 0 0 24px 0;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
 }
 
 // Tarjetas de materiales
 .material-card {
-  background: white;
-  border-radius: 12px;
-  margin-bottom: 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: #ffffff;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  padding: 16px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  transition: border-color 0.2s ease;
   
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    border-color: #dee2e6;
+  }
+  
+  &:last-child {
+    margin-bottom: 0;
   }
 }
 
 .material-imagen {
-  width: 100%;
-  height: 200px;
+  width: 80px;
+  height: 80px;
+  border-radius: 6px;
   overflow: hidden;
-  position: relative;
+  flex-shrink: 0;
+  background: #f8f9fa;
   
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
-  }
-  
-  &:hover img {
-    transform: scale(1.05);
   }
 }
 
 .material-info {
-  padding: 16px;
+  flex: 1;
+  min-width: 0;
   
   h3 {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #1b1213;
-    margin: 0 0 12px 0;
-    line-height: 1.3;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #212529;
+    margin: 0 0 8px 0;
+    line-height: 1.4;
   }
   
   .material-details {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
   }
   
   .material-cantidad,
   .material-descripcion {
     display: flex;
     align-items: flex-start;
-    gap: 8px;
-    font-size: 0.9rem;
+    gap: 6px;
+    font-size: 0.85rem;
     margin: 0;
     line-height: 1.4;
     
     ion-icon {
-      font-size: 1rem;
-      margin-top: 2px;
+      font-size: 0.9rem;
+      margin-top: 1px;
       flex-shrink: 0;
+      color: #6c757d;
     }
   }
   
   .material-cantidad {
-    color: #666;
+    color: #6c757d;
     
     strong {
-      color: #1b1213;
-      font-weight: 600;
+      color: #495057;
+      font-weight: 500;
     }
   }
   
   .material-descripcion {
-    color: #555;
+    color: #6c757d;
   }
 }
 
 // Estado vacío
 .empty-state {
   text-align: center;
-  padding: 40px 20px;
-  color: #666;
+  padding: 60px 20px;
+  color: #6c757d;
   
   ion-icon {
-    font-size: 64px;
+    font-size: 48px;
     margin-bottom: 16px;
-    color: #999;
+    color: #adb5bd;
   }
   
   h3 {
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin-bottom: 8px;
-    color: #333;
-    font-weight: 600;
+    color: #495057;
+    font-weight: 500;
   }
   
   p {
-    font-size: 0.95rem;
-    color: #666;
+    font-size: 0.85rem;
+    color: #6c757d;
     margin: 0;
   }
 }
@@ -172,12 +178,12 @@
   
   ion-spinner {
     margin-bottom: 16px;
-    --color: #ffde59;
+    --color: #6c757d;
   }
   
   p {
-    color: #666;
-    font-size: 14px;
+    color: #6c757d;
+    font-size: 0.85rem;
     margin: 0;
   }
 }
@@ -192,89 +198,44 @@
 }
 
 .back-button {
-  --background: #1b1213;
+  --background: #495057;
   --color: white;
-  --border-radius: 12px;
-  --padding-start: 20px;
-  --padding-end: 20px;
-  --padding-top: 12px;
-  --padding-bottom: 12px;
-  font-weight: 600;
-  font-size: 0.95rem;
-  box-shadow: 0 4px 12px rgba(27, 18, 19, 0.3);
+  --border-radius: 6px;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 10px;
+  --padding-bottom: 10px;
+  font-weight: 500;
+  font-size: 0.9rem;
   transition: all 0.2s ease;
   
   &:hover {
-    --background: #333;
-    transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(27, 18, 19, 0.4);
+    --background: #343a40;
   }
   
   ion-icon {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 }
 
 // Responsive para pantallas muy pequeñas
 @media (max-width: 375px) {
   .content-container {
-    padding: 12px;
-  }
-  
-  .lista-header {
     padding: 16px;
   }
   
-  .lista-titulo {
-    font-size: 1.6rem;
+  .material-card {
+    padding: 12px;
+    gap: 12px;
   }
   
-  .material-info {
-    padding: 12px;
+  .material-imagen {
+    width: 60px;
+    height: 60px;
   }
   
   .back-button-container {
     left: 16px;
     right: 16px;
   }
-}
-
-// Animaciones
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.material-card {
-  animation: fadeInUp 0.3s ease forwards;
-  
-  &:nth-child(1) { animation-delay: 0.1s; }
-  &:nth-child(2) { animation-delay: 0.2s; }
-  &:nth-child(3) { animation-delay: 0.3s; }
-  &:nth-child(4) { animation-delay: 0.4s; }
-  &:nth-child(5) { animation-delay: 0.5s; }
-}
-
-// Mejoras para iOS
-.ios .material-card {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
-}
-
-.ios .back-button {
-  --border-radius: 8px;
-}
-
-// Mejoras para Android
-.md .material-card {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.md .back-button {
-  --border-radius: 12px;
 }
