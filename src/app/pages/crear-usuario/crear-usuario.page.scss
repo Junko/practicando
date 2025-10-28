@@ -52,11 +52,11 @@
   margin: 2px 0;
 }
 
-// Sección de Datos Personales - Con espacio para botón fijo
+// Sección de Datos Personales - Conectada al botón
 .personal-data-section {
   background: rgba(255, 197, 1, 1); // Color original de la marca
-  border-radius: 25px;
-  padding: 30px 25px 100px 25px; // Espacio para el botón fijo
+  border-radius: 25px 25px 0 0;
+  padding: 30px 25px 0 25px; // Sin padding inferior
   margin: 20px -20px 0 -20px; // Expandir hasta los lados
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   position: relative;
@@ -80,7 +80,7 @@
   margin-bottom: 20px;
   
   &:last-child {
-    margin-bottom: 20px; // Espacio antes del botón
+    margin-bottom: 30px; // Espacio antes del botón
   }
 }
 
@@ -131,10 +131,35 @@ app-custom-input {
     border-radius: 8px;
     min-height: 48px;
     box-sizing: border-box;
+    
+    // Prevenir espacios blancos al enfocar
+    &:focus {
+      outline: none;
+      border-color: #007bff;
+    }
   }
 }
 
-// Contenedor del botón fijo en la parte inferior
+// Prevenir que el viewport cambie al enfocar inputs
+ion-content {
+  --keyboard-offset: 0px;
+  --offset-bottom: 0px;
+}
+
+// Asegurar que no haya scroll innecesario
+.crear-usuario-content {
+  --background: #ffffff;
+  padding: 0;
+  height: 100vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0;
+  position: relative;
+  // Prevenir cambios de viewport
+  contain: layout style;
+}
+
+// Contenedor del botón normal después del formulario
 .button-container {
   padding: 20px 25px 25px 25px;
   background: rgba(255, 197, 1, 1); // Color original de la marca
@@ -143,11 +168,8 @@ app-custom-input {
   box-sizing: border-box;
   border-radius: 0 0 25px 25px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
+  position: relative;
+  z-index: 10;
 }
 
 // Botón Continuar - Diseño suave como en la imagen
@@ -172,19 +194,16 @@ app-custom-input {
   }
   
   .personal-data-section {
-    padding: 25px 20px 80px 20px; // Espacio para botón fijo
+    padding: 25px 20px 0 20px; // Sin padding inferior
     margin: 15px -15px 0 -15px; // Expandir hasta los lados
-    border-radius: 20px;
+    border-radius: 20px 20px 0 0;
   }
   
   .button-container {
     padding: 15px 20px 20px 20px; // Ajustar padding
     margin: 0 -15px; // Expandir hasta los lados
     width: calc(100% + 30px); // Ajustar ancho
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    position: relative;
   }
 }
 
@@ -194,9 +213,9 @@ app-custom-input {
   }
   
   .personal-data-section {
-    padding: 20px 15px 70px 15px; // Espacio para botón fijo
+    padding: 20px 15px 0 15px; // Sin padding inferior
     margin: 10px -10px 0 -10px; // Expandir hasta los lados
-    border-radius: 20px;
+    border-radius: 20px 20px 0 0;
   }
   
   .personal-data-title {
@@ -207,27 +226,21 @@ app-custom-input {
     padding: 10px 15px 15px 15px; // Ajustar padding
     margin: 0 -10px; // Expandir hasta los lados
     width: calc(100% + 20px); // Ajustar ancho
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    position: relative;
   }
 }
 
 @media (min-width: 1024px) {
   .personal-data-section {
-    padding: 35px 30px 120px 30px; // Espacio para botón fijo
+    padding: 35px 30px 0 30px; // Sin padding inferior
     margin: 30px -25px 0 -25px; // Expandir hasta los lados
-    border-radius: 30px;
+    border-radius: 30px 30px 0 0;
   }
   
   .button-container {
     padding: 20px 25px 25px 25px; // Ajustar padding
     margin: 0 -25px; // Expandir hasta los lados
     width: calc(100% + 50px); // Ajustar ancho
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    position: relative;
   }
 }
