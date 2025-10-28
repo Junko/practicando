@@ -107,6 +107,20 @@ ion-select {
   width: 100%;
   margin: 0;
   font-size: 16px;
+  
+  // Prevenir espacios blancos al enfocar
+  &:focus {
+    outline: none;
+    border-color: #007bff;
+    transform: none;
+    box-shadow: none;
+  }
+  
+  // Prevenir que el select cause scroll
+  &:focus-within {
+    position: relative;
+    z-index: 1;
+  }
 }
 
 // Estilos simples para custom inputs como en la imagen
@@ -136,6 +150,14 @@ app-custom-input {
     &:focus {
       outline: none;
       border-color: #007bff;
+      transform: none;
+      box-shadow: none;
+    }
+    
+    // Prevenir que el input cause scroll
+    &:focus-within {
+      position: relative;
+      z-index: 1;
     }
   }
 }
@@ -144,13 +166,29 @@ app-custom-input {
 ion-content {
   --keyboard-offset: 0px;
   --offset-bottom: 0px;
+  --overflow: hidden;
+  height: 100vh;
+  max-height: 100vh;
+}
+
+// Prevenir scroll excesivo en el formulario
+.create-user-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
 }
 
 // Asegurar que no haya scroll innecesario
 .crear-usuario-content {
   --background: #ffffff;
   padding: 0;
-  height: 100vh;
+  min-height: 100vh;
+  max-height: 100vh;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   padding-bottom: 0;
