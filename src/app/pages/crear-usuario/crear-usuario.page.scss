@@ -50,30 +50,31 @@
   margin: 2px 0;
 }
 
-// Sección de Datos Personales - Diseño simple como en la imagen
+// Sección de Datos Personales - Diseño suave como en la imagen
 .personal-data-section {
-  background: rgba(255, 197, 1, 1);
-  border-radius: 20px;
-  padding: 20px;
+  background: #FFF080;
+  border-radius: 25px;
+  padding: 30px 25px;
   margin: 20px 0 0 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   position: relative;
 }
 
 .personal-data-title {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
   color: #000;
-  margin: 0 0 20px 0;
-  text-align: left;
+  margin: 0 0 25px 0;
+  text-align: center;
+  font-family: sans-serif;
 }
 
-// Estilos simples para inputs como en la imagen
+// Estilos para inputs con espaciado como en la imagen
 .input-group {
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  margin-bottom: 15px;
+  gap: 8px;
+  margin-bottom: 20px;
   
   &:last-child {
     margin-bottom: 0;
@@ -130,27 +131,30 @@ app-custom-input {
   }
 }
 
-// Contenedor del botón simple como en la imagen
+// Contenedor del botón suave como en la imagen
 .button-container {
-  padding: 20px;
-  background: rgba(255, 197, 1, 1);
+  padding: 25px;
+  background: #FFF080;
   margin: 0;
   width: 100%;
   box-sizing: border-box;
-  border-radius: 0 0 20px 20px;
+  border-radius: 0 0 25px 25px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
-// Botón Continuar - Diseño simple como en la imagen
+// Botón Continuar - Diseño suave como en la imagen
 .continue-button {
   margin: 0;
   --background: white;
   --color: #000;
-  --border-radius: 20px;
-  --padding-top: 16px;
-  --padding-bottom: 16px;
+  --border-radius: 25px;
+  --padding-top: 18px;
+  --padding-bottom: 18px;
   font-weight: bold;
   font-size: 16px;
-  border: 1px solid #ccc;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-family: sans-serif;
 }
 
 // Responsive
@@ -160,8 +164,9 @@ app-custom-input {
   }
   
   .personal-data-section {
-    padding: 25px 15px;
+    padding: 25px 20px;
     margin: 15px 0 0 0;
+    border-radius: 20px;
   }
   
   .button-container {
@@ -177,6 +182,7 @@ app-custom-input {
   .personal-data-section {
     padding: 20px 15px;
     margin: 10px 0 0 0;
+    border-radius: 20px;
   }
   
   .personal-data-title {
@@ -190,8 +196,9 @@ app-custom-input {
 
 @media (min-width: 1024px) {
   .personal-data-section {
-    padding: 40px 30px;
+    padding: 35px 30px;
     margin: 30px 0 0 0;
+    border-radius: 30px;
   }
   
   .button-container {
