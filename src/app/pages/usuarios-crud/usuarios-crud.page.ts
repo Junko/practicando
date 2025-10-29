@@ -99,8 +99,8 @@ export class UsuariosCrudPage implements OnInit {
 
   viewUser(user: User) {
     console.log('Ver usuario:', user);
+    // Por ahora solo muestra en consola, sin funcionalidad
     // Aquí puedes implementar la lógica para mostrar los detalles del usuario
-    // Por ejemplo, abrir un modal o navegar a una página de detalles
   }
 
   async deleteUser(user: User) {
