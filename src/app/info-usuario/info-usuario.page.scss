@@ -4,137 +4,97 @@
   min-height: 100vh;
 }
 
-// Header mejorado para móviles
+// Header minimalista y limpio
 .user-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 50px 20px 40px 20px;
+  background: #ffffff;
+  padding: 30px 20px;
   margin: 0;
   display: flex;
   align-items: center;
-  position: relative;
-  overflow: hidden;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-    opacity: 0.3;
-  }
+  border-bottom: 2px solid #f1f5f9;
   
   .user-avatar {
     margin-right: 20px;
-    position: relative;
-    z-index: 2;
     
     ion-icon {
-      font-size: 70px;
-      color: white;
-      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+      font-size: 60px;
+      color: #64748b;
     }
   }
   
   .user-basic-info {
     flex: 1;
-    position: relative;
-    z-index: 2;
     
     .user-name {
-      margin: 0 0 8px 0;
-      font-size: 28px;
-      font-weight: 700;
-      color: white;
+      margin: 0 0 6px 0;
+      font-size: 24px;
+      font-weight: 600;
+      color: #1e293b;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
     }
     
     .user-role {
       margin: 0;
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 500;
-      color: rgba(255, 255, 255, 0.9);
+      color: #64748b;
       text-transform: capitalize;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: rgba(255, 255, 255, 0.2);
-      padding: 6px 12px;
-      border-radius: 20px;
-      display: inline-block;
-      backdrop-filter: blur(10px);
     }
   }
 }
 
-// Contenedor principal mejorado
+// Contenedor principal simple
 .user-info-container {
   max-width: 800px;
   margin: 0 auto;
-  padding: 30px 20px;
-  background: #f8fafc;
-  margin-top: -20px;
-  border-radius: 25px 25px 0 0;
-  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
-  position: relative;
-  z-index: 1;
+  padding: 20px;
+  background: #ffffff;
 }
 
-// Cards mejoradas para móviles
+// Cards simples y limpias
 .user-details-card, .students-card {
-  margin: 0 0 20px 0;
-  border-radius: 16px;
+  margin: 0 0 16px 0;
+  border-radius: 8px;
   background: #ffffff;
-  border: none;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e2e8f0;
+  box-shadow: none;
   overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-  }
   
   ion-card-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 20px 24px 16px 24px;
-    border-bottom: none;
+    background: #f8fafc;
+    padding: 16px 20px;
+    border-bottom: 1px solid #e2e8f0;
     
     ion-card-title {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 600;
-      color: white;
+      color: #1e293b;
       display: flex;
       align-items: center;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       
       ion-icon {
-        margin-right: 12px;
-        color: white;
-        font-size: 20px;
+        margin-right: 10px;
+        color: #64748b;
+        font-size: 18px;
       }
     }
   }
   
   ion-card-content {
-    padding: 24px;
+    padding: 20px;
     background: #ffffff;
   }
 }
 
-// Items de detalle mejorados
+// Items de detalle simples
 .detail-item {
-  margin-bottom: 16px;
-  padding: 20px;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
-  border-radius: 12px;
-  border-left: 4px solid #667eea;
-  transition: all 0.2s ease;
-  
-  &:hover {
-    transform: translateX(4px);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
-  }
+  margin-bottom: 12px;
+  padding: 16px;
+  background: #f8fafc;
+  border-radius: 6px;
+  border-left: 3px solid #64748b;
   
   &:last-child {
     margin-bottom: 0;
@@ -142,10 +102,10 @@
   
   ion-label {
     display: block;
-    margin-bottom: 8px;
-    font-size: 12px;
+    margin-bottom: 6px;
+    font-size: 11px;
     font-weight: 600;
-    color: #667eea;
+    color: #64748b;
     text-transform: uppercase;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     letter-spacing: 0.5px;
@@ -153,25 +113,24 @@
   
   p {
     margin: 0;
-    font-size: 16px;
-    font-weight: 500;
-    color: #1a202c;
+    font-size: 15px;
+    font-weight: 400;
+    color: #1e293b;
     word-break: break-word;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   }
 }
 
-// Lista de estudiantes optimizada para móviles
+// Lista de estudiantes simple
 .students-list {
   .student-item {
     display: flex;
     flex-direction: column;
-    padding: 20px;
-    margin-bottom: 16px;
-    background: #ffffff;
-    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    background: #f8fafc;
+    border-radius: 6px;
     border: 1px solid #e2e8f0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     
     &:last-child {
       margin-bottom: 0;
@@ -179,61 +138,46 @@
     
     .student-info {
       width: 100%;
-      margin-bottom: 12px;
       
       h3 {
-        margin: 0 0 12px 0;
-        font-size: 18px;
+        margin: 0 0 8px 0;
+        font-size: 16px;
         font-weight: 600;
-        color: #1a202c;
+        color: #1e293b;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         line-height: 1.3;
       }
       
       .student-details {
         margin: 0;
-        font-size: 14px;
+        font-size: 13px;
         display: flex;
         flex-wrap: wrap;
-        gap: 8px;
+        gap: 6px;
         
         span {
-          padding: 6px 12px;
-          border-radius: 6px;
+          padding: 4px 8px;
+          border-radius: 4px;
           font-weight: 500;
-          font-size: 12px;
+          font-size: 11px;
           font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
           
           &.student-level {
-            background: #4299e1;
+            background: #64748b;
             color: white;
           }
           
           &.student-grade {
             background: #e2e8f0;
-            color: #4a5568;
+            color: #475569;
           }
           
           &.student-section {
-            background: #f7fafc;
-            color: #718096;
+            background: #f1f5f9;
+            color: #64748b;
             border: 1px solid #e2e8f0;
           }
         }
-      }
-    }
-    
-    .student-status {
-      align-self: flex-start;
-      
-      ion-badge {
-        --background: #48bb78;
-        --color: white;
-        font-weight: 500;
-        padding: 6px 12px;
-        border-radius: 6px;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        font-size: 12px;
       }
     }
   }
@@ -304,152 +248,135 @@
   }
 }
 
-// Responsive design optimizado para Pixel 7
+// Responsive design simple
 @media (max-width: 768px) {
   .user-header {
-    padding: 40px 20px 30px 20px;
+    padding: 25px 20px;
     
     .user-avatar ion-icon {
-      font-size: 60px;
+      font-size: 50px;
     }
     
     .user-basic-info .user-name {
-      font-size: 26px;
+      font-size: 22px;
     }
   }
   
   .user-info-container {
-    padding: 25px 20px;
-    margin-top: -15px;
-    border-radius: 20px 20px 0 0;
+    padding: 16px;
   }
   
   .user-details-card, .students-card {
-    margin-bottom: 18px;
-    border-radius: 14px;
+    margin-bottom: 14px;
     
     ion-card-header {
-      padding: 18px 22px 14px 22px;
+      padding: 14px 16px;
       
       ion-card-title {
-        font-size: 17px;
+        font-size: 15px;
       }
     }
     
     ion-card-content {
-      padding: 22px;
+      padding: 16px;
     }
   }
   
   .detail-item {
-    padding: 18px;
-    margin-bottom: 16px;
-    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 10px;
   }
   
   .student-item {
-    padding: 18px;
-    margin-bottom: 14px;
-    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 10px;
     
     .student-info h3 {
-      font-size: 17px;
-      margin-bottom: 10px;
+      font-size: 15px;
+      margin-bottom: 6px;
     }
     
     .student-details {
-      gap: 6px;
+      gap: 4px;
       
       span {
-        padding: 5px 10px;
-        font-size: 11px;
+        padding: 3px 6px;
+        font-size: 10px;
       }
     }
   }
 }
 
-// Optimización específica para Pixel 7 (393px de ancho)
 @media (max-width: 393px) {
   .user-header {
-    padding: 35px 18px 25px 18px;
+    padding: 20px 16px;
     
     .user-avatar {
-      margin-right: 16px;
+      margin-right: 14px;
       
       ion-icon {
-        font-size: 55px;
+        font-size: 45px;
       }
     }
     
     .user-basic-info .user-name {
-      font-size: 24px;
+      font-size: 20px;
     }
     
     .user-role {
-      font-size: 14px;
-      padding: 5px 10px;
+      font-size: 13px;
     }
   }
   
   .user-info-container {
-    padding: 20px 18px;
-    margin-top: -12px;
-    border-radius: 18px 18px 0 0;
+    padding: 14px;
   }
   
   .user-details-card, .students-card {
-    margin-bottom: 16px;
-    border-radius: 12px;
+    margin-bottom: 12px;
     
     ion-card-header {
-      padding: 16px 20px 12px 20px;
+      padding: 12px 14px;
       
       ion-card-title {
-        font-size: 16px;
+        font-size: 14px;
       }
     }
     
     ion-card-content {
-      padding: 20px;
+      padding: 14px;
     }
   }
   
   .detail-item {
-    padding: 16px;
-    margin-bottom: 14px;
-    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 8px;
     
     ion-label {
-      font-size: 11px;
+      font-size: 10px;
     }
     
     p {
-      font-size: 15px;
+      font-size: 14px;
     }
   }
   
   .student-item {
-    padding: 16px;
-    margin-bottom: 12px;
-    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 8px;
     
     .student-info h3 {
-      font-size: 16px;
-      margin-bottom: 8px;
+      font-size: 14px;
+      margin-bottom: 6px;
     }
     
     .student-details {
-      gap: 5px;
+      gap: 3px;
       
       span {
-        padding: 4px 8px;
-        font-size: 10px;
+        padding: 2px 5px;
+        font-size: 9px;
       }
-    }
-    
-    .student-status ion-badge {
-      padding: 4px 8px;
-      font-size: 10px;
     }
   }
 }
