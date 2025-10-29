@@ -55,13 +55,8 @@
 
       <!-- Lista de usuarios -->
       <div 
-        *ngFor="let user of filteredUsers; let i = index" 
-        class="user-card"
-        (touchstart)="startLongPress(user, i, $event)"
-        (touchend)="endLongPress()"
-        (mousedown)="startLongPress(user, i, $event)"
-        (mouseup)="endLongPress()"
-        (mouseleave)="endLongPress()">
+        *ngFor="let user of filteredUsers" 
+        class="user-card">
         <div class="user-info">
           <div class="user-avatar">
             <img [src]="user.avatar" [alt]="user.name" class="avatar-img">
@@ -71,7 +66,7 @@
             <p class="user-email">{{ user.email }}</p>
           </div>
         </div>
-        <div class="user-actions" [class.show-actions]="user.showActions">
+        <div class="user-actions">
           <ion-button fill="outline" size="small" (click)="editUser(user)" class="action-btn">
             <ion-icon name="create-outline" slot="start"></ion-icon>
             Editar
