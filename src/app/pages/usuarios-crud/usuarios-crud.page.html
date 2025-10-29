@@ -67,14 +67,17 @@
           </div>
         </div>
         <div class="user-actions">
-          <ion-button fill="clear" (click)="editUser(user)" class="action-btn">
-            <ion-icon name="create-outline"></ion-icon>
+          <ion-button fill="outline" size="small" (click)="editUser(user)" class="action-btn">
+            <ion-icon name="create-outline" slot="start"></ion-icon>
+            Editar
           </ion-button>
-          <ion-button fill="clear" (click)="viewUser(user)" class="action-btn">
-            <ion-icon name="eye-outline"></ion-icon>
+          <ion-button fill="outline" size="small" (click)="viewUser(user)" class="action-btn">
+            <ion-icon name="eye-outline" slot="start"></ion-icon>
+            Ver
           </ion-button>
-          <ion-button fill="clear" (click)="deleteUser(user)" class="action-btn">
-            <ion-icon name="trash-outline"></ion-icon>
+          <ion-button fill="outline" size="small" color="danger" (click)="deleteUser(user)" class="action-btn">
+            <ion-icon name="trash-outline" slot="start"></ion-icon>
+            Eliminar
           </ion-button>
         </div>
       </div>

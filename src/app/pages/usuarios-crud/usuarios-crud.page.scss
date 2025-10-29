@@ -101,8 +101,7 @@ ion-content {
   padding: 16px;
   margin-bottom: 12px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -143,25 +142,29 @@ ion-content {
 
 .user-actions {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 8px;
+  margin-top: 12px;
+  justify-content: center;
 }
 
 .action-btn {
   --color: #000000;
-  --padding-start: 8px;
-  --padding-end: 8px;
+  --padding-start: 12px;
+  --padding-end: 12px;
   --padding-top: 8px;
   --padding-bottom: 8px;
   margin: 0;
-  height: 32px;
-  width: 32px;
+  height: 36px;
   border-radius: 8px;
   transition: transform 0.1s ease, background-color 0.2s ease;
+  flex: 1;
+  max-width: 100px;
 }
 
 .action-btn ion-icon {
-  font-size: 18px;
+  font-size: 16px;
+  margin-right: 4px;
 }
 
 .action-btn:hover {
