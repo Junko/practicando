@@ -107,29 +107,6 @@
       </ion-card-content>
     </ion-card>
 
-    <!-- Account Status -->
-    <ion-card class="status-card">
-      <ion-card-header>
-        <ion-card-title>
-          <ion-icon name="shield-checkmark-outline" slot="start"></ion-icon>
-          Estado de la Cuenta
-        </ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <div class="status-item">
-          <ion-icon name="checkmark-circle" color="success"></ion-icon>
-          <span>Cuenta activa</span>
-        </div>
-        <div class="status-item" *ngIf="userInfo.registroCompleto">
-          <ion-icon name="checkmark-circle" color="success"></ion-icon>
-          <span>Registro completado</span>
-        </div>
-        <div class="status-item" *ngIf="!userInfo.registroCompleto">
-          <ion-icon name="warning" color="warning"></ion-icon>
-          <span>Registro pendiente de completar</span>
-        </div>
-      </ion-card-content>
-    </ion-card>
 
   </div>
 
