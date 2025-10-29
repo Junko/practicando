@@ -58,12 +58,7 @@ const routes: Routes = [
   {
     path: '**',
     redirectTo: 'login'
-  },   {
-    path: 'ver-usuario',
-    loadChildren: () => import('./usuarios-crud/ver-usuario/ver-usuario.module').then( m => m.VerUsuarioPageModule)
-  },
-
-
+  }
 ];
 
 @NgModule({
