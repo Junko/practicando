@@ -5,15 +5,16 @@ import { IonicModule } from '@ionic/angular';
 
 import { VerUsuarioPageRoutingModule } from './ver-usuario-routing.module';
 import { VerUsuarioPage } from './ver-usuario.page';
-import { HeaderComponent } from '../../../shared/components/header/header.component';
+import { SharedModule } from '../../../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    VerUsuarioPageRoutingModule
+    VerUsuarioPageRoutingModule,
+    SharedModule
   ],
-  declarations: [VerUsuarioPage, HeaderComponent]
+  declarations: [VerUsuarioPage]
 })
 export class VerUsuarioPageModule {}
