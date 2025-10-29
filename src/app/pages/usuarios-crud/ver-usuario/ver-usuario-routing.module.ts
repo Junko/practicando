@@ -1,0 +1,21 @@
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
+import { VerUsuarioPage } from './ver-usuario.page';
+
+const routes: Routes = [
+  {
+    path: '',
+    component: VerUsuarioPage
+  },
+  {
+    path: ':id',
+    component: VerUsuarioPage
+  }
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
+})
+export class VerUsuarioPageRoutingModule {}
