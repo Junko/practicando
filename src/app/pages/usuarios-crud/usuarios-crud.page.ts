@@ -97,10 +97,16 @@ export class UsuariosCrudPage implements OnInit {
     // this.router.navigate(['/editar-usuario', user.id]);
   }
 
+  viewUser(user: User) {
+    console.log('Ver usuario:', user);
+    // Aquí puedes implementar la lógica para mostrar los detalles del usuario
+    // Por ejemplo, abrir un modal o navegar a una página de detalles
+  }
+
   async deleteUser(user: User) {
     const alert = await this.alertCtrl.create({
       header: '⚠️ Eliminar usuario',
-      message: `¿Estás seguro de que deseas eliminar a "${user.name}"?\n\n• Se eliminará el perfil del usuario\n• Se eliminarán todos los estudiantes asociados (si es padre)\n• Esta acción no se puede deshacer`,
+      message: `¿Estás seguro de que deseas eliminar a "${user.name}"?\n\nEsta acción no se puede deshacer`,
       cssClass: 'alert-delete',
       buttons: [
         {
