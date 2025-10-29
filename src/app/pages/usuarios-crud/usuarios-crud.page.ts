@@ -99,7 +99,8 @@ export class UsuariosCrudPage implements OnInit {
 
   viewUser(user: User) {
     console.log('Ver usuario:', user);
-    this.router.navigate(['/usuarios-crud/ver-usuario', user.id]);
+    // Aquí puedes implementar la lógica para mostrar los detalles del usuario
+    // Por ejemplo, abrir un modal o navegar a una página de detalles
   }
 
   async deleteUser(user: User) {

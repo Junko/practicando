@@ -7,10 +7,6 @@ const routes: Routes = [
   {
     path: '',
     component: VerUsuarioPage
-  },
-  {
-    path: ':id',
-    component: VerUsuarioPage
   }
 ];
 
