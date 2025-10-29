@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/usuarios-crud"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Ver Usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  
+  <!-- Información del Usuario -->
+  <div class="usuario-container">
+    
+    <!-- Header con nombre -->
+    <div class="usuario-header">
+      <h1>{{ usuario.nombre }}</h1>
+      <p class="tipo-usuario">{{ usuario.tipo }}</p>
+    </div>
+
+    <!-- Información básica -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Información Personal</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="info-item">
+          <strong>Email:</strong> {{ usuario.email }}
+        </div>
+        <div class="info-item">
+          <strong>Teléfono:</strong> {{ usuario.telefono }}
+        </div>
+        <div class="info-item">
+          <strong>Fecha de Registro:</strong> {{ usuario.fechaRegistro }}
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Botones de acción -->
+    <div class="botones-container">
+      <ion-button expand="block" fill="outline">
+        <ion-icon name="create-outline" slot="start"></ion-icon>
+        Editar Usuario
+      </ion-button>
+      
+      <ion-button expand="block" color="danger" fill="outline">
+        <ion-icon name="trash-outline" slot="start"></ion-icon>
+        Eliminar Usuario
+      </ion-button>
+    </div>
+
+  </div>
+
+</ion-content>
