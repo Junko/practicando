@@ -12,6 +12,7 @@ interface User {
   email: string;
   avatar: string;
   type: 'padres' | 'admins';
+  showActions?: boolean;
 }
 
 @Component({
@@ -33,6 +34,7 @@ export class UsuariosCrudPage implements OnInit {
   
   users: User[] = [];
   filteredUsers: User[] = [];
+  private longPressTimer: any = null;
 
   constructor(private router: Router, private alertCtrl: AlertController) { }
 
@@ -101,6 +103,37 @@ export class UsuariosCrudPage implements OnInit {
     console.log('Ver usuario:', user);
     // Aquí puedes implementar la lógica para mostrar los detalles del usuario
     // Por ejemplo, abrir un modal o navegar a una página de detalles
+  }
+
+  startLongPress(user: User, index: number, event: any) {
+    // Prevenir el comportamiento por defecto
+    event.preventDefault();
+    
+    // Limpiar timer existente
+    if (this.longPressTimer) {
+      clearTimeout(this.longPressTimer);
+    }
+    
+    // Configurar timer para 2 segundos
+    this.longPressTimer = setTimeout(() => {
+      // Mostrar botones para este usuario específico
+      this.filteredUsers[index].showActions = true;
+      
+      // Ocultar botones de otros usuarios
+      this.filteredUsers.forEach((u, i) => {
+        if (i !== index) {
+          u.showActions = false;
+        }
+      });
+    }, 2000);
+  }
+
+  endLongPress() {
+    // Limpiar timer si se suelta antes de los 2 segundos
+    if (this.longPressTimer) {
+      clearTimeout(this.longPressTimer);
+      this.longPressTimer = null;
+    }
   }
 
   async deleteUser(user: User) {
