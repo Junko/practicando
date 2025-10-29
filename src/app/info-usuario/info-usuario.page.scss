@@ -1,146 +1,209 @@
 .info-usuario-content {
-  --background: white;
+  --background: #f5f7fa;
   padding: 0;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
 }
 
-// Header con fondo blanco (como el login)
+// Header moderno con gradiente sutil
 .user-header {
-  background: white;
-  padding: 40px 20px 20px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 60px 20px 40px 20px;
   margin: 0;
   display: flex;
   align-items: center;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/><circle cx="10" cy="60" r="0.5" fill="white" opacity="0.1"/><circle cx="90" cy="40" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    opacity: 0.3;
+  }
   
   .user-avatar {
-    margin-right: 16px;
+    margin-right: 20px;
+    position: relative;
+    z-index: 2;
     
     ion-icon {
-      font-size: 64px;
-      color: #000;
+      font-size: 80px;
+      color: white;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
     }
   }
   
   .user-basic-info {
     flex: 1;
+    position: relative;
+    z-index: 2;
     
     .user-name {
       margin: 0 0 8px 0;
-      font-size: 28px;
-      font-weight: bold;
-      color: #000;
-      font-family: sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     }
     
     .user-role {
       margin: 0;
       font-size: 16px;
-      font-weight: normal;
-      color: #333;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.9);
       text-transform: capitalize;
-      font-family: sans-serif;
+      font-family: 'Poppins', sans-serif;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 6px 16px;
+      border-radius: 20px;
+      display: inline-block;
+      backdrop-filter: blur(10px);
     }
   }
 }
 
-// Contenedor principal con fondo amarillo minimalista
+// Contenedor principal moderno
 .user-info-container {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0;
-  flex: 1;
-  background: rgba(255, 197, 1, 1);
-  border-radius: 20px 20px 0 0;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 30px 20px;
+  background: #f5f7fa;
   position: relative;
-  margin-top: 20px;
-  min-height: calc(100vh - 200px);
+  z-index: 1;
+  margin-top: -30px;
+  border-radius: 30px 30px 0 0;
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.1);
 }
 
-// Cards minimalistas con fondo blanco
+// Cards modernas con glassmorphism
 .user-details-card, .students-card, .status-card {
-  margin: 20px;
-  border-radius: 8px;
-  background: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  border: none;
+  margin: 0 0 25px 0;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  }
   
   ion-card-header {
-    background: white;
-    padding: 20px 20px 10px 20px;
-    border-bottom: 1px solid #eee;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    padding: 25px 25px 15px 25px;
+    border-bottom: 1px solid rgba(102, 126, 234, 0.1);
     
     ion-card-title {
-      font-size: 18px;
-      font-weight: bold;
-      color: #000;
+      font-size: 20px;
+      font-weight: 600;
+      color: #2d3748;
       display: flex;
       align-items: center;
-      font-family: sans-serif;
+      font-family: 'Poppins', sans-serif;
       
       ion-icon {
-        margin-right: 12px;
-        color: rgba(255, 197, 1, 1);
-        font-size: 20px;
+        margin-right: 15px;
+        color: #667eea;
+        font-size: 24px;
       }
     }
   }
   
   ion-card-content {
-    padding: 20px;
-    background: white;
+    padding: 25px;
+    background: transparent;
   }
 }
 
-// Items de detalle minimalistas
+// Items de detalle modernos
 .detail-item {
-  margin-bottom: 16px;
-  padding: 16px;
-  background: #f8f9fa;
-  border-radius: 6px;
-  border-left: 4px solid rgba(255, 197, 1, 1);
+  margin-bottom: 20px;
+  padding: 20px;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+  border-radius: 15px;
+  border: 1px solid rgba(102, 126, 234, 0.1);
+  position: relative;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.1);
+  }
   
   &:last-child {
     margin-bottom: 0;
   }
   
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 0 4px 4px 0;
+  }
+  
   ion-label {
     display: block;
-    margin-bottom: 6px;
-    font-size: 12px;
-    font-weight: bold;
-    color: #666;
+    margin-bottom: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #667eea;
     text-transform: uppercase;
-    font-family: sans-serif;
-    letter-spacing: 0.5px;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 1px;
   }
   
   p {
     margin: 0;
     font-size: 16px;
-    font-weight: normal;
-    color: #000;
+    font-weight: 500;
+    color: #2d3748;
     word-break: break-word;
-    font-family: sans-serif;
+    font-family: 'Poppins', sans-serif;
   }
 }
 
-// Lista de estudiantes minimalista
+// Lista de estudiantes moderna
 .students-list {
   .student-item {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px;
-    margin-bottom: 12px;
-    background: white;
-    border-radius: 8px;
-    border: 1px solid #eee;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 15px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.9) 100%);
+    border-radius: 16px;
+    border: 1px solid rgba(102, 126, 234, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+    }
     
     &:last-child {
       margin-bottom: 0;
@@ -150,11 +213,11 @@
       flex: 1;
       
       h3 {
-        margin: 0 0 8px 0;
-        font-size: 16px;
-        font-weight: bold;
-        color: #000;
-        font-family: sans-serif;
+        margin: 0 0 10px 0;
+        font-size: 18px;
+        font-weight: 600;
+        color: #2d3748;
+        font-family: 'Poppins', sans-serif;
       }
       
       .student-details {
@@ -162,78 +225,101 @@
         font-size: 14px;
         display: flex;
         flex-wrap: wrap;
-        gap: 6px;
+        gap: 8px;
         
         span {
-          padding: 4px 8px;
-          border-radius: 4px;
-          font-weight: normal;
-          font-size: 11px;
-          font-family: sans-serif;
+          padding: 6px 12px;
+          border-radius: 20px;
+          font-weight: 500;
+          font-size: 12px;
+          font-family: 'Poppins', sans-serif;
+          transition: all 0.2s ease;
           
           &.student-level {
-            background: rgba(255, 197, 1, 1);
-            color: #000;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
           }
           
           &.student-grade {
-            background: #e9ecef;
-            color: #000;
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            border: 1px solid rgba(102, 126, 234, 0.2);
           }
           
           &.student-section {
-            background: #f8f9fa;
-            color: #666;
+            background: rgba(118, 75, 162, 0.1);
+            color: #764ba2;
+            border: 1px solid rgba(118, 75, 162, 0.2);
           }
         }
       }
     }
     
     .student-status {
-      margin-left: 16px;
+      margin-left: 20px;
       
       ion-badge {
-        --background: #28a745;
+        --background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
         --color: white;
-        font-weight: normal;
-        padding: 4px 8px;
-        border-radius: 4px;
-        font-family: sans-serif;
-        font-size: 11px;
+        font-weight: 600;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 12px;
+        box-shadow: 0 2px 8px rgba(72, 187, 120, 0.3);
       }
     }
   }
 }
 
-// Estado de cuenta minimalista
+// Estado de cuenta moderno
 .status-item {
   display: flex;
   align-items: center;
-  padding: 12px 16px;
-  margin-bottom: 8px;
-  background: #f8f9fa;
-  border-radius: 6px;
-  border-left: 3px solid #28a745;
+  padding: 16px 20px;
+  margin-bottom: 12px;
+  background: linear-gradient(135deg, rgba(72, 187, 120, 0.05) 0%, rgba(56, 161, 105, 0.05) 100%);
+  border-radius: 12px;
+  border: 1px solid rgba(72, 187, 120, 0.1);
+  position: relative;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 20px rgba(72, 187, 120, 0.1);
+  }
   
   &:last-child {
     margin-bottom: 0;
   }
   
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+    border-radius: 0 4px 4px 0;
+  }
+  
   ion-icon {
-    margin-right: 12px;
-    font-size: 18px;
-    color: #28a745;
+    margin-right: 15px;
+    font-size: 20px;
+    color: #48bb78;
   }
   
   span {
-    font-size: 14px;
-    font-weight: normal;
-    color: #000;
-    font-family: sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: #2d3748;
+    font-family: 'Poppins', sans-serif;
   }
 }
 
-// Estados de loading y error simples
+// Estados de loading y error modernos
 .loading-container, .error-container {
   display: flex;
   flex-direction: column;
@@ -244,67 +330,131 @@
   padding: 40px 20px;
   
   ion-spinner {
-    margin-bottom: 24px;
-    --color: rgba(255, 197, 1, 1);
+    margin-bottom: 30px;
+    --color: #667eea;
   }
   
   h3 {
-    color: #000;
-    margin: 16px 0 8px 0;
-    font-size: 24px;
-    font-weight: bold;
-    font-family: sans-serif;
+    color: #2d3748;
+    margin: 20px 0 10px 0;
+    font-size: 28px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
   }
   
   p {
-    color: #333;
-    margin-bottom: 24px;
+    color: #718096;
+    margin-bottom: 30px;
     font-size: 16px;
-    line-height: 1.5;
-    font-family: sans-serif;
+    line-height: 1.6;
+    font-family: 'Poppins', sans-serif;
   }
   
   ion-button {
-    --background: rgba(255, 197, 1, 1);
-    --color: #000;
-    --border-radius: 8px;
-    --padding-start: 24px;
-    --padding-end: 24px;
-    font-weight: bold;
-    font-family: sans-serif;
+    --background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --color: white;
+    --border-radius: 25px;
+    --padding-start: 30px;
+    --padding-end: 30px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
   }
 }
 
 .no-students {
   text-align: center;
-  padding: 40px 20px;
-  background: #f8f9fa;
-  border-radius: 8px;
-  border: 2px dashed #ddd;
+  padding: 50px 30px;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+  border-radius: 20px;
+  border: 2px dashed rgba(102, 126, 234, 0.3);
   
   ion-icon {
-    margin-bottom: 16px;
-    font-size: 48px;
-    color: #ccc;
+    margin-bottom: 20px;
+    font-size: 64px;
+    color: #667eea;
+    opacity: 0.6;
   }
   
   p {
     margin: 0;
-    color: #666;
-    font-size: 16px;
-    font-weight: normal;
-    font-family: sans-serif;
+    color: #718096;
+    font-size: 18px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
   }
 }
 
-// Responsive design
+// Responsive design moderno
 @media (max-width: 768px) {
   .info-usuario-content {
     padding: 0;
   }
   
   .user-header {
-    padding: 30px 16px 16px 16px;
+    padding: 40px 20px 30px 20px;
+    
+    .user-avatar ion-icon {
+      font-size: 64px;
+    }
+    
+    .user-basic-info .user-name {
+      font-size: 28px;
+    }
+  }
+  
+  .user-info-container {
+    padding: 20px 15px;
+    margin-top: -20px;
+    border-radius: 25px 25px 0 0;
+  }
+  
+  .user-details-card, .students-card, .status-card {
+    margin-bottom: 20px;
+    border-radius: 16px;
+    
+    ion-card-header {
+      padding: 20px 20px 12px 20px;
+      
+      ion-card-title {
+        font-size: 18px;
+      }
+    }
+    
+    ion-card-content {
+      padding: 20px;
+    }
+  }
+  
+  .detail-item {
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  
+  .student-item {
+    padding: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    
+    .student-status {
+      margin-left: 0;
+      margin-top: 15px;
+      align-self: flex-end;
+    }
+    
+    .student-details {
+      margin-top: 10px;
+    }
+  }
+  
+  .status-item {
+    padding: 14px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .user-header {
+    padding: 30px 15px 25px 15px;
     
     .user-avatar ion-icon {
       font-size: 56px;
@@ -316,74 +466,20 @@
   }
   
   .user-info-container {
-    padding: 16px;
-  }
-  
-  .user-details-card, .students-card, .status-card {
-    margin-bottom: 16px;
-    border-radius: 8px;
-    
-    ion-card-header {
-      padding: 16px 16px 8px 16px;
-      
-      ion-card-title {
-        font-size: 18px;
-      }
-    }
-    
-    ion-card-content {
-      padding: 16px;
-    }
+    padding: 15px 10px;
+    margin-top: -15px;
+    border-radius: 20px 20px 0 0;
   }
   
   .detail-item {
-    padding: 12px;
-    margin-bottom: 16px;
+    padding: 14px;
   }
   
   .student-item {
-    padding: 12px;
-    flex-direction: column;
-    align-items: flex-start;
-    
-    .student-status {
-      margin-left: 0;
-      margin-top: 12px;
-      align-self: flex-end;
-    }
-    
-    .student-details {
-      margin-top: 8px;
-    }
+    padding: 14px;
   }
   
   .status-item {
-    padding: 10px 12px;
-  }
-}
-
-@media (max-width: 480px) {
-  .user-header {
-    padding: 20px 12px 12px 12px;
-    
-    .user-avatar ion-icon {
-      font-size: 48px;
-    }
-    
-    .user-basic-info .user-name {
-      font-size: 20px;
-    }
-  }
-  
-  .user-info-container {
-    padding: 12px;
-  }
-  
-  .detail-item {
-    padding: 10px;
-  }
-  
-  .student-item {
-    padding: 10px;
+    padding: 12px 14px;
   }
 }
