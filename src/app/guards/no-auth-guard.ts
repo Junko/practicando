@@ -19,27 +19,9 @@ export const noAuthGuard: CanActivateFn = (
     console.log('No-Auth Guard - PERMITIDO (no autenticado)');
     return true;
   } else {
-    console.log('No-Auth Guard - BLOQUEADO - Redirigiendo según rol');
-    
-    try {
-      const userData = JSON.parse(user);
-      const userRole = userData.rol || userData.role;
-      
-      // Redirigir según el rol del usuario
-      if (userRole === 'padre') {
-        window.location.href = '/padre/inicio';
-      } else if (userRole === 'admin') {
-        window.location.href = '/admin/inicio';
-      } else {
-        // Rol no reconocido, redirigir a admin por defecto
-        window.location.href = '/admin/inicio';
-      }
-    } catch (error) {
-      console.error('Error al parsear datos del usuario:', error);
-      // En caso de error, redirigir a admin por defecto
-      window.location.href = '/admin/inicio';
-    }
-    
+    console.log('No-Auth Guard - BLOQUEADO - Redirigiendo a admin');
+    // Usar window.location en lugar de router para evitar bucles
+    window.location.href = '/admin/inicio';
     return false;
   }
 };
