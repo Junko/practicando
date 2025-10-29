@@ -1,100 +1,162 @@
+// Variables de colores del cliente
+:root {
+  --client-primary: rgba(255, 197, 1, 1);
+  --client-primary-light: rgba(255, 197, 1, 0.1);
+  --client-primary-dark: rgba(255, 197, 1, 0.8);
+  --client-text: rgba(27, 18, 19, 1);
+  --client-text-light: rgba(27, 18, 19, 0.7);
+  --client-text-lighter: rgba(27, 18, 19, 0.5);
+  --client-background: #f8f9fa;
+  --client-surface: #ffffff;
+  --client-border: rgba(27, 18, 19, 0.1);
+  --client-shadow: rgba(27, 18, 19, 0.08);
+  --client-shadow-hover: rgba(27, 18, 19, 0.12);
+}
+
 .info-usuario-content {
-  --background: #f5f5f5;
-  padding: 16px;
+  --background: var(--client-background);
+  padding: 0;
+  min-height: 100vh;
 }
 
-.loading-container, .error-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 50vh;
-  text-align: center;
-  
-  ion-spinner {
-    margin-bottom: 16px;
-  }
-  
-  h3 {
-    color: var(--ion-color-danger);
-    margin: 16px 0 8px 0;
-  }
-  
-  p {
-    color: var(--ion-color-medium);
-    margin-bottom: 16px;
-  }
-}
-
-.user-info-container {
-  max-width: 800px;
-  margin: 0 auto;
-}
-
+// Header con gradiente del cliente
 .user-header {
-  display: flex;
-  align-items: center;
-  background: white;
-  border-radius: 12px;
-  padding: 24px;
-  margin-bottom: 16px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, var(--client-primary) 0%, var(--client-primary-dark) 100%);
+  padding: 24px 20px;
+  margin: 0;
+  border-radius: 0 0 24px 24px;
+  position: relative;
+  overflow: hidden;
+  
+  // Efecto de ondas decorativas
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -10%;
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    animation: float 8s ease-in-out infinite reverse;
+  }
   
   .user-avatar {
+    position: relative;
+    z-index: 2;
     margin-right: 16px;
     
     ion-icon {
-      font-size: 64px;
-      color: var(--ion-color-primary);
+      font-size: 72px;
+      color: var(--client-text);
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
     }
   }
   
   .user-basic-info {
     flex: 1;
+    position: relative;
+    z-index: 2;
     
     .user-name {
       margin: 0 0 8px 0;
-      font-size: 24px;
-      font-weight: 600;
-      color: var(--ion-color-dark);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--client-text);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     }
     
     .user-role {
       margin: 0;
       font-size: 16px;
-      color: var(--ion-color-medium);
+      font-weight: 500;
+      color: var(--client-text-light);
       text-transform: capitalize;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 4px 12px;
+      border-radius: 20px;
+      display: inline-block;
+      backdrop-filter: blur(10px);
     }
   }
 }
 
+// Contenedor principal con padding
+.user-info-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+  margin-top: -20px;
+}
+
+// Cards modernas con glassmorphism
 .user-details-card, .students-card, .status-card {
-  margin-bottom: 16px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  border-radius: 20px;
+  background: var(--client-surface);
+  box-shadow: 0 8px 32px var(--client-shadow);
+  border: 1px solid var(--client-border);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px var(--client-shadow-hover);
+  }
   
   ion-card-header {
-    padding-bottom: 8px;
+    background: linear-gradient(135deg, var(--client-primary-light) 0%, rgba(255, 255, 255, 0.8) 100%);
+    padding: 20px;
+    border-bottom: 1px solid var(--client-border);
     
     ion-card-title {
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--ion-color-dark);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--client-text);
+      display: flex;
+      align-items: center;
       
       ion-icon {
-        margin-right: 8px;
-        color: var(--ion-color-primary);
+        margin-right: 12px;
+        color: var(--client-primary);
+        font-size: 24px;
       }
     }
   }
   
   ion-card-content {
-    padding-top: 0;
+    padding: 20px;
   }
 }
 
+// Items de detalle mejorados
 .detail-item {
-  margin-bottom: 16px;
+  margin-bottom: 20px;
+  padding: 16px;
+  background: var(--client-primary-light);
+  border-radius: 12px;
+  border-left: 4px solid var(--client-primary);
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: rgba(255, 197, 1, 0.15);
+    transform: translateX(4px);
+  }
   
   &:last-child {
     margin-bottom: 0;
@@ -102,118 +164,274 @@
   
   ion-label {
     display: block;
-    margin-bottom: 4px;
+    margin-bottom: 8px;
     font-size: 14px;
-    color: var(--ion-color-medium);
+    font-weight: 600;
+    color: var(--client-text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
   
   p {
     margin: 0;
     font-size: 16px;
-    color: var(--ion-color-dark);
+    font-weight: 500;
+    color: var(--client-text);
     word-break: break-word;
   }
 }
 
-.no-students {
-  text-align: center;
-  padding: 32px 16px;
-  
-  ion-icon {
-    margin-bottom: 16px;
-  }
-  
-  p {
-    margin: 0;
-    color: var(--ion-color-medium);
-  }
-}
-
+// Lista de estudiantes moderna
 .students-list {
   .student-item {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 12px 0;
-    border-bottom: 1px solid var(--ion-color-light);
+    padding: 16px;
+    margin-bottom: 12px;
+    background: var(--client-surface);
+    border-radius: 16px;
+    border: 1px solid var(--client-border);
+    box-shadow: 0 4px 16px var(--client-shadow);
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px var(--client-shadow-hover);
+      border-color: var(--client-primary);
+    }
     
     &:last-child {
-      border-bottom: none;
+      margin-bottom: 0;
     }
     
     .student-info {
       flex: 1;
       
       h3 {
-        margin: 0 0 4px 0;
-        font-size: 16px;
-        font-weight: 600;
-        color: var(--ion-color-dark);
+        margin: 0 0 8px 0;
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--client-text);
       }
       
       .student-details {
         margin: 0;
         font-size: 14px;
-        color: var(--ion-color-medium);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
         
         span {
-          margin-right: 12px;
-          
-          &:last-child {
-            margin-right: 0;
-          }
-        }
-        
-        .student-level {
+          padding: 4px 12px;
+          border-radius: 20px;
           font-weight: 500;
-          color: var(--ion-color-primary);
-        }
-        
-        .student-grade {
-          color: var(--ion-color-secondary);
-        }
-        
-        .student-section {
-          color: var(--ion-color-tertiary);
+          font-size: 12px;
+          
+          &.student-level {
+            background: var(--client-primary);
+            color: var(--client-text);
+          }
+          
+          &.student-grade {
+            background: var(--client-primary-light);
+            color: var(--client-text);
+            border: 1px solid var(--client-primary);
+          }
+          
+          &.student-section {
+            background: rgba(27, 18, 19, 0.1);
+            color: var(--client-text-light);
+          }
         }
       }
     }
     
     .student-status {
       margin-left: 16px;
+      
+      ion-badge {
+        --background: #10dc60;
+        --color: white;
+        font-weight: 600;
+        padding: 8px 12px;
+        border-radius: 20px;
+      }
     }
   }
 }
 
+// Estado de cuenta mejorado
 .status-item {
   display: flex;
   align-items: center;
+  padding: 12px 16px;
   margin-bottom: 8px;
+  background: var(--client-surface);
+  border-radius: 12px;
+  border: 1px solid var(--client-border);
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: var(--client-primary-light);
+    transform: translateX(4px);
+  }
   
   &:last-child {
     margin-bottom: 0;
   }
   
   ion-icon {
-    margin-right: 8px;
-    font-size: 18px;
+    margin-right: 12px;
+    font-size: 20px;
   }
   
   span {
-    font-size: 14px;
-    color: var(--ion-color-dark);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--client-text);
   }
 }
 
-// Responsive design
+// Estados de loading y error mejorados
+.loading-container, .error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  text-align: center;
+  padding: 40px 20px;
+  
+  ion-spinner {
+    margin-bottom: 24px;
+    --color: var(--client-primary);
+  }
+  
+  h3 {
+    color: var(--client-text);
+    margin: 16px 0 8px 0;
+    font-size: 24px;
+    font-weight: 700;
+  }
+  
+  p {
+    color: var(--client-text-light);
+    margin-bottom: 24px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  ion-button {
+    --background: var(--client-primary);
+    --color: var(--client-text);
+    --border-radius: 25px;
+    --padding-start: 24px;
+    --padding-end: 24px;
+    font-weight: 600;
+  }
+}
+
+.no-students {
+  text-align: center;
+  padding: 40px 20px;
+  background: var(--client-primary-light);
+  border-radius: 16px;
+  border: 2px dashed var(--client-primary);
+  
+  ion-icon {
+    margin-bottom: 16px;
+    font-size: 48px;
+    color: var(--client-primary);
+  }
+  
+  p {
+    margin: 0;
+    color: var(--client-text-light);
+    font-size: 16px;
+    font-weight: 500;
+  }
+}
+
+// Animaciones
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+  }
+}
+
+// Responsive design mejorado
 @media (max-width: 768px) {
   .info-usuario-content {
-    padding: 8px;
+    padding: 0;
   }
   
   .user-header {
-    padding: 16px;
+    padding: 20px 16px;
+    border-radius: 0 0 20px 20px;
     
+    .user-avatar ion-icon {
+      font-size: 56px;
+    }
+    
+    .user-basic-info .user-name {
+      font-size: 24px;
+    }
+  }
+  
+  .user-info-container {
+    padding: 16px;
+    margin-top: -16px;
+  }
+  
+  .user-details-card, .students-card, .status-card {
+    margin-bottom: 16px;
+    border-radius: 16px;
+    
+    ion-card-header {
+      padding: 16px;
+      
+      ion-card-title {
+        font-size: 18px;
+      }
+    }
+    
+    ion-card-content {
+      padding: 16px;
+    }
+  }
+  
+  .detail-item {
+    padding: 12px;
+    margin-bottom: 16px;
+  }
+  
+  .student-item {
+    padding: 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    
+    .student-status {
+      margin-left: 0;
+      margin-top: 12px;
+      align-self: flex-end;
+    }
+    
+    .student-details {
+      margin-top: 8px;
+    }
+  }
+  
+  .status-item {
+    padding: 10px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .user-header {
     .user-avatar ion-icon {
       font-size: 48px;
     }
@@ -223,13 +441,15 @@
     }
   }
   
+  .user-info-container {
+    padding: 12px;
+  }
+  
+  .detail-item {
+    padding: 10px;
+  }
+  
   .student-item {
-    flex-direction: column;
-    align-items: flex-start;
-    
-    .student-status {
-      margin-left: 0;
-      margin-top: 8px;
-    }
+    padding: 10px;
   }
 }
