@@ -1,0 +1,136 @@
+<app-header title="Información del Usuario" [showBackButton]="true" [defaultHref]="'/usuarios-crud'" (backClick)="goBack()"></app-header>
+
+<ion-content [fullscreen]="true" class="info-usuario-content">
+  
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-container">
+    <ion-spinner></ion-spinner>
+    <p>Cargando información del usuario...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error && !loading" class="error-container">
+    <ion-icon name="alert-circle-outline" size="large" color="danger"></ion-icon>
+    <h3>Error al cargar la información</h3>
+    <p>No se pudo obtener la información del usuario</p>
+    <ion-button (click)="goBack()" fill="outline">
+      <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
+      Volver
+    </ion-button>
+  </div>
+
+  <!-- User Information -->
+  <div *ngIf="!loading && !error && userInfo" class="user-info-container">
+    
+    <!-- User Header -->
+    <div class="user-header">
+      <div class="user-avatar">
+        <ion-icon name="person-circle-outline" size="large"></ion-icon>
+      </div>
+      <div class="user-basic-info">
+        <h1 class="user-name">{{ userInfo.nombres }} {{ userInfo.apellidos }}</h1>
+        <p class="user-role">{{ userInfo.rol === 'padre' ? 'Padre de Familia' : 'Administrador' }}</p>
+      </div>
+    </div>
+
+    <!-- User Details Card -->
+    <ion-card class="user-details-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="information-circle-outline" slot="start"></ion-icon>
+          Información Personal
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="detail-item">
+          <ion-label>
+            <strong>Correo electrónico:</strong>
+          </ion-label>
+          <p>{{ userInfo.correo }}</p>
+        </div>
+        
+        <div class="detail-item">
+          <ion-label>
+            <strong>Teléfono:</strong>
+          </ion-label>
+          <p>{{ userInfo.telefono || 'No disponible' }}</p>
+        </div>
+        
+        <div class="detail-item">
+          <ion-label>
+            <strong>Fecha de registro:</strong>
+          </ion-label>
+          <p>{{ formatDate(userInfo.creadoEn) }}</p>
+        </div>
+        
+        <div class="detail-item" *ngIf="userInfo.registroCompleto">
+          <ion-label>
+            <strong>Registro completado:</strong>
+          </ion-label>
+          <p>{{ formatDate(userInfo.completadoEn) }}</p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Students Information (only for parents) -->
+    <ion-card *ngIf="userInfo.rol === 'padre'" class="students-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="people-outline" slot="start"></ion-icon>
+          Estudiantes Asociados
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        
+        <!-- No students message -->
+        <div *ngIf="estudiantes.length === 0" class="no-students">
+          <ion-icon name="school-outline" size="large" color="medium"></ion-icon>
+          <p>No hay estudiantes asociados a este usuario</p>
+        </div>
+
+        <!-- Students list -->
+        <div *ngIf="estudiantes.length > 0" class="students-list">
+          <div *ngFor="let estudiante of estudiantes" class="student-item">
+            <div class="student-info">
+              <h3>{{ estudiante.nombre }} {{ estudiante.apellido }}</h3>
+              <p class="student-details">
+                <span class="student-level">{{ estudiante.nivel }}</span>
+                <span class="student-grade">{{ estudiante.grado }}°</span>
+                <span class="student-section">Sección {{ estudiante.seccion }}</span>
+              </p>
+            </div>
+            <div class="student-status">
+              <ion-badge color="success">Activo</ion-badge>
+            </div>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Account Status -->
+    <ion-card class="status-card">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="shield-checkmark-outline" slot="start"></ion-icon>
+          Estado de la Cuenta
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="status-item">
+          <ion-icon name="checkmark-circle" color="success"></ion-icon>
+          <span>Cuenta activa</span>
+        </div>
+        <div class="status-item" *ngIf="userInfo.registroCompleto">
+          <ion-icon name="checkmark-circle" color="success"></ion-icon>
+          <span>Registro completado</span>
+        </div>
+        <div class="status-item" *ngIf="!userInfo.registroCompleto">
+          <ion-icon name="warning" color="warning"></ion-icon>
+          <span>Registro pendiente de completar</span>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+
+</ion-content>
