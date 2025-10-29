@@ -7,14 +7,6 @@ const routes: Routes = [
   {
     path: '',
     component: UsuariosCrudPage
-  },
-  {
-    path: 'ver-usuario',
-    loadChildren: () => import('./ver-usuario/ver-usuario.module').then( m => m.VerUsuarioPageModule)
-  },
-  {
-    path: 'ver-usuario',
-    loadChildren: () => import('./ver-usuario/ver-usuario.module').then( m => m.VerUsuarioPageModule)
   }
 ];
 
