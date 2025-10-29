@@ -46,7 +46,7 @@
   }
 }
 
-// Contenedor principal con fondo amarillo (como crear-usuario)
+// Contenedor principal con fondo amarillo minimalista
 .user-info-container {
   max-width: 800px;
   margin: 0 auto;
@@ -60,22 +60,22 @@
   min-height: calc(100vh - 200px);
 }
 
-// Cards con fondo amarillo y contenido blanco
+// Cards minimalistas con fondo blanco
 .user-details-card, .students-card, .status-card {
   margin: 20px;
-  border-radius: 12px;
+  border-radius: 8px;
   background: white;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 197, 1, 0.3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: none;
   overflow: hidden;
   
   ion-card-header {
-    background: linear-gradient(135deg, rgba(255, 197, 1, 0.1) 0%, white 100%);
+    background: white;
     padding: 20px 20px 10px 20px;
-    border-bottom: 2px solid rgba(255, 197, 1, 0.2);
+    border-bottom: 1px solid #eee;
     
     ion-card-title {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: bold;
       color: #000;
       display: flex;
@@ -85,7 +85,7 @@
       ion-icon {
         margin-right: 12px;
         color: rgba(255, 197, 1, 1);
-        font-size: 24px;
+        font-size: 20px;
       }
     }
   }
@@ -96,15 +96,13 @@
   }
 }
 
-// Items de detalle con más presencia del amarillo
+// Items de detalle minimalistas
 .detail-item {
   margin-bottom: 16px;
   padding: 16px;
-  background: linear-gradient(135deg, rgba(255, 197, 1, 0.15) 0%, rgba(255, 197, 1, 0.05) 100%);
-  border-radius: 12px;
-  border: 2px solid rgba(255, 197, 1, 0.3);
-  border-left: 6px solid rgba(255, 197, 1, 1);
-  box-shadow: 0 2px 8px rgba(255, 197, 1, 0.1);
+  background: #f8f9fa;
+  border-radius: 6px;
+  border-left: 4px solid rgba(255, 197, 1, 1);
   
   &:last-child {
     margin-bottom: 0;
@@ -112,12 +110,13 @@
   
   ion-label {
     display: block;
-    margin-bottom: 8px;
-    font-size: 14px;
+    margin-bottom: 6px;
+    font-size: 12px;
     font-weight: bold;
-    color: #000;
+    color: #666;
     text-transform: uppercase;
     font-family: sans-serif;
+    letter-spacing: 0.5px;
   }
   
   p {
@@ -130,7 +129,7 @@
   }
 }
 
-// Lista de estudiantes con más amarillo
+// Lista de estudiantes minimalista
 .students-list {
   .student-item {
     display: flex;
@@ -138,10 +137,10 @@
     justify-content: space-between;
     padding: 16px;
     margin-bottom: 12px;
-    background: linear-gradient(135deg, rgba(255, 197, 1, 0.1) 0%, white 100%);
-    border-radius: 12px;
-    border: 2px solid rgba(255, 197, 1, 0.3);
-    box-shadow: 0 2px 8px rgba(255, 197, 1, 0.1);
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     
     &:last-child {
       margin-bottom: 0;
@@ -152,7 +151,7 @@
       
       h3 {
         margin: 0 0 8px 0;
-        font-size: 18px;
+        font-size: 16px;
         font-weight: bold;
         color: #000;
         font-family: sans-serif;
@@ -163,31 +162,28 @@
         font-size: 14px;
         display: flex;
         flex-wrap: wrap;
-        gap: 8px;
+        gap: 6px;
         
         span {
-          padding: 6px 14px;
-          border-radius: 20px;
-          font-weight: bold;
-          font-size: 12px;
+          padding: 4px 8px;
+          border-radius: 4px;
+          font-weight: normal;
+          font-size: 11px;
           font-family: sans-serif;
           
           &.student-level {
             background: rgba(255, 197, 1, 1);
             color: #000;
-            border: 2px solid rgba(255, 197, 1, 1);
           }
           
           &.student-grade {
-            background: rgba(255, 197, 1, 0.2);
+            background: #e9ecef;
             color: #000;
-            border: 2px solid rgba(255, 197, 1, 0.5);
           }
           
           &.student-section {
-            background: rgba(255, 197, 1, 0.1);
-            color: #000;
-            border: 2px solid rgba(255, 197, 1, 0.3);
+            background: #f8f9fa;
+            color: #666;
           }
         }
       }
@@ -197,28 +193,27 @@
       margin-left: 16px;
       
       ion-badge {
-        --background: rgba(255, 197, 1, 1);
-        --color: #000;
-        font-weight: bold;
-        padding: 8px 14px;
-        border-radius: 20px;
+        --background: #28a745;
+        --color: white;
+        font-weight: normal;
+        padding: 4px 8px;
+        border-radius: 4px;
         font-family: sans-serif;
-        border: 2px solid rgba(255, 197, 1, 1);
+        font-size: 11px;
       }
     }
   }
 }
 
-// Estado de cuenta con amarillo
+// Estado de cuenta minimalista
 .status-item {
   display: flex;
   align-items: center;
   padding: 12px 16px;
   margin-bottom: 8px;
-  background: linear-gradient(135deg, rgba(255, 197, 1, 0.1) 0%, white 100%);
-  border-radius: 12px;
-  border: 2px solid rgba(255, 197, 1, 0.3);
-  box-shadow: 0 2px 8px rgba(255, 197, 1, 0.1);
+  background: #f8f9fa;
+  border-radius: 6px;
+  border-left: 3px solid #28a745;
   
   &:last-child {
     margin-bottom: 0;
@@ -226,13 +221,13 @@
   
   ion-icon {
     margin-right: 12px;
-    font-size: 20px;
-    color: rgba(255, 197, 1, 1);
+    font-size: 18px;
+    color: #28a745;
   }
   
   span {
-    font-size: 15px;
-    font-weight: bold;
+    font-size: 14px;
+    font-weight: normal;
     color: #000;
     font-family: sans-serif;
   }
@@ -283,22 +278,21 @@
 .no-students {
   text-align: center;
   padding: 40px 20px;
-  background: linear-gradient(135deg, rgba(255, 197, 1, 0.1) 0%, white 100%);
-  border-radius: 12px;
-  border: 2px dashed rgba(255, 197, 1, 0.5);
-  box-shadow: 0 2px 8px rgba(255, 197, 1, 0.1);
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 2px dashed #ddd;
   
   ion-icon {
     margin-bottom: 16px;
     font-size: 48px;
-    color: rgba(255, 197, 1, 1);
+    color: #ccc;
   }
   
   p {
     margin: 0;
-    color: #000;
+    color: #666;
     font-size: 16px;
-    font-weight: bold;
+    font-weight: normal;
     font-family: sans-serif;
   }
 }
