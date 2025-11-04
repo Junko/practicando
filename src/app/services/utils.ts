@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { LoadingController, ToastController, ToastOptions } from '@ionic/angular';
+import { LoadingController, ToastController, ToastOptions, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
@@ -11,6 +11,7 @@ export class Utils {
   loadingCtrl = inject(LoadingController);
   toastCtrl = inject(ToastController);
   router = inject(Router);
+  alertCtrl = inject(AlertController);
 
   // === LOADING ===
   loading(){
@@ -20,6 +21,21 @@ export class Utils {
   async presentToast(opts?: ToastOptions){
     const toast = await this.toastCtrl.create(opts);
     toast.present();
+  }
+
+  // === ALERT CONFIRM ===
+  async confirm(options: { header?: string; message?: string; confirmText?: string; cancelText?: string; }) {
+    const alert = await this.alertCtrl.create({
+      header: options.header || 'Confirmar',
+      message: options.message || '¿Estás seguro?',
+      buttons: [
+        { text: options.cancelText || 'Cancelar', role: 'cancel' },
+        { text: options.confirmText || 'Eliminar', role: 'confirm' }
+      ]
+    });
+    await alert.present();
+    const { role } = await alert.onDidDismiss();
+    return role === 'confirm';
   }
 
   // === LOCAL STORAGE ===

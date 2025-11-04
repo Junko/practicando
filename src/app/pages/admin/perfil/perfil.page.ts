@@ -33,4 +33,12 @@ export class PerfilPage implements OnInit {
     }
   }
 
+  async logout() {
+    try {
+      await this.firebaseSvc.signOut();
+    } finally {
+      this.utilsSvc.routerLink('/login');
+    }
+  }
+
 }

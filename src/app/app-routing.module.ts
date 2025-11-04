@@ -63,6 +63,10 @@ const routes: Routes = [
   {
     path: '**',
     redirectTo: 'login'
+  },
+  {
+    path: 'editar-lista',
+    loadChildren: () => import('./editar-lista/editar-lista.module').then( m => m.EditarListaPageModule)
   }
 ];
 

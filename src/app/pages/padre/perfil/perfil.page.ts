@@ -16,11 +16,13 @@ export class PerfilPage implements OnInit {
   firebaseSvc = inject(Firebase);
   utilsSvc = inject(Utils);
   tabsConfig: TabsConfig = PADRE_TABS_CONFIG;
+  hijos: any[] = [];
 
   constructor() { }
 
   ngOnInit() {
     this.loadUserInfo();
+    this.loadHijos();
   }
 
   loadUserInfo() {
@@ -30,6 +32,24 @@ export class PerfilPage implements OnInit {
       console.log('Usuario cargado:', this.userInfo);
     } else {
       console.error('No se encontró información del usuario');
+    }
+  }
+
+  async loadHijos() {
+    try {
+      const uid = this.userInfo?.uid || this.userInfo?.user?.uid || this.userInfo?.id;
+      if (!uid) return;
+      this.hijos = await this.firebaseSvc.getEstudiantesByPadreUid(uid);
+    } catch (e) {
+      console.error('Error cargando hijos', e);
+    }
+  }
+
+  async logout() {
+    try {
+      await this.firebaseSvc.signOut();
+    } finally {
+      this.utilsSvc.routerLink('/login');
     }
   }
 

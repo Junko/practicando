@@ -26,6 +26,10 @@ export class ListasCrudPage implements OnInit {
     this.loadListas();
   }
 
+  ionViewWillEnter() {
+    this.loadListas();
+  }
+
   async loadListas() {
     try {
       this.loading = true;
@@ -64,13 +68,21 @@ export class ListasCrudPage implements OnInit {
   }
 
   editLista(lista: any) {
-    console.log('Editar lista:', lista);
-    // Aquí irá la lógica para editar
+    this.router.navigate(['/listas-crud/editar-lista', lista.id]);
   }
 
   deleteLista(lista: any) {
-    console.log('Eliminar lista:', lista);
-    // Aquí irá la lógica para eliminar
+    this.utilsSvc.confirm({ header: 'Eliminar lista', message: `¿Eliminar la lista ${lista.grado} ${lista.nivel}?`, confirmText: 'Eliminar' })
+      .then(async confirmed => {
+        if (!confirmed) return;
+        try {
+          await this.firebaseSvc.deleteDocument(`listas_utiles/${lista.id}`);
+          await this.utilsSvc.presentToast({ message: 'Lista eliminada', duration: 1500, color: 'success' });
+          this.loadListas();
+        } catch (e) {
+          await this.utilsSvc.presentToast({ message: 'Error al eliminar', duration: 2000, color: 'danger' });
+        }
+      });
   }
 
   signOut() {

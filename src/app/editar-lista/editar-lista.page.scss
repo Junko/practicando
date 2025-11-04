@@ -1,0 +1,33 @@
+@use '../pages/listas-crud/crear-listas/crear-listas.page.scss';
+
+// Estilos adicionales para editar-lista
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.cancel-btn {
+  background: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-family: sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  width: 100%;
+  cursor: pointer;
+  
+  &:hover {
+    background: #5a6268;
+  }
+}
+
+.no-options {
+  color: #666;
+  font-size: 12px;
+  font-style: italic;
+  margin-top: 5px;
+}
+

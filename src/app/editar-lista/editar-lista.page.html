@@ -1,0 +1,141 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="header-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/listas-crud" class="back-button"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="header-title">
+      <strong>Editar</strong>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="crear-listas-content">
+
+  <!-- Loading inicial -->
+  <div *ngIf="loading" class="loading-container" style="display:flex;align-items:center;justify-content:center;height:40vh;">
+    <ion-spinner></ion-spinner>
+  </div>
+
+  <!-- Sección de Configuración de Lista (Blanca) -->
+  <div class="lista-config-section" *ngIf="!loading">
+    <form [formGroup]="form" class="config-form">
+      <div class="config-row">
+        <label class="config-label">Nivel:</label>
+        <ion-select [formControl]="form.controls.nivel" placeholder="Inicial" class="config-select">
+          <ion-select-option value="Inicial">Inicial</ion-select-option>
+          <ion-select-option value="Primaria">Primaria</ion-select-option>
+          <ion-select-option value="Secundaria">Secundaria</ion-select-option>
+        </ion-select>
+      </div>
+
+      <div class="config-row">
+        <label class="config-label">Grado:</label>
+        <ion-select [formControl]="form.controls.grado" placeholder="3°" class="config-select">
+          <ion-select-option *ngFor="let grado of gradosOptions" [value]="grado.value">
+            {{ grado.label }}
+          </ion-select-option>
+        </ion-select>
+        <div *ngIf="gradosOptions.length === 0" class="no-options">
+          Selecciona un nivel primero
+        </div>
+      </div>
+
+      <div class="config-row">
+        <label class="config-label">Año:</label>
+        <ion-input [formControl]="form.controls.anio" type="number" placeholder="2025" class="config-input readonly-input" [readonly]="true"></ion-input>
+      </div>
+    </form>
+  </div>
+
+  <!-- Sección Principal Amarilla con Lista -->
+  <div class="main-yellow-section" *ngIf="!loading">
+    <div class="lista-title-container" *ngIf="form.get('grado')?.value && form.get('nivel')?.value && form.get('anio')?.value">
+      <h2 class="lista-title">Lista: {{ form.get('grado')?.value }} {{ form.get('nivel')?.value }} - {{ form.get('anio')?.value }}</h2>
+    </div>
+
+    <div class="items-header">
+      <span class="items-label">Items:</span>
+      <button class="add-item-btn" (click)="showAddMaterialForm()" *ngIf="!showMaterialForm">
+        <ion-icon name="add" class="add-icon"></ion-icon>
+        Agregar Item
+      </button>
+    </div>
+
+    <!-- Formulario de material (solo visible cuando se quiere editar/agregar) -->
+    <div class="material-form-container" *ngIf="showMaterialForm">
+      <form [formGroup]="materialForm" class="material-form">
+        <div class="material-input-group">
+          <label class="material-label">Nombre:</label>
+          <ion-input [formControl]="materialForm.controls.nombre_material" type="text" placeholder="Cuaderno Verde A4" class="material-input"></ion-input>
+        </div>
+
+        <div class="material-input-group">
+          <label class="material-label">Descripción:</label>
+          <ion-textarea [formControl]="materialForm.controls.descripcion" placeholder="Descripción..." class="material-textarea" rows="3"></ion-textarea>
+        </div>
+
+        <div class="material-input-group">
+          <label class="material-label">Cantidad:</label>
+          <ion-input [formControl]="materialForm.controls.cantidad" type="number" placeholder="2" class="material-input"></ion-input>
+        </div>
+
+        <div class="material-input-group">
+          <label class="material-label">Imagen del Material:</label>
+          <div class="image-container">
+            <ion-avatar *ngIf="materialForm.get('imagen')?.value" class="material-avatar">
+              <img [src]="materialForm.get('imagen')?.value" alt="Imagen del material">
+            </ion-avatar>
+            <ion-icon class="image-icon" *ngIf="!materialForm.get('imagen')?.value" name="image-outline"></ion-icon>
+            <ion-button (click)="takeImage()" fill="outline" color="primary" size="small">
+              <ion-icon name="camera" slot="start"></ion-icon>
+              Seleccionar Imagen
+            </ion-button>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button class="save-btn" (click)="addMaterial()" type="button">
+            {{ editingMaterial ? 'Actualizar' : 'Guardar' }}
+          </button>
+          <button class="cancel-btn" (click)="clearMaterialForm()" type="button">
+            Cancelar
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Lista de materiales existentes -->
+    <div class="items-list-container">
+      <ng-container *ngFor="let material of materiales">
+      <div class="material-item-white" *ngIf="!editingMaterial || editingMaterial.id !== material.id">
+        <div class="material-content">
+          <h4 class="material-name">{{ material.nombre_material }}</h4>
+          <p class="material-description">{{ material.descripcion || 'Sin descripción' }}</p>
+          <p class="material-quantity">Cantidad: {{ material.cantidad }}</p>
+        </div>
+        <div class="material-actions">
+          <ion-button (click)="editMaterial(material)" fill="clear" size="small" class="action-btn">
+            <ion-icon name="create" color="dark"></ion-icon>
+          </ion-button>
+          <ion-button (click)="deleteMaterial(material)" fill="clear" size="small" class="action-btn">
+            <ion-icon name="trash" color="dark"></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+      </ng-container>
+
+      <div class="empty-materials" *ngIf="materiales.length === 0">
+        <ion-icon name="list" size="large" color="medium"></ion-icon>
+        <p>No hay materiales agregados</p>
+        <p>Completa el formulario de arriba para añadir items</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="create-button-container">
+    <ion-button (click)="guardar()" expand="block" fill="solid" color="dark" [disabled]="!form.valid || materiales.length === 0 || loading">
+      Guardar cambios
+    </ion-button>
+  </div>
+
+</ion-content>

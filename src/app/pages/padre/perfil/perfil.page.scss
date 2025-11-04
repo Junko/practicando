@@ -1,219 +1,108 @@
 .perfil-content {
-  --background: #f8f9fa;
-  padding: 20px 16px !important;
-  padding-bottom: 100px !important; // Espacio para la navegación inferior
-  max-width: 100%;
-  margin: 0 auto;
-  box-sizing: border-box;
+  --background: #fff;
+  padding: 16px 20px; /* fallback */
+  --padding-start: 20px; /* padding nativo ion-content */
+  --padding-end: 20px;
+  padding-bottom: 96px !important;
 }
 
-.perfil-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0 16px;
-}
-
-.page-title {
-  font-size: 2.5em;
-  font-weight: bold;
-  margin: 20px 0;
-  color: #333;
-  text-align: center;
-}
-
-.info-card, .config-card, .additional-info-card {
-  margin: 20px 0;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  background: linear-gradient(to bottom, #ffde59, #ffeca1);
-}
-
-.info-card ion-card-header,
-.config-card ion-card-header,
-.additional-info-card ion-card-header {
-  padding: 20px 20px 10px 20px;
-}
-
-.info-card ion-card-title,
-.config-card ion-card-title,
-.additional-info-card ion-card-title {
-  font-size: 1.5em;
-  font-weight: bold;
-  color: #333;
-}
-
-.user-info {
+.perfil-hero {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 20px;
-  padding: 10px 0;
+  margin-top: 12px;
 }
 
-.avatar-section {
-  flex-shrink: 0;
+.avatar-wrapper {
+  position: relative;
 }
 
-.user-avatar {
-  width: 80px;
-  height: 80px;
+.avatar {
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border: 4px solid #000;
 }
 
-.user-details h3 {
-  margin: 0 0 8px 0;
-  font-size: 1.4em;
-  font-weight: bold;
-  color: #333;
+.edit-btn {
+  position: absolute;
+  right: -6px;
+  bottom: 6px;
+  --padding-start: 4px;
+  --padding-end: 4px;
+  --ripple-color: transparent;
 }
 
-.user-details p {
-  margin: 4px 0;
-  color: #666;
-  font-size: 1em;
+.nombre {
+  font-size: 28px;
+  font-weight: 800;
+  margin: 12px 0 0;
 }
 
-.config-card ion-list {
+.perfil-sections {
+  margin-top: 18px;
+  max-width: 680px; /* centra y limita ancho */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-title {
+  font-weight: 800;
+  margin: 16px 0 8px;
+}
+
+.info-list {
   background: transparent;
 }
 
-.config-card ion-item {
-  --background: transparent;
-  --border-color: transparent;
-  --padding-start: 0;
-  --padding-end: 0;
-  margin: 10px 0;
-  border-radius: 8px;
-  transition: background-color 0.3s ease;
+.info-row {
+  --background: #fff;
+  margin-bottom: 8px;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
 }
 
-.config-card ion-item:hover {
-  --background: rgba(255, 255, 255, 0.3);
-}
-
-.config-card ion-icon {
-  margin-right: 12px;
-  color: #333;
-  font-size: 1.2em;
-}
-
-.config-card ion-label {
-  color: #333;
-  font-weight: 500;
-}
-
-.additional-info-card ion-card-content {
-  padding: 20px;
-}
-
-.info-item {
+.circle-icon {
+  width: 38px;
+  height: 38px;
+  background: #ffe180;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 10px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  justify-content: center;
+  border-radius: 50%;
 }
 
-.info-item:last-child {
-  border-bottom: none;
+.hijos-list {
+  background: transparent;
 }
 
-.info-label {
-  font-weight: 600;
-  color: #333;
+.hijo-card {
+  --background: #f5f5f5;
+  margin-bottom: 10px;
+  border-radius: 14px;
 }
 
-.info-value {
-  color: #666;
-  text-align: right;
+.hijo-nombre { font-weight: 700; }
+.hijo-sub { font-size: 12px; opacity: .75; font-weight: 700; color: #8c7a00; }
+
+.empty { opacity: .6; padding: 8px 2px; }
+
+.logout-btn {
+  margin-top: 18px;
+  --border-radius: 12px;
 }
 
-// Tabs
 ion-tab-bar {
   --background: rgba(255, 197, 1);
   --border-color: transparent;
   height: 60px;
-  padding-top: 6px;
-  padding-bottom: 6px;
 }
 
-ion-tab-button {
-  --color: rgba(27, 18, 19);
-  --color-selected: rgba(27, 18, 19);
-  font-weight: bold;
-  padding-top: 6px;
-  padding-bottom: 6px;
-}
-
-// Responsive
-@media (max-width: 768px) {
-  .perfil-content {
-    padding: 16px 12px !important;
-  }
-  
-  .perfil-container {
-    padding: 0 12px;
-  }
-  
-  .page-title {
-    font-size: 2em;
-    margin: 16px 0;
-  }
-  
-  .user-info {
-    flex-direction: column;
-    text-align: center;
-    gap: 15px;
-  }
-  
-  .user-avatar {
-    width: 60px;
-    height: 60px;
-  }
-  
-  .user-details h3 {
-    font-size: 1.2em;
-  }
-  
-  .info-card, .config-card, .additional-info-card {
-    margin: 15px 0;
-  }
-}
-
-@media (max-width: 480px) {
-  .perfil-content {
-    padding: 12px 8px !important;
-  }
-  
-  .perfil-container {
-    padding: 0 8px;
-  }
-  
-  .page-title {
-    font-size: 1.8em;
-    margin: 12px 0;
-  }
-  
-  .user-avatar {
-    width: 50px;
-    height: 50px;
-  }
-  
-  .user-details h3 {
-    font-size: 1.1em;
-  }
-  
-  .info-card ion-card-header,
-  .config-card ion-card-header,
-  .additional-info-card ion-card-header {
-    padding: 15px 15px 8px 15px;
-  }
-  
-  .info-card ion-card-title,
-  .config-card ion-card-title,
-  .additional-info-card ion-card-title {
-    font-size: 1.3em;
+@media (min-width: 768px) {
+  .perfil-content { 
+    padding: 24px 28px; 
+    --padding-start: 28px; 
+    --padding-end: 28px; 
   }
 }

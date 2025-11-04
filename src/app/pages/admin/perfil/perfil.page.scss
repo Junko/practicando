@@ -1,219 +1,27 @@
-.perfil-content {
-  --background: #f8f9fa;
-  padding: 20px 16px !important;
-  padding-bottom: 100px !important; // Espacio para la navegación inferior
-  max-width: 100%;
-  margin: 0 auto;
-  box-sizing: border-box;
+.perfil-content { 
+  --background: #fff; 
+  padding: 16px 20px; 
+  --padding-start: 20px; 
+  --padding-end: 20px; 
+  padding-bottom: 96px !important; 
 }
+.perfil-hero { display: flex; flex-direction: column; align-items: center; margin-top: 12px; }
+.avatar-wrapper { position: relative; }
+.avatar { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid #000; }
+.edit-btn { position: absolute; right: -6px; bottom: 6px; --padding-start: 4px; --padding-end: 4px; --ripple-color: transparent; }
+.nombre { font-size: 28px; font-weight: 800; margin: 12px 0 0; }
+.perfil-sections { margin-top: 18px; max-width: 680px; margin-left: auto; margin-right: auto; }
+.section-title { font-weight: 800; margin: 16px 0 8px; }
+.info-list { background: transparent; }
+.info-row { --background: #fff; margin-bottom: 8px; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.08); }
+.circle-icon { width: 38px; height: 38px; background: #ffe180; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+.logout-btn { margin-top: 18px; --border-radius: 12px; }
+ion-tab-bar { --background: rgba(255, 197, 1); --border-color: transparent; height: 60px; }
 
-.perfil-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0 16px;
-}
-
-.page-title {
-  font-size: 2.5em;
-  font-weight: bold;
-  margin: 20px 0;
-  color: #333;
-  text-align: center;
-}
-
-.info-card, .config-card, .additional-info-card {
-  margin: 20px 0;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  background: linear-gradient(to bottom, #ffde59, #ffeca1);
-}
-
-.info-card ion-card-header,
-.config-card ion-card-header,
-.additional-info-card ion-card-header {
-  padding: 20px 20px 10px 20px;
-}
-
-.info-card ion-card-title,
-.config-card ion-card-title,
-.additional-info-card ion-card-title {
-  font-size: 1.5em;
-  font-weight: bold;
-  color: #333;
-}
-
-.user-info {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  padding: 10px 0;
-}
-
-.avatar-section {
-  flex-shrink: 0;
-}
-
-.user-avatar {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.user-details h3 {
-  margin: 0 0 8px 0;
-  font-size: 1.4em;
-  font-weight: bold;
-  color: #333;
-}
-
-.user-details p {
-  margin: 4px 0;
-  color: #666;
-  font-size: 1em;
-}
-
-.config-card ion-list {
-  background: transparent;
-}
-
-.config-card ion-item {
-  --background: transparent;
-  --border-color: transparent;
-  --padding-start: 0;
-  --padding-end: 0;
-  margin: 10px 0;
-  border-radius: 8px;
-  transition: background-color 0.3s ease;
-}
-
-.config-card ion-item:hover {
-  --background: rgba(255, 255, 255, 0.3);
-}
-
-.config-card ion-icon {
-  margin-right: 12px;
-  color: #333;
-  font-size: 1.2em;
-}
-
-.config-card ion-label {
-  color: #333;
-  font-weight: 500;
-}
-
-.additional-info-card ion-card-content {
-  padding: 20px;
-}
-
-.info-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.info-item:last-child {
-  border-bottom: none;
-}
-
-.info-label {
-  font-weight: 600;
-  color: #333;
-}
-
-.info-value {
-  color: #666;
-  text-align: right;
-}
-
-// Tabs
-ion-tab-bar {
-  --background: rgba(255, 197, 1);
-  --border-color: transparent;
-  height: 60px;
-  padding-top: 6px;
-  padding-bottom: 6px;
-}
-
-ion-tab-button {
-  --color: rgba(27, 18, 19);
-  --color-selected: rgba(27, 18, 19);
-  font-weight: bold;
-  padding-top: 6px;
-  padding-bottom: 6px;
-}
-
-// Responsive
-@media (max-width: 768px) {
-  .perfil-content {
-    padding: 16px 12px !important;
-  }
-  
-  .perfil-container {
-    padding: 0 12px;
-  }
-  
-  .page-title {
-    font-size: 2em;
-    margin: 16px 0;
-  }
-  
-  .user-info {
-    flex-direction: column;
-    text-align: center;
-    gap: 15px;
-  }
-  
-  .user-avatar {
-    width: 60px;
-    height: 60px;
-  }
-  
-  .user-details h3 {
-    font-size: 1.2em;
-  }
-  
-  .info-card, .config-card, .additional-info-card {
-    margin: 15px 0;
-  }
-}
-
-@media (max-width: 480px) {
-  .perfil-content {
-    padding: 12px 8px !important;
-  }
-  
-  .perfil-container {
-    padding: 0 8px;
-  }
-  
-  .page-title {
-    font-size: 1.8em;
-    margin: 12px 0;
-  }
-  
-  .user-avatar {
-    width: 50px;
-    height: 50px;
-  }
-  
-  .user-details h3 {
-    font-size: 1.1em;
-  }
-  
-  .info-card ion-card-header,
-  .config-card ion-card-header,
-  .additional-info-card ion-card-header {
-    padding: 15px 15px 8px 15px;
-  }
-  
-  .info-card ion-card-title,
-  .config-card ion-card-title,
-  .additional-info-card ion-card-title {
-    font-size: 1.3em;
+@media (min-width: 768px) {
+  .perfil-content { 
+    padding: 24px 28px; 
+    --padding-start: 28px; 
+    --padding-end: 28px; 
   }
 }
