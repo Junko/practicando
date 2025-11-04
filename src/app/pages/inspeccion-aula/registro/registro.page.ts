@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Firebase } from '../../../services/firebase';
+import { HttpClient } from '@angular/common/http';
+import { doc, getFirestore, updateDoc } from 'firebase/firestore';
+import { ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-registro',
@@ -9,38 +15,71 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class RegistroPage implements OnInit {
 
-  recursos = [
-    { id: 1, nombre: 'Pupitre H1005', estado: 'bueno', motivo: '', observacion: '' },
-    { id: 2, nombre: '1 pizarra', estado: 'bueno', motivo: '', observacion: '' }
-  ];
-
   estados = [
     { label: 'En buen estado', value: 'bueno' },
     { label: 'Faltante', value: 'faltante' },
-    { label: 'Dañada', value: 'danado' }
+    { label: 'Dañado', value: 'danado' }
   ];
 
   nivel!: string;
   grado!: string;
   seccion!: string;
+  muebles: any[] = [];
+  aulaId: string | null = null;
 
-  constructor(private route: ActivatedRoute) {}
-  
-
+  constructor(
+    private route: ActivatedRoute,
+    private firebaseSvc: Firebase,
+    private http: HttpClient,
+    private toastController: ToastController,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      this.nivel = params['nivel'];
-      this.grado = params['grado'];
-      this.seccion = params['seccion'];
+    this.route.queryParams.subscribe(async params => {
+      this.nivel = decodeURIComponent(params['nivel'] || '');
+      this.grado = decodeURIComponent(params['grado'] || '');
+      this.seccion = decodeURIComponent(params['seccion'] || '');
 
-      console.log('Datos recibidos:', this.nivel, this.grado, this.seccion);
+      const resultado = await this.firebaseSvc.getMueblesByGradoYNivel(this.grado, this.nivel, this.seccion,);
+
+      if (resultado) {
+        this.aulaId = resultado.id;
+        this.muebles = resultado.muebles || []; 
+      }
+
+      console.log('Muebles cargados:', this.muebles);
     });
   }
 
-  guardarInspeccion() {
-    console.log('Guardar inspección ->', this.recursos);
-    // aquí envías a tu API o servicio
-  }
+   async guardarInspeccion() {
+    try {
+      if (!this.aulaId) {
+        console.warn('No se encontró el ID del aula.');
+        return;
+      }
 
+      const db = getFirestore();
+      const aulaRef = doc(db, 'aulas', this.aulaId);
+
+      await updateDoc(aulaRef, {
+        muebles: this.muebles,
+        ultimaInspeccion: new Date() 
+      });
+
+      
+    const toast = await this.toastController.create({
+      message: 'Inspección actualizada con éxito',
+      duration: 2000,
+      color: 'success'
+    });
+    await toast.present();
+      console.log('Inspección guardada correctamente.');
+    this.router.navigate(['/inspeccion-aula']);
+
+    } catch (error) {
+      console.error('Error al guardar inspección:', error);
+      
+    }
+  }
 }

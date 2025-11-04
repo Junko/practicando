@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/salones"></ion-back-button>
+      <ion-back-button defaultHref="admin/aulas"></ion-back-button>
     </ion-buttons>
     <ion-title>Crear</ion-title>
   </ion-toolbar>
@@ -20,10 +20,13 @@
           placeholder="Ej: 1A, Aula Computación 201, 301">
         </ion-input>
       </div>
+        <div *ngIf="crearForm.get('nombreAula')?.hasError('required') && crearForm.get('nombreAula')?.touched" class="error">
+          * Este campo es obligatorio
+        </div>
 
       <div class="campo">
         <label>Tipo de Aula</label>
-        <ion-select formControlName="tipoAula">
+        <ion-select formControlName="tipoAula" interface="popover">
           <ion-select-option value="General">General</ion-select-option>
           <ion-select-option value="Computación">Computación</ion-select-option>
           <ion-select-option value="Laboratorio">Laboratorio</ion-select-option>
@@ -37,29 +40,42 @@
       </div>
 
       <div class="fila">
-        <div class="columna">
-          <label>Grado:</label>
-          <ion-select formControlName="grado">
-            <ion-select-option value="1°">1°</ion-select-option>
-            <ion-select-option value="2°">2°</ion-select-option>
-            <ion-select-option value="3°">3°</ion-select-option>
-          </ion-select>
-        </div>
 
         <div class="columna">
           <label>Nivel:</label>
-          <ion-select formControlName="nivel">
+          <ion-select formControlName="nivel" interface="popover" (ionChange)="actualizarGrados()">
             <ion-select-option value="Inicial">Inicial</ion-select-option>
             <ion-select-option value="Primaria">Primaria</ion-select-option>
             <ion-select-option value="Secundaria">Secundaria</ion-select-option>
           </ion-select>
         </div>
+
+        <div class="columna">
+           <label>Grado:</label>
+            <ion-select formControlName="grado" interface="popover">
+              <ion-select-option *ngFor="let grado of grados" [value]="grado">
+                {{ grado }}
+              </ion-select-option>
+            </ion-select>
+        </div>
+
+      </div>
+
+      <div class="campo">
+        <label>Sección</label>
+          <ion-select formControlName="seccion" interface="popover">
+            <ion-select-option value="A">A</ion-select-option>
+            <ion-select-option value="B">B</ion-select-option>
+            <ion-select-option value="C">C</ion-select-option>
+            <ion-select-option value="D">D</ion-select-option>
+            <ion-select-option value="E">E</ion-select-option>
+          </ion-select>
       </div>
 
       <div class="tarjeta">
         <div class="tarjeta-header">
           <h3>
-            Salón: {{ crearForm.value.grado }} {{ crearForm.value.nivel }} - 2025
+            Salón: {{ crearForm.value.grado }} {{ crearForm.value.nivel }}
           </h3>
         </div>
 
@@ -71,18 +87,45 @@
             </ion-button>
           </div>
 
-          <div *ngFor="let m of muebles" class="mueble">
-            <div>
-              <label>Nombre:</label>
-              <div class="valor">{{ m.nombre }}</div>
-            </div>
-            <div>
-              <label>Estado:</label>
-              <div class="valor estado">{{ m.estado }}</div>
-            </div>
+              <div formArrayName="muebles">
+                <div *ngFor="let mueble of muebles.controls; let i = index" [formGroupName]="i" class="mueble">
+            
+                    <div class="mueblelabel">
+                      <label>Nombre:</label>
+                      <div class="valor">
+                        <ion-input
+                          formControlName="nombre"
+                          placeholder="Ej: Computadora 1">
+                        </ion-input>
+                      </div>
+                    </div>
+                     <div *ngIf="mueble.get('nombre')?.hasError('required') && mueble.get('nombre')?.touched" class="error">
+                      * Este campo es obligatorio
+                    </div>
+
+                    <div>
+                      <label>Estado:</label>
+                      <div class="valor estado">
+                        <ion-select formControlName="estado" interface="popover">
+                          <ion-select-option value="bueno">En buen estado</ion-select-option>
+                          <ion-select-option value="faltante">Faltante</ion-select-option>
+                          <ion-select-option value="dañado">Dañado</ion-select-option>
+                        </ion-select>
+                      </div>
+                    </div>
+
+                    <ion-button
+                      fill="clear"
+                      color="danger"
+                      size="small"
+                      class="btn-eliminar"
+                      (click)="eliminarMueble(i)">
+                      ×
+                    </ion-button>
+                  </div>
+              </div>
           </div>
         </div>
-      </div>
 
       <ion-button expand="block" color="dark" class="btn-crear" type="submit">
         Crear

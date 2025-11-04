@@ -3,7 +3,6 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, sendPasswordResetEmail, deleteUser } from 'firebase/auth';
 import { getFirestore, collection, getDocs, addDoc, doc, setDoc, getDoc, query, where, CollectionReference, Query, deleteDoc } from 'firebase/firestore';
 import { User, CrearUsuario } from '../models/user.model';
-import { Firestore } from '@angular/fire/firestore';
 import { getStorage, ref, uploadString, getDownloadURL } from 'firebase/storage';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -426,5 +425,43 @@ export class Firebase {
       throw error;
     }
   }
+
+
+//=== Obtener muebles de un aula específico por grado y nivel ===
+async getMueblesByGradoYNivel(grado: string, nivel: string, seccion:string) {
+  try {
+       const normalize = (str: string) =>
+      str
+        ?.replace(/º/g, 'º') // reemplaza el símbolo ordinal por el de grado
+        ?.trim();
+    const q = query(
+      collection(getFirestore(), 'aulas'),
+      where('grado', '==', normalize(grado)),
+      where('nivel', '==', normalize(nivel)),
+      where('seccion', '==', normalize(seccion))    
+    );
+
+    const snapshot = await getDocs(q);
+
+    if (!snapshot.empty) {
+      const docSnap = snapshot.docs[0];
+      const data: any = docSnap.data();
+      return { id: docSnap.id, ...data }; 
+    }
+
+    // si no se encuentra ningún aula que coincida
+    return null;
+
+  } catch (error) {
+    console.error('Error al obtener muebles por grado y nivel:', error);
+    throw error;
+  }
+}
+
+async getCollection(nombre: string): Promise<any[]> {
+  const snapshot = await getDocs(collection(this.db, nombre));
+  return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+}
+
 
 }

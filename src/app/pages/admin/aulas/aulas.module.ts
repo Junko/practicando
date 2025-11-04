@@ -5,15 +5,17 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { AulasPageRoutingModule } from './aulas-routing.module';
-
 import { AulasPage } from './aulas.page';
+import { SharedModule } from '../../../shared/shared-module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AulasPageRoutingModule
+    AulasPageRoutingModule,
+    SharedModule,
+    
   ],
   declarations: [AulasPage]
 })

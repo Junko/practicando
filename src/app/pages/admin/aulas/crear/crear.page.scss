@@ -86,14 +86,17 @@ ion-content {
   }
 
   .mueble {
-    background: #fff;
-    border-radius: 10px;
-    padding: 10px;
-    margin-top: 10px;
+  position: relative;
+  border: 1px solid #ccc;
+  padding: 10px;
+  background: #ffff;
+  margin-bottom: 10px;
+  border-radius: 5px;
 
     label {
       font-weight: 600;
       font-size: 13px;
+      margin-top: 20px;
     }
 
     .valor {
@@ -101,7 +104,7 @@ ion-content {
       padding: 5px 10px;
       border-radius: 8px;
       font-size: 13px;
-      margin-top: 4px;
+      margin-top: 6px;
     }
 
     .estado {
@@ -115,4 +118,22 @@ ion-content {
   margin-top: 25px;
   --border-radius: 20px;
   font-weight: bold;
+}
+
+
+.btn-eliminar {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  font-size: 25px;
+  line-height: 16px;
+}
+
+.mueblelabel{
+  margin-top: 12px;
+}
+
+.error {
+  color: red;
+  font-size: 13px;
 }

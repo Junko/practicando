@@ -1,13 +1,51 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>aulas</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header title="Aulas" menuId="admin-menu"></app-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">aulas</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <div class="container">
+
+    <div class="barra-superior">
+      <ion-input
+        placeholder="Buscar aula o grupo (1A, 3C, Computación...)"
+        [(ngModel)]="busqueda"
+        (ionInput)="filtrar()">
+      </ion-input>
+
+      <ion-select [(ngModel)]="filtroTipo" (ionChange)="filtrar()" interface="popover">
+        <ion-select-option value="Todos">Todos los tipos</ion-select-option>
+        <ion-select-option value="General">General</ion-select-option>
+        <ion-select-option value="Computación">Computación</ion-select-option>
+        <ion-select-option value="Laboratorio">Laboratorio</ion-select-option>
+        <ion-select-option value="Secretaría">Secretaría</ion-select-option>
+      </ion-select>
+
+      <ion-button color="primary" (click)="irCrear()"> +Nuevo</ion-button>
+    </div>
+
+    <div class="aulas-grid">
+      <div class="aula-card" *ngFor="let aula of aulasFiltradas">
+        <h3>{{ aula.nombreAula }}</h3>
+        <div class="etiquetas">
+          <span class="nivel">{{ aula.nivel }}</span>
+          <span class="tipo">{{ aula.tipoAula }}</span>
+          <span *ngIf="aula.grado">{{ aula.grado }}</span>
+          <span *ngIf="aula.seccion">{{ aula.seccion }}</span>
+        </div>
+
+        <div class="detalles">
+          <p>Piso {{ aula.piso || '-' }}</p>
+          <p *ngIf="aula.muebles?.length">{{ aula.muebles.length }} muebles registrados</p>
+        </div>
+
+        <div class="acciones">
+          <ion-icon name="create-outline" title="Editar" (click)="editarAula(aula)"></ion-icon>
+          <ion-icon name="trash-outline" title="Eliminar" (click)="eliminarAula(aula)"></ion-icon>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </ion-content>
+
+
+<!-- Componente de tabs personalizado para admin -->
+<app-custom-tabs [config]="tabsConfig"></app-custom-tabs>
