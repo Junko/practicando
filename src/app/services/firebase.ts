@@ -463,5 +463,15 @@ async getCollection(nombre: string): Promise<any[]> {
   return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 }
 
+async updateDocument(path: string, data: any) {
+  try {
+    await setDoc(doc(getFirestore(), path), data, { merge: true });
+    console.log(`Documento actualizado en ${path}`);
+  } catch (error) {
+    console.error('Error al actualizar documento:', error);
+    throw error;
+  }
+}
+
 
 }

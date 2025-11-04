@@ -63,13 +63,11 @@
 
       <div class="campo">
         <label>Sección</label>
-          <ion-select formControlName="seccion" interface="popover">
-            <ion-select-option value="A">A</ion-select-option>
-            <ion-select-option value="B">B</ion-select-option>
-            <ion-select-option value="C">C</ion-select-option>
-            <ion-select-option value="D">D</ion-select-option>
-            <ion-select-option value="E">E</ion-select-option>
-          </ion-select>
+              <ion-select formControlName="seccion" interface="popover">
+                <ion-select-option *ngFor="let s of secciones" [value]="s">
+                  {{ s }}
+                </ion-select-option>
+              </ion-select>
       </div>
 
       <div class="tarjeta">
@@ -127,9 +125,9 @@
           </div>
         </div>
 
-      <ion-button expand="block" color="dark" class="btn-crear" type="submit">
-        Crear
-      </ion-button>
+    <ion-button expand="block" color="dark" class="btn-crear" type="submit">
+      {{ aulaId ? 'Actualizar' : 'Crear' }}
+    </ion-button>
     </form>
   </div>
 </ion-content>
