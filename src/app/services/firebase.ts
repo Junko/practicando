@@ -93,7 +93,7 @@ export class Firebase {
   //== Guardar Datos Temporales de Usuario Padre (Sin Authentication) ==
   async guardarDatosTemporalesPadre(userData: CrearUsuario) {
     try {
-      // Solo guardar datos temporales en localStorage (NO crear en Authentication aún)
+      // Solo guardar datos temporales en localStorage 
       const tempUserData = {
         nombres: userData.nombres,
         apellidos: userData.apellidos,
@@ -135,13 +135,13 @@ export class Firebase {
 
       const tempUserData = JSON.parse(tempUserDataStr);
       
-      // Verificar que los datos temporales sean válidos y no muy antiguos (máximo 1 hora)
+      // Verificar que los datos temporales sean válidos y no muy antiguos
       if (!tempUserData.timestamp) {
         throw new Error('Datos temporales inválidos. Por favor, inicie el proceso de registro nuevamente.');
       }
 
       const now = Date.now();
-      const maxAge = 60 * 60 * 1000; // 1 hora en milisegundos
+      const maxAge = 60 * 60 * 1000; 
       if (now - tempUserData.timestamp > maxAge) {
         localStorage.removeItem('tempUserData');
         throw new Error('Los datos temporales han expirado. Por favor, inicie el proceso de registro nuevamente.');
