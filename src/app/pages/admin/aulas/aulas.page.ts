@@ -18,22 +18,28 @@ export class AulasPage implements OnInit {
   filtroTipo: string = 'Todos';
   busqueda: string = '';
   tabsConfig: TabsConfig = ADMIN_TABS_CONFIG;
+  unsubscribeAulas: any; 
 
   constructor(private firebaseSvc: Firebase,
     private router: Router,
     private alertCtrl: AlertController) {}
 
-  async ngOnInit() {
+  async ngOnInit() 
+  {
     await this.cargarAulas();
   }
 
-  async cargarAulas() {
-    const data = await this.firebaseSvc.getCollection('aulas');
-    this.aulas = data;
-    this.aulasFiltradas = [...data];
+  
+  async cargarAulas() 
+  {
+    this.unsubscribeAulas = this.firebaseSvc.listenCollection('aulas', (data) => {
+      this.aulas = data;
+      this.aulasFiltradas = [...data];
+    });
   }
 
-  filtrar() {
+  filtrar() 
+  {
     this.aulasFiltradas = this.aulas.filter(aula => {
       const coincideTipo = this.filtroTipo === 'Todos' || aula.tipoAula === this.filtroTipo;
       const coincideBusqueda =
@@ -45,17 +51,20 @@ export class AulasPage implements OnInit {
   }
 
 
-  irCrear() {
+  irCrear() 
+  {
     this.router.navigate(['/admin/aulas/crear']);
   }
   
-editarAula(aula: any) {
-  this.router.navigate(['/admin/aulas/crear'], {
-    queryParams: { id: aula.id }
-  });
-}
+  editarAula(aula: any) 
+  {
+    this.router.navigate(['/admin/aulas/crear'], {
+      queryParams: { id: aula.id }
+    });
+  }
 
-  async eliminarAula(aula: any) {
+  async eliminarAula(aula: any) 
+  {
     const alerta = await this.alertCtrl.create({
       header: 'Confirmar eliminación',
       message: `¿Seguro que deseas eliminar el aula "${aula.nombreAula}"?`,
@@ -75,4 +84,10 @@ editarAula(aula: any) {
     });
     await alerta.present();
   }
+
+  ngOnDestroy() {
+  if (this.unsubscribeAulas) {
+    this.unsubscribeAulas(); 
+  }
+}
 }

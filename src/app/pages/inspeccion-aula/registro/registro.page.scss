@@ -1,16 +1,9 @@
-/* colores base parecidos a la imagen */
-.toolbar-yellow {
-  --background: #f7c600;
-  color: #000;
-  font-weight: 700;
-}
-
 .seccion-titulo {
   margin: 8px 0 16px;
   font-size: 1.05rem;
 }
 
-/* Card amarillo claro */
+
 .recurso-card {
   background: #fff7b5; /* fondo tarjeta */
   border-radius: 10px;
@@ -28,14 +21,14 @@
   }
 }
 
-/* estilos de las opciones (simulan el recuadro verde cuando está seleccionado 'bueno') */
+
 ion-item.option-bueno {
   --background: transparent;
 }
 
 /* ajustar apariencia del radio y label cuando la opción es 'bueno' */
 ion-radio {
-  transform: scale(1); /* tamaño radio */
+  transform: scale(1); 
 }
 
 /* resaltado para la opción seleccionada 'bueno' */
@@ -43,9 +36,7 @@ ion-radio {
   --background: transparent;
 }
 
-/* aplicamos estilo condicional por estado usando ngModel en el item no es directo en css,
-   pero podemos resaltar el item seleccionado con un selector cuando el ion-radio está checked.
-   Ionic marca aria-checked="true" en ion-radio cuando está seleccionado. */
+
 .recurso-card ion-radio[aria-checked="true"] + ion-label {
   background: rgba(214, 255, 244, 0.8); /* verde pálido */
   padding: 10px;

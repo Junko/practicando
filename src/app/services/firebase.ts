@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, sendPasswordResetEmail, deleteUser } from 'firebase/auth';
-import { getFirestore, collection, getDocs, addDoc, doc, setDoc, getDoc, query, where, CollectionReference, Query, deleteDoc, updateDoc } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, addDoc, doc, setDoc, getDoc, query, where, CollectionReference, Query, deleteDoc, updateDoc,onSnapshot } from 'firebase/firestore';
 import { User, CrearUsuario } from '../models/user.model';
 import { getStorage, ref, uploadString, getDownloadURL } from 'firebase/storage';
 import { Observable } from 'rxjs';
@@ -477,6 +477,15 @@ async updateDocument(path: string, data: any) {
     throw error;
   }
 }
+
+listenCollection(nombreColeccion: string, callback: (data: any[]) => void) {
+    const ref = collection(this.db, nombreColeccion);
+    
+    return onSnapshot(ref, snapshot => {
+      const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      callback(data);
+    });
+  }
 
 
 }
