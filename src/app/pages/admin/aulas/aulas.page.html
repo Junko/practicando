@@ -4,12 +4,7 @@
   <div class="container">
 
     <div class="barra-superior">
-      <ion-input
-        placeholder="Buscar aula o grupo (1A, 3C, Computación...)"
-        [(ngModel)]="busqueda"
-        (ionInput)="filtrar()">
-      </ion-input>
-
+   
       <ion-select [(ngModel)]="filtroTipo" (ionChange)="filtrar()" interface="popover">
         <ion-select-option value="Todos">Todos los tipos</ion-select-option>
         <ion-select-option value="General">General</ion-select-option>

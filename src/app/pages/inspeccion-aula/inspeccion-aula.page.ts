@@ -31,12 +31,18 @@ export class InspeccionAulaPage implements OnInit, OnDestroy {
   niveles: Nivel[] = [];
   datos: any[] = [];
   unsubscrube: any;
-   tabsConfig: TabsConfig = ADMIN_TABS_CONFIG;
+  tabsConfig: TabsConfig = ADMIN_TABS_CONFIG;
+  aulas: any[] = [];
+  aulasFiltradas: any[] = [];
+  filtroNivel: string = 'Todos';
+  unsubscribeAulas: any;
+  busqueda: string = '';
 
   constructor(private firebaseSvc: Firebase, private router: Router) {}
 
   async ngOnInit() {
     
+    await this.cargarAulas();
     this.datos = await this.firebaseSvc.getCollectionOnce('niveles');
     console.log('Datos de Firebase:', this.datos);
 
@@ -81,6 +87,22 @@ export class InspeccionAulaPage implements OnInit, OnDestroy {
 
     // navegar a la página "registro" con los parámetros
     this.router.navigate(['inspeccion-aula/registro'], { queryParams: seleccion });
+  }
+
+    async cargarAulas() 
+  {
+    this.unsubscribeAulas = this.firebaseSvc.listenCollection('aulas', (data) => {
+      this.aulas = data;
+      this.aulasFiltradas = [...data];
+    });
+  }
+
+  filtrar() 
+  {
+    this.aulasFiltradas = this.aulas.filter(aula => {
+      const coincideTipo = this.filtroNivel === 'Todos' || aula.nivel === this.filtroNivel;
+      return coincideTipo;
+    });
   }
 
 

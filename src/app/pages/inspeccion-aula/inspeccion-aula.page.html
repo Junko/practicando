@@ -2,52 +2,35 @@
 
 <ion-content class="ion-padding" [fullscreen]="true">
   <p class="admin-subtitle">Seleccionar aula</p>
-  <div *ngFor="let nivel of niveles" class="nivel-container">
-    <!-- BOTÓN DE NIVEL -->
-    <ion-button
-      expand="block"
-      color="warning"
-      (click)="toggleNivel(nivel.nombre)"
-      
-    >
-      <ion-label>{{ nivel.nombre }}</ion-label>
-      <ion-icon
-        [name]="nivel.expandido ? 'chevron-up' : 'chevron-down'"
-        slot="end"
-      ></ion-icon>
-    </ion-button>
-    <div *ngIf="nivel.expandido">
-        <!-- LISTA DE GRADOS -->
-      <div *ngFor="let grado of nivel.grados">
-        <!-- Botón del grado -->
-        <ion-button
-          expand="block"
-          fill="solid"
-          color="light"
-          (click)="toggleGrado(nivel.nombre, grado.nombre)"
-        >
-          <ion-label>{{ grado.nombre }}</ion-label>
-          <ion-icon
-            [name]="grado.expandido ? 'chevron-up' : 'chevron-down'"
-            slot="end"
-          ></ion-icon>
-        </ion-button>
 
-        <!--  Aquí dentro, justo debajo del grado -->
-        <div *ngIf="grado.expandido" class="secciones-container">
-          <ion-button 
-            *ngFor="let seccion of grado.secciones"
-            expand="block"            
-            fill="outline"
-            (click)="abrirRegistro(nivel.nombre, grado.nombre, seccion.nombre)"
-          >
-            {{ seccion.nombre }}
-          </ion-button>
+    <div class="barra-superior">
+      <ion-select [(ngModel)]="filtroNivel" (ionChange)="filtrar()" interface="popover" placeholder="Seleciona nivel">       
+          <ion-select-option value="Todos">Todos</ion-select-option>
+          <ion-select-option value="Inicial">Inicial</ion-select-option>
+          <ion-select-option value="Primaria">Primaria</ion-select-option>
+          <ion-select-option value="Secundaria">Secundaria</ion-select-option>
+      </ion-select>
+    </div>
+    
+    <div class="aulas-grid">
+      <div class="aula-card" 
+      *ngFor="let aula of aulasFiltradas"
+       (click)="abrirRegistro(aula.nivel, aula.grado, aula.seccion)">
+        <h3>{{ aula.nombreAula }}</h3>
+        <div class="etiquetas">
+          <span class="nivel">{{ aula.nivel }}</span>
+          <span class="tipo">{{ aula.tipoAula }}</span>
+          <span *ngIf="aula.grado">{{ aula.grado }}</span>
+          <span *ngIf="aula.seccion">{{ aula.seccion }}</span>
         </div>
+
+        <div class="detalles">
+          <p>Piso {{ aula.piso || '-' }}</p>
+          <p *ngIf="aula.muebles?.length">{{ aula.muebles.length }} muebles registrados</p>
+        </div>
+
       </div>
     </div>
-  </div>
- 
 </ion-content>
 
 
