@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, sendPasswordResetEmail, deleteUser } from 'firebase/auth';
-import { getFirestore, collection, getDocs, addDoc, doc, setDoc, getDoc, query, where, CollectionReference, Query, deleteDoc, updateDoc,onSnapshot } from 'firebase/firestore';
+import { getFirestore, collection, getDocs, addDoc, doc, setDoc, getDoc, query, where, getCountFromServer, Query, deleteDoc, updateDoc,onSnapshot } from 'firebase/firestore';
 import { User, CrearUsuario } from '../models/user.model';
 import { getStorage, ref, uploadString, getDownloadURL } from 'firebase/storage';
 import { Observable } from 'rxjs';
@@ -486,6 +486,25 @@ listenCollection(nombreColeccion: string, callback: (data: any[]) => void) {
       callback(data);
     });
   }
+async getCollectionCount(collectionName: string): Promise<number> {
+  const collRef = collection(this.db, collectionName);
+  const snapshot = await getCountFromServer(collRef);
+  return snapshot.data().count;
+}
 
+async getCountByField(
+  collectionName: string,
+  field: string,
+  value: any
+): Promise<number> {
+  const q = query(
+    collection(this.db, collectionName),
+    where(field, '==', value)
+  );
 
+  const snapshot = await getCountFromServer(q);
+  return snapshot.data().count;
+}
+
+  
 }

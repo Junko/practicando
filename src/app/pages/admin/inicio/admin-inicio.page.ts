@@ -24,9 +24,9 @@ export class AdminInicioPage implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.loadUserInfo();
-    this.loadCounters();
+    await this.loadCounters();
   }
 
   loadUserInfo() {
@@ -39,12 +39,27 @@ export class AdminInicioPage implements OnInit {
     }
   }
 
-  loadCounters() {
-    // Por ahora usamos valores estáticos, más adelante se pueden conectar con Firebase
-    this.totalPadres = 45;
-    this.totalListas = 12;
-    this.totalSalones = 8;
+async loadCounters() {
+  try {
+    // total de padres
+    this.totalPadres = await this.firebaseSvc.getCountByField(
+      'users',
+      'rol',
+      'padre'
+    );
+
+    // total de listas
+    this.totalListas = await this.firebaseSvc.getCollectionCount('listas_utiles');
+
+    // total de salones
+    this.totalSalones = await this.firebaseSvc.getCollectionCount('aulas');
+
+    console.log('Contadores cargados');
+    
+  } catch (error) {
+    console.error('Error cargando contadores', error);
   }
+}
 
   signOut() {
     this.firebaseSvc.signOut();
