@@ -33,6 +33,10 @@ export class PerfilPage implements OnInit {
     }
   }
 
+  editProfile() {
+    console.log('Editar perfil');
+  }
+
   async logout() {
     try {
       await this.firebaseSvc.signOut();
