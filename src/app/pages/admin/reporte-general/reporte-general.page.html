@@ -1,0 +1,54 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/admin/inicio"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Reporte general</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="filter-buttons ion-padding">
+    <ion-button expand="block" class="filter-button">Tipo de recurso</ion-button>
+    <ion-button expand="block" class="filter-button">Estado</ion-button>
+  </div>
+
+  <ion-list class="report-list">
+    <ion-item lines="none">
+      <ion-label>
+        <h2>2 computadoras dañadas (No encienden)</h2>
+        <p>Sala de cómputo</p>
+      </ion-label>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label>
+        <h2>3 sillas faltantes</h2>
+        <p>Biblioteca</p>
+      </ion-label>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label>
+        <h2>2 mesas faltantes</h2>
+        <p>2do Primaria A</p>
+      </ion-label>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label>
+        <h2>2 computadoras dañadas (No encienden)</h2>
+        <p>Sala de cómputo</p>
+      </ion-label>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label>
+        <h2>2 computadoras dañadas (No encienden)</h2>
+        <p>Sala de cómputo</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <div class="generate-pdf-button ion-padding">
+    <ion-button expand="block" class="generate-button">Generar PDF</ion-button>
+  </div>
+</ion-content>
+
+<app-custom-tabs [config]="tabsConfig"></app-custom-tabs>
