@@ -18,11 +18,15 @@ const routes: Routes = [
   {
     path: 'perfil',
     loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
-  },  {
+  },
+  {
     path: 'aulas',
     loadChildren: () => import('./aulas/aulas.module').then( m => m.AulasPageModule)
+  },
+  {
+    path: 'reporte-general',
+    loadChildren: () => import('./reporte-general/reporte-general.module').then( m => m.ReporteGeneralPageModule)
   }
-
 ];
 
 @NgModule({

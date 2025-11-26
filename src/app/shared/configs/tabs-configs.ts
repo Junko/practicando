@@ -26,6 +26,12 @@ export const ADMIN_TABS_CONFIG: TabsConfig = {
       label: 'Inspección',
       icon: 'clipboard-outline',
       route: '/inspeccion-aula'
+    },
+    {
+      id: 'reportes',
+      label: 'Reportes',
+      icon: 'document-text-outline',
+      route: '/admin/reporte-general'
     }
   ],
   tabBarPosition: 'bottom',
