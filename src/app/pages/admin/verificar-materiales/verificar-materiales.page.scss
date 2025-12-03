@@ -1,0 +1,477 @@
+.verificar-materiales-content {
+  --background: #f8f9fa;
+  padding: 20px 16px !important;
+  padding-bottom: 100px !important;
+}
+
+// Vista de búsqueda
+.search-container {
+  padding: 0 16px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+// Barra de búsqueda
+.custom-searchbar {
+  --background: #ffffff;
+  --border-radius: 12px;
+  --box-shadow: 0 0 0 1px #000000;
+  --color: #000000;
+  --placeholder-color: #666666;
+  --icon-color: #000000;
+  padding: 0;
+}
+
+.filters-container {
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  margin: 0 16px 24px 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  
+  .filter-item {
+    margin-bottom: 16px;
+    --padding-start: 0;
+    --inner-padding-end: 0;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  
+  .filter-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+    
+    ion-button {
+      flex: 1;
+    }
+  }
+}
+
+// Lista de estudiantes
+.students-list {
+  padding: 0 16px;
+  
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #666;
+    
+    ion-icon {
+      font-size: 64px;
+      margin-bottom: 16px;
+      color: #999;
+    }
+    
+    p {
+      font-size: 1rem;
+      color: #666;
+    }
+  }
+  
+  .student-card {
+    margin-bottom: 12px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    
+    &:active {
+      transform: scale(0.98);
+    }
+    
+    ion-card-content {
+      padding: 16px;
+    }
+    
+    .student-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      
+      .student-name {
+        flex: 1;
+        
+        h3 {
+          font-size: 1.1rem;
+          font-weight: bold;
+          color: #1b1213;
+          margin: 0 0 4px 0;
+        }
+        
+        .student-details {
+          font-size: 0.9rem;
+          color: #666;
+          margin: 0;
+        }
+      }
+      
+      .arrow-icon {
+        font-size: 1.5rem;
+        color: #999;
+      }
+    }
+  }
+}
+
+// Vista de materiales
+.materials-container {
+  padding: 16px;
+}
+
+.student-header {
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  
+  .back-button {
+    margin-bottom: 12px;
+    --color: #666;
+  }
+  
+  .student-title {
+    h2 {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #1b1213;
+      margin: 0 0 4px 0;
+    }
+    
+    p {
+      font-size: 0.95rem;
+      color: #666;
+      margin: 0;
+    }
+  }
+}
+
+.stats-container {
+  margin-bottom: 16px;
+  
+  .stat-card {
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    
+    ion-card-content {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 12px 8px;
+      
+      .stat-item {
+        text-align: center;
+        flex: 1;
+        
+        h3 {
+          font-size: 1.5rem;
+          font-weight: bold;
+          color: #1b1213;
+          margin: 0 0 2px 0;
+          line-height: 1.2;
+        }
+        
+        p {
+          font-size: 0.75rem;
+          color: #666;
+          margin: 0;
+          line-height: 1.2;
+        }
+      }
+    }
+  }
+}
+
+.materials-list {
+  .list-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #1b1213;
+    margin-bottom: 20px;
+    padding: 0 4px;
+  }
+  
+  .material-card {
+    background: white;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    
+    &.completo {
+      border: 2px solid #4caf50;
+      background: linear-gradient(to bottom, #f1f8f4, #ffffff);
+    }
+    
+    &.parcial {
+      border: 2px solid #ff9800;
+      background: linear-gradient(to bottom, #fff8e1, #ffffff);
+    }
+    
+    &.pendiente {
+      border: 2px solid #e0e0e0;
+      background: #ffffff;
+    }
+    
+    .material-header-card {
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.7);
+      border-bottom: 1px solid #e0e0e0;
+      
+      .material-title-section {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        
+        .material-name {
+          font-size: 1.1rem;
+          font-weight: bold;
+          color: #1b1213;
+          margin: 0;
+          flex: 1;
+        }
+        
+        .status-badge-header {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          padding: 6px 12px;
+          border-radius: 20px;
+          font-size: 0.85rem;
+          font-weight: 600;
+          white-space: nowrap;
+          
+          &.completo {
+            background: #c8e6c9;
+            color: #2e7d32;
+          }
+          
+          &.parcial {
+            background: #ffe0b2;
+            color: #e65100;
+          }
+          
+          &:not(.completo):not(.parcial) {
+            background: #ffcdd2;
+            color: #c62828;
+          }
+          
+          ion-icon {
+            font-size: 1.1rem;
+          }
+        }
+      }
+    }
+    
+    .material-image-container {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      background: #f5f5f5;
+      
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    
+    .material-details {
+      padding: 16px;
+      
+      .material-desc {
+        font-size: 0.95rem;
+        color: #666;
+        margin: 0 0 20px 0;
+        line-height: 1.5;
+      }
+      
+      .cantidad-section {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        
+        .cantidad-info {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 12px;
+          background: #f8f9fa;
+          border-radius: 8px;
+          
+          .cantidad-label {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 500;
+          }
+          
+          .cantidad-solicitada {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #1b1213;
+          }
+        }
+        
+        .cantidad-verificacion {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          
+          .cantidad-label-input {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #1b1213;
+            margin: 0;
+          }
+          
+          .cantidad-input-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            
+            ion-button {
+              --border-radius: 50%;
+              --padding-start: 12px;
+              --padding-end: 12px;
+              width: 48px;
+              height: 48px;
+              margin: 0;
+              
+              ion-icon {
+                font-size: 1.2rem;
+              }
+            }
+            
+            .cantidad-input-large {
+              --padding-start: 16px;
+              --padding-end: 16px;
+              --padding-top: 12px;
+              --padding-bottom: 12px;
+              width: 100px;
+              text-align: center;
+              font-size: 1.5rem;
+              font-weight: bold;
+              border: 2px solid #ddd;
+              border-radius: 12px;
+              background: white;
+            }
+          }
+          
+          .cantidad-total-text {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 500;
+          }
+        }
+      }
+    }
+  }
+}
+
+.save-actions {
+  margin-top: 24px;
+  padding-bottom: 20px;
+  
+  ion-button {
+    --border-radius: 12px;
+    height: 48px;
+    font-weight: bold;
+  }
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  
+  ion-spinner {
+    margin-bottom: 16px;
+  }
+  
+  p {
+    color: #666;
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #666;
+  
+  ion-icon {
+    font-size: 64px;
+    margin-bottom: 16px;
+    color: #999;
+  }
+  
+  p {
+    font-size: 1rem;
+    color: #666;
+  }
+}
+
+// Responsive
+@media (max-width: 480px) {
+  .stats-container {
+    .stat-card {
+      ion-card-content {
+        padding: 10px 4px;
+        
+        .stat-item {
+          h3 {
+            font-size: 1.2rem;
+            margin: 0 0 2px 0;
+          }
+          
+          p {
+            font-size: 0.7rem;
+            line-height: 1.1;
+          }
+        }
+      }
+    }
+  }
+  
+  .materials-list {
+    .material-card {
+      .material-header-card {
+        .material-title-section {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 8px;
+          
+          .status-badge-header {
+            width: 100%;
+            justify-content: center;
+          }
+        }
+      }
+      
+      .material-details {
+        .cantidad-section {
+          .cantidad-input-container {
+            .cantidad-input-large {
+              width: 80px;
+              font-size: 1.3rem;
+            }
+            
+            ion-button {
+              width: 44px;
+              height: 44px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

@@ -3,31 +3,187 @@
 <ion-content [fullscreen]="true" class="perfil-content" id="admin-content">
   <div class="perfil-hero">
     <div class="avatar-wrapper">
-      <img class="avatar" src="https://ionicframework.com/docs/img/demos/avatar.svg" alt="avatar" />
-      <ion-button fill="clear" class="edit-btn" size="small">
-        <ion-icon name="create-outline"></ion-icon>
-      </ion-button>
+      <img class="avatar" [src]="userInfo?.fotoPerfil || 'https://ionicframework.com/docs/img/demos/avatar.svg'" alt="avatar" />
+      <div class="avatar-buttons">
+        <ion-button 
+          fill="clear" 
+          class="edit-photo-btn" 
+          size="small"
+          (click)="cambiarFotoPerfil()">
+          <ion-icon name="camera-outline"></ion-icon>
+        </ion-button>
+        <ion-button 
+          fill="clear" 
+          class="edit-btn" 
+          size="small"
+          (click)="abrirModalEditar()">
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-button>
+      </div>
     </div>
     <h2 class="nombre">{{ userInfo?.nombres }} {{ userInfo?.apellidos }}</h2>
   </div>
 
   <div class="perfil-sections">
     <div class="section-title">Información</div>
+    
     <ion-list class="info-list">
       <ion-item lines="none" class="info-row">
+        <ion-avatar slot="start" class="circle-icon user"><ion-icon name="person-outline"></ion-icon></ion-avatar>
+        <ion-label>
+          <h3>Nombre</h3>
+          <p>{{ userInfo?.nombres }} {{ userInfo?.apellidos }}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="none" class="info-row">
         <ion-avatar slot="start" class="circle-icon email"><ion-icon name="mail-outline"></ion-icon></ion-avatar>
-        <ion-label>{{ userInfo?.correo || userInfo?.email }}</ion-label>
+        <ion-label>
+          <h3>Correo</h3>
+          <p>{{ userInfo?.correo || userInfo?.email }}</p>
+        </ion-label>
       </ion-item>
       <ion-item lines="none" class="info-row">
         <ion-avatar slot="start" class="circle-icon phone"><ion-icon name="call-outline"></ion-icon></ion-avatar>
-        <ion-label>{{ userInfo?.telefono || '—' }}</ion-label>
+        <ion-label>
+          <h3>Teléfono</h3>
+          <p>{{ userInfo?.telefono || '—' }}</p>
+        </ion-label>
       </ion-item>
     </ion-list>
 
-    <ion-button expand="block" color="dark" class="logout-btn" (click)="logout()">
+    <ion-button 
+      expand="block" 
+      color="dark" 
+      class="logout-btn" 
+      (click)="logout()">
       Cerrar sesión
     </ion-button>
   </div>
 </ion-content>
+
+<!-- Modal para editar perfil -->
+<ion-modal [isOpen]="isModalOpen" (willDismiss)="cerrarModal()">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Editar Perfil</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="cerrarModal()">
+            <ion-icon name="close-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="modal-content">
+      <form [formGroup]="editForm" class="edit-form-modal">
+        <ion-list>
+          <ion-item>
+            <ion-label position="stacked">Nombres <span class="required">*</span></ion-label>
+            <ion-input 
+              formControlName="nombres" 
+              placeholder="Nombres"
+              [class.invalid]="editForm.get('nombres')?.invalid && editForm.get('nombres')?.touched">
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Apellidos <span class="required">*</span></ion-label>
+            <ion-input 
+              formControlName="apellidos" 
+              placeholder="Apellidos"
+              [class.invalid]="editForm.get('apellidos')?.invalid && editForm.get('apellidos')?.touched">
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Correo Electrónico <span class="required">*</span></ion-label>
+            <ion-input 
+              type="email"
+              formControlName="correo" 
+              placeholder="correo@ejemplo.com"
+              [class.invalid]="editForm.get('correo')?.invalid && editForm.get('correo')?.touched">
+            </ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Teléfono</ion-label>
+            <ion-input 
+              type="tel"
+              formControlName="telefono" 
+              placeholder="Teléfono (opcional)">
+            </ion-input>
+          </ion-item>
+        </ion-list>
+
+        <div class="modal-actions">
+          <ion-button 
+            expand="block" 
+            color="primary" 
+            (click)="guardarCambios()"
+            [disabled]="loading || editForm.invalid">
+            <ion-icon name="save-outline" slot="start"></ion-icon>
+            {{ loading ? 'Guardando...' : 'Guardar Cambios' }}
+          </ion-button>
+          <ion-button 
+            expand="block" 
+            fill="outline" 
+            color="medium"
+            (click)="cerrarModal()"
+            [disabled]="loading">
+            Cancelar
+          </ion-button>
+        </div>
+      </form>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<!-- Modal de vista previa de foto -->
+<ion-modal [isOpen]="isPreviewModalOpen" (willDismiss)="cerrarPreviewModal()">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Vista Previa</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="cerrarPreviewModal()">
+            <ion-icon name="close-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="preview-modal-content">
+      <div class="preview-container">
+        <div class="preview-image-wrapper">
+          <img [src]="previewImage" alt="Vista previa de foto de perfil" class="preview-image">
+        </div>
+        <p class="preview-text">¿Te gusta esta foto?</p>
+      </div>
+      <div class="preview-actions">
+        <ion-button 
+          expand="block" 
+          color="primary" 
+          (click)="confirmarFoto()"
+          [disabled]="loadingFoto">
+          <ion-icon name="checkmark-outline" slot="start"></ion-icon>
+          {{ loadingFoto ? 'Guardando...' : 'Confirmar' }}
+        </ion-button>
+        <ion-button 
+          expand="block" 
+          fill="outline" 
+          color="medium"
+          (click)="seleccionarOtraImagen()"
+          [disabled]="loadingFoto">
+          <ion-icon name="camera-outline" slot="start"></ion-icon>
+          Seleccionar Otra
+        </ion-button>
+        <ion-button 
+          expand="block" 
+          fill="clear" 
+          color="medium"
+          (click)="cerrarPreviewModal()"
+          [disabled]="loadingFoto">
+          Cancelar
+        </ion-button>
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-modal>
 
 <app-custom-tabs [config]="tabsConfig"></app-custom-tabs>

@@ -208,11 +208,12 @@ export class EditarListaPage implements OnInit {
         materiales: this.materiales,
         actualizadoEn: new Date()
       };
-      await this.firebaseSvc.updateDocument(`listas_utiles/${this.listaId}`, payload);
+      await this.firebaseSvc.actualizarListaUtiles(this.listaId, payload);
       await this.utilsSvc.presentToast({ message: 'Lista actualizada', duration: 1500, color: 'success' });
       this.router.navigate(['/listas-crud']);
-    } catch (e) {
-      await this.utilsSvc.presentToast({ message: 'Error al actualizar', duration: 2000, color: 'danger' });
+    } catch (e: any) {
+      const mensajeError = e.message || 'Error al actualizar';
+      await this.utilsSvc.presentToast({ message: mensajeError, duration: 3000, color: 'danger' });
     } finally {
       this.loading = false;
     }

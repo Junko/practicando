@@ -8,41 +8,81 @@
 
     <!-- Cuadros informativos -->
     <div class="info-cards">
-      <ion-card class="info-card">
-        <ion-card-content>
-          <div class="card-icon">
-            <ion-icon name="people-outline"></ion-icon>
-          </div>
-          <div class="card-info">
-            <h3>Padres Registrados</h3>
-            <p class="card-number">{{ totalPadres }}</p>
-          </div>
-        </ion-card-content>
-      </ion-card>
+      <!-- Skeleton loader mientras carga -->
+      <ng-container *ngIf="loadingCounters">
+        <ion-card class="info-card skeleton-card">
+          <ion-card-content>
+            <div class="card-icon skeleton-icon">
+              <ion-skeleton-text [animated]="true" style="width: 24px; height: 24px; border-radius: 50%;"></ion-skeleton-text>
+            </div>
+            <div class="card-info">
+              <ion-skeleton-text [animated]="true" style="width: 60%; height: 14px; margin-bottom: 8px;"></ion-skeleton-text>
+              <ion-skeleton-text [animated]="true" style="width: 40px; height: 28px;"></ion-skeleton-text>
+            </div>
+          </ion-card-content>
+        </ion-card>
+        <ion-card class="info-card skeleton-card">
+          <ion-card-content>
+            <div class="card-icon skeleton-icon">
+              <ion-skeleton-text [animated]="true" style="width: 24px; height: 24px; border-radius: 50%;"></ion-skeleton-text>
+            </div>
+            <div class="card-info">
+              <ion-skeleton-text [animated]="true" style="width: 60%; height: 14px; margin-bottom: 8px;"></ion-skeleton-text>
+              <ion-skeleton-text [animated]="true" style="width: 40px; height: 28px;"></ion-skeleton-text>
+            </div>
+          </ion-card-content>
+        </ion-card>
+        <ion-card class="info-card skeleton-card">
+          <ion-card-content>
+            <div class="card-icon skeleton-icon">
+              <ion-skeleton-text [animated]="true" style="width: 24px; height: 24px; border-radius: 50%;"></ion-skeleton-text>
+            </div>
+            <div class="card-info">
+              <ion-skeleton-text [animated]="true" style="width: 60%; height: 14px; margin-bottom: 8px;"></ion-skeleton-text>
+              <ion-skeleton-text [animated]="true" style="width: 40px; height: 28px;"></ion-skeleton-text>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ng-container>
 
-      <ion-card class="info-card">
-        <ion-card-content>
-          <div class="card-icon">
-            <ion-icon name="list-outline"></ion-icon>
-          </div>
-          <div class="card-info">
-            <h3>Listas Registradas</h3>
-            <p class="card-number">{{ totalListas }}</p>
-          </div>
-        </ion-card-content>
-      </ion-card>
+      <!-- Contenido real cuando termina de cargar -->
+      <ng-container *ngIf="!loadingCounters">
+        <ion-card class="info-card">
+          <ion-card-content>
+            <div class="card-icon">
+              <ion-icon name="people-outline"></ion-icon>
+            </div>
+            <div class="card-info">
+              <h3>Padres Registrados</h3>
+              <p class="card-number">{{ totalPadres }}</p>
+            </div>
+          </ion-card-content>
+        </ion-card>
 
-      <ion-card class="info-card">
-        <ion-card-content>
-          <div class="card-icon">
-            <ion-icon name="business-outline"></ion-icon>
-          </div>
-          <div class="card-info">
-            <h3>Salones Registrados</h3>
-            <p class="card-number">{{ totalSalones }}</p>
-          </div>
-        </ion-card-content>
-      </ion-card>
+        <ion-card class="info-card">
+          <ion-card-content>
+            <div class="card-icon">
+              <ion-icon name="list-outline"></ion-icon>
+            </div>
+            <div class="card-info">
+              <h3>Listas Registradas</h3>
+              <p class="card-number">{{ totalListas }}</p>
+            </div>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card class="info-card">
+          <ion-card-content>
+            <div class="card-icon">
+              <ion-icon name="business-outline"></ion-icon>
+            </div>
+            <div class="card-info">
+              <h3>Salones Registrados</h3>
+              <p class="card-number">{{ totalSalones }}</p>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ng-container>
     </div>
 
     <!-- Botones de opciones CRUD -->
@@ -51,33 +91,33 @@
       
       <div class="options-grid">
         <ion-button expand="block" class="option-button" routerLink="/usuarios-crud" routerDirection="root">
-          <ion-icon name="people-outline" slot="start"></ion-icon>
-          CRUD Usuarios
+          <ion-icon name="people-outline"></ion-icon>
+          <span class="button-label">CRUD Usuarios</span>
         </ion-button>
 
         <ion-button expand="block" class="option-button" routerLink="/listas-crud" routerDirection="root">
-          <ion-icon name="list-outline" slot="start"></ion-icon>
-          CRUD Listas
+          <ion-icon name="list-outline"></ion-icon>
+          <span class="button-label">CRUD Listas</span>
         </ion-button>
 
         <ion-button expand="block" class="option-button" routerLink="/admin/aulas" routerDirection="root">
-          <ion-icon name="business-outline" slot="start"></ion-icon>
-          CRUD Salones
+          <ion-icon name="business-outline"></ion-icon>
+          <span class="button-label">CRUD Salones</span>
         </ion-button>
 
-        <ion-button expand="block" class="option-button" routerLink="/listas-cumplidas" routerDirection="root">
-          <ion-icon name="checkmark-circle-outline" slot="start"></ion-icon>
-          Verificar Listas
+        <ion-button expand="block" class="option-button" routerLink="/admin/verificar-materiales" routerDirection="root">
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
+          <span class="button-label">Verificar Materiales</span>
         </ion-button>
 
         <ion-button expand="block" class="option-button" routerLink="/inspeccion-aula" routerDirection="root">
-          <ion-icon name="clipboard-outline" slot="start"></ion-icon>
-          Inspección de Aulas
+          <ion-icon name="clipboard-outline"></ion-icon>
+          <span class="button-label">Inspección de Aulas</span>
         </ion-button>
 
         <ion-button expand="block" class="option-button" routerLink="/admin/perfil" routerDirection="root">
-          <ion-icon name="person-outline" slot="start"></ion-icon>
-          Perfil
+          <ion-icon name="person-outline"></ion-icon>
+          <span class="button-label">Perfil</span>
         </ion-button>
       </div>
     </div>

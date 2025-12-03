@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, sendPasswordResetEmail, deleteUser } from 'firebase/auth';
-import { getFirestore, collection, getDocs, addDoc, doc, setDoc, getDoc, query, where, CollectionReference, Query, deleteDoc, updateDoc,onSnapshot } from 'firebase/firestore';
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, sendPasswordResetEmail, deleteUser, updateEmail, EmailAuthProvider, reauthenticateWithCredential } from 'firebase/auth';
+import { getFirestore, collection, getDocs, addDoc, doc, setDoc, getDoc, query, where, getCountFromServer, Query, deleteDoc, updateDoc,onSnapshot } from 'firebase/firestore';
 import { User, CrearUsuario } from '../models/user.model';
 import { getStorage, ref, uploadString, getDownloadURL } from 'firebase/storage';
 import { Observable } from 'rxjs';
@@ -243,6 +243,84 @@ export class Firebase {
     return updateProfile(getAuth().currentUser, { displayName });
   }
 
+  //=== Actualizar perfil completo (nombre, correo, teléfono) ===
+  async actualizarPerfilUsuario(
+    uid: string,
+    datos: {
+      nombres?: string;
+      apellidos?: string;
+      correo?: string;
+      telefono?: string;
+      fotoPerfil?: string;
+    },
+    passwordActual?: string // Necesario si se cambia el correo
+  ) {
+    try {
+      const currentUser = getAuth().currentUser;
+      if (!currentUser) {
+        throw new Error('No hay usuario autenticado');
+      }
+
+      const updates: any = {};
+      let actualizarAuth = false;
+
+      // 1. Actualizar correo en Authentication (si cambió)
+      if (datos.correo && datos.correo !== currentUser.email) {
+        if (!passwordActual) {
+          throw new Error('Se requiere la contraseña actual para cambiar el correo');
+        }
+
+        // Reautenticar antes de cambiar el correo
+        const credential = EmailAuthProvider.credential(
+          currentUser.email!,
+          passwordActual
+        );
+        await reauthenticateWithCredential(currentUser, credential);
+        
+        // Actualizar correo
+        await updateEmail(currentUser, datos.correo);
+        updates.correo = datos.correo;
+        actualizarAuth = true;
+      }
+
+      // 2. Actualizar displayName en Authentication (si cambió nombre)
+      if (datos.nombres || datos.apellidos) {
+        const nombres = datos.nombres || currentUser.displayName?.split(' ')[0] || '';
+        const apellidos = datos.apellidos || currentUser.displayName?.split(' ').slice(1).join(' ') || '';
+        const nuevoDisplayName = `${nombres} ${apellidos}`.trim();
+        
+        if (nuevoDisplayName !== currentUser.displayName) {
+          await updateProfile(currentUser, {
+            displayName: nuevoDisplayName
+          });
+          actualizarAuth = true;
+        }
+      }
+
+      // 3. Actualizar datos en Firestore
+      if (datos.nombres) updates.nombres = datos.nombres;
+      if (datos.apellidos) updates.apellidos = datos.apellidos;
+      if (datos.telefono !== undefined) updates.telefono = datos.telefono;
+      if (datos.correo) updates.correo = datos.correo;
+      if (datos.fotoPerfil !== undefined) updates.fotoPerfil = datos.fotoPerfil;
+      
+      updates.actualizadoEn = new Date();
+
+      // Actualizar en Firestore usando merge para no sobrescribir otros campos
+      await this.updateDocument(`users/${uid}`, updates);
+
+      console.log('Perfil actualizado exitosamente');
+      return {
+        success: true,
+        updates: updates
+      };
+
+    } catch (error) {
+      console.error('Error al actualizar perfil:', error);
+      throw error;
+    }
+  }
+
   //=== Enviar email para restablecer contraseña ===
   sendRecoveryEmail(email: string) {
     return sendPasswordResetEmail(getAuth(), email);
@@ -338,17 +416,65 @@ export class Firebase {
     return await this.getDocument(`listas_utiles/${listaId}`);
   }
 
+  //=== Verificar si ya existe una lista con el mismo nivel, grado y año ===
+  // excludeListaId: ID de lista a excluir de la búsqueda (útil al editar)
+  async existeListaDuplicada(
+    nivel: string, 
+    grado: string, 
+    anio: string | number, 
+    excludeListaId?: string
+  ): Promise<boolean> {
+    try {
+      const anioStr = anio.toString();
+      const q = query(
+        collection(getFirestore(), 'listas_utiles'),
+        where('nivel', '==', nivel),
+        where('grado', '==', grado),
+        where('anio', '==', anioStr)
+      );
+      const snapshot = await getDocs(q);
+      
+      // Si hay resultados y se especificó un ID a excluir, verificar que no sea solo esa lista
+      if (snapshot.empty) {
+        return false;
+      }
+      
+      // Si se especificó un ID a excluir, verificar que haya otras listas además de esa
+      if (excludeListaId) {
+        const otrasListas = snapshot.docs.filter(doc => doc.id !== excludeListaId);
+        return otrasListas.length > 0;
+      }
+      
+      return true;
+    } catch (error) {
+      console.error('Error al verificar lista duplicada:', error);
+      throw error;
+    }
+  }
+
   //=== Guardar lista de útiles completa ===
   async guardarListaUtiles(data: any) {
     try {
-      // Guardar la lista principal
+      // Verificar si ya existe una lista con el mismo nivel, grado y año
+      const existeDuplicado = await this.existeListaDuplicada(
+        data.nivel,
+        data.grado,
+        data.anio
+      );
+
+      if (existeDuplicado) {
+        throw new Error(`Ya existe una lista para ${data.nivel} - ${data.grado} del año ${data.anio}. Solo se puede crear una lista por grado/nivel/año.`);
+      }
+
+      // Guardar la lista principal (igual que en editar, sin normalización excesiva)
       const docRef = await this.addDocument('listas_utiles', {
         nivel: data.nivel,
         grado: data.grado,
         anio: data.anio,
         materiales: data.materiales || [],
         creadoEn: new Date(),
-        actualizadoEn: new Date()
+        actualizadoEn: new Date(),
+        ...(data.titulo && { titulo: data.titulo }) // Agregar título solo si existe
       });
       
       console.log('Lista guardada con ID:', docRef.id);
@@ -478,6 +604,31 @@ async updateDocument(path: string, data: any) {
   }
 }
 
+  //=== Actualizar lista de útiles con validación de duplicados ===
+  async actualizarListaUtiles(listaId: string, data: any) {
+    try {
+      // Verificar si ya existe otra lista con el mismo nivel, grado y año (excluyendo la actual)
+      const existeDuplicado = await this.existeListaDuplicada(
+        data.nivel,
+        data.grado,
+        data.anio,
+        listaId // Excluir la lista actual
+      );
+
+      if (existeDuplicado) {
+        throw new Error(`Ya existe otra lista para ${data.nivel} - ${data.grado} del año ${data.anio}. Solo se puede crear una lista por grado/nivel/año.`);
+      }
+
+      // Actualizar la lista
+      await this.updateDocument(`listas_utiles/${listaId}`, data);
+      console.log('Lista actualizada con ID:', listaId);
+      return listaId;
+    } catch (error) {
+      console.error('Error al actualizar lista de útiles:', error);
+      throw error;
+    }
+  }
+
 listenCollection(nombreColeccion: string, callback: (data: any[]) => void) {
     const ref = collection(this.db, nombreColeccion);
     
@@ -486,6 +637,136 @@ listenCollection(nombreColeccion: string, callback: (data: any[]) => void) {
       callback(data);
     });
   }
+async getCollectionCount(collectionName: string): Promise<number> {
+  const collRef = collection(this.db, collectionName);
+  const snapshot = await getCountFromServer(collRef);
+  return snapshot.data().count;
+}
 
+async getCountByField(
+  collectionName: string,
+  field: string,
+  value: any
+): Promise<number> {
+  const q = query(
+    collection(this.db, collectionName),
+    where(field, '==', value)
+  );
 
+  const snapshot = await getCountFromServer(q);
+  return snapshot.data().count;
+}
+
+  //=== VERIFICACIÓN DE MATERIALES ===
+
+  //=== Guardar o actualizar verificación de material ===
+  async guardarVerificacionMaterial(
+    estudianteId: string,
+    listaId: string,
+    materialIndex: number,
+    materialNombre: string,
+    cantidadEntregada: number,
+    cantidadSolicitada: number
+  ) {
+    try {
+      // Crear ID único para la verificación: estudianteId_listaId_materialIndex
+      const verificacionId = `${estudianteId}_${listaId}_${materialIndex}`;
+      
+      const entregado = cantidadEntregada >= cantidadSolicitada;
+      
+      const verificacionData = {
+        estudianteId: estudianteId,
+        listaId: listaId,
+        materialIndex: materialIndex,
+        materialNombre: materialNombre,
+        cantidadSolicitada: cantidadSolicitada,
+        cantidadEntregada: cantidadEntregada,
+        entregado: entregado,
+        fechaVerificacion: new Date(),
+        actualizadoEn: new Date()
+      };
+
+      await this.setDocument(`verificaciones_materiales/${verificacionId}`, verificacionData);
+      
+      console.log('Verificación guardada:', verificacionData);
+      return { success: true, id: verificacionId };
+    } catch (error) {
+      console.error('Error al guardar verificación:', error);
+      throw error;
+    }
+  }
+
+  //=== Obtener verificaciones de un estudiante ===
+  async getVerificacionesByEstudiante(estudianteId: string) {
+    try {
+      const q = query(
+        collection(this.db, 'verificaciones_materiales'),
+        where('estudianteId', '==', estudianteId)
+      );
+      
+      const snapshot = await getDocs(q);
+      return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    } catch (error) {
+      console.error('Error al obtener verificaciones:', error);
+      throw error;
+    }
+  }
+
+  //=== Obtener verificación específica de un material ===
+  async getVerificacionMaterial(
+    estudianteId: string,
+    listaId: string,
+    materialIndex: number
+  ) {
+    try {
+      const verificacionId = `${estudianteId}_${listaId}_${materialIndex}`;
+      return await this.getDocument(`verificaciones_materiales/${verificacionId}`);
+    } catch (error) {
+      console.error('Error al obtener verificación:', error);
+      throw error;
+    }
+  }
+
+  //=== Buscar estudiantes por nombre, grado, nivel o sección ===
+  async buscarEstudiantes(filtro: {
+    nombre?: string;
+    grado?: string;
+    nivel?: string;
+    seccion?: string;
+  }) {
+    try {
+      let estudiantes = await this.getCollection('estudiantes');
+      
+      // Aplicar filtros
+      if (filtro.nombre) {
+        const nombreLower = filtro.nombre.toLowerCase();
+        estudiantes = estudiantes.filter((est: any) => {
+          // Manejar ambos formatos: nombre/apellido o nombres/apellidos
+          const nombre = est.nombre || est.nombres || '';
+          const apellido = est.apellido || est.apellidos || '';
+          const nombreCompleto = `${nombre} ${apellido}`.toLowerCase();
+          return nombreCompleto.includes(nombreLower);
+        });
+      }
+      
+      if (filtro.grado) {
+        estudiantes = estudiantes.filter((est: any) => est.grado === filtro.grado);
+      }
+      
+      if (filtro.nivel) {
+        estudiantes = estudiantes.filter((est: any) => est.nivel === filtro.nivel);
+      }
+      
+      if (filtro.seccion) {
+        estudiantes = estudiantes.filter((est: any) => est.seccion === filtro.seccion);
+      }
+      
+      return estudiantes;
+    } catch (error) {
+      console.error('Error al buscar estudiantes:', error);
+      throw error;
+    }
+  }
+
+  
 }
