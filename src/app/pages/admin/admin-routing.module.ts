@@ -26,6 +26,10 @@ const routes: Routes = [
   {
     path: 'verificar-materiales',
     loadChildren: () => import('./verificar-materiales/verificar-materiales.module').then( m => m.VerificarMaterialesPageModule)
+  },
+  {
+    path: 'reporte-general',
+    loadChildren: () => import('./reporte-general/reporte-general.module').then( m => m.ReporteGeneralPageModule)
   }
 
 ];

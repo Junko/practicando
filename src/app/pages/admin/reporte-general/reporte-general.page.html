@@ -1,0 +1,125 @@
+<app-header title="Reporte General" menuId="admin-menu"></app-header>
+
+<ion-content [fullscreen]="true" class="reporte-content">
+  
+  <!-- Filtros -->
+  <div class="filter-section ion-padding">
+    <div class="filter-buttons">
+      <ion-button 
+        expand="block" 
+        class="filter-button"
+        (click)="seleccionarFiltroTipoRecurso()">
+        <ion-icon name="pricetag-outline" slot="start"></ion-icon>
+        {{ filtroTipoRecurso }}
+      </ion-button>
+      <ion-button 
+        expand="block" 
+        class="filter-button"
+        (click)="seleccionarFiltroEstado()">
+        <ion-icon name="flag-outline" slot="start"></ion-icon>
+        {{ filtroEstado }}
+      </ion-button>
+    </div>
+    
+    <!-- Botón para limpiar filtros -->
+    <ion-button 
+      *ngIf="filtroTipoRecurso !== 'Todos' || filtroEstado !== 'Todos'"
+      fill="clear" 
+      size="small" 
+      class="clear-filters"
+      (click)="limpiarFiltros()">
+      <ion-icon name="close-circle-outline" slot="start"></ion-icon>
+      Limpiar filtros
+    </ion-button>
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="loading-container">
+    <ion-spinner></ion-spinner>
+    <p>Cargando reportes...</p>
+  </div>
+
+  <!-- Lista de reportes -->
+  <div *ngIf="!loading">
+    <!-- Mensaje si no hay reportes -->
+    <div *ngIf="reportesFiltrados.length === 0" class="empty-state">
+      <ion-icon name="checkmark-circle-outline"></ion-icon>
+      <h3>No hay problemas reportados</h3>
+      <p *ngIf="filtroTipoRecurso !== 'Todos' || filtroEstado !== 'Todos'">
+        Intenta cambiar los filtros o limpiarlos para ver más resultados.
+      </p>
+      <p *ngIf="filtroTipoRecurso === 'Todos' && filtroEstado === 'Todos'">
+        Todas las aulas están en buen estado.
+      </p>
+    </div>
+
+    <!-- Lista de reportes -->
+    <ion-list *ngIf="reportesFiltrados.length > 0" class="report-list">
+      <ion-item 
+        *ngFor="let reporte of reportesFiltrados" 
+        lines="none"
+        class="report-item">
+        <ion-label>
+          <h2 class="report-title">{{ reporte.titulo }}</h2>
+          <p class="report-aula">
+            <ion-icon name="business-outline"></ion-icon>
+            {{ reporte.aula }}
+          </p>
+          <div class="report-meta">
+            <ion-chip [color]="reporte.estado === 'Faltante' ? 'warning' : 'danger'">
+              <ion-icon name="alert-circle-outline"></ion-icon>
+              <ion-label>{{ reporte.estado }}</ion-label>
+            </ion-chip>
+            <ion-chip color="medium">
+              <ion-icon name="pricetag-outline"></ion-icon>
+              <ion-label>{{ reporte.tipoRecurso }}</ion-label>
+            </ion-chip>
+          </div>
+          <p *ngIf="reporte.motivo" class="report-motivo">
+            <strong>Motivo:</strong> {{ reporte.motivo }}
+          </p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+    <!-- Resumen -->
+    <div *ngIf="reportesFiltrados.length > 0" class="summary-section ion-padding">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Resumen</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="summary-stats">
+            <div class="stat-item">
+              <span class="stat-number">{{ reportesFiltrados.length }}</span>
+              <span class="stat-label">Problemas encontrados</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">{{ totalFaltantes }}</span>
+              <span class="stat-label">Faltantes</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">{{ totalDanados }}</span>
+              <span class="stat-label">Dañados</span>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+
+  <!-- Botón generar PDF -->
+  <div *ngIf="!loading && reportesFiltrados.length > 0" class="generate-pdf-section ion-padding">
+    <ion-button 
+      expand="block" 
+      class="generate-button"
+      (click)="generarPDF()">
+      <ion-icon name="document-text-outline" slot="start"></ion-icon>
+      Generar PDF
+    </ion-button>
+  </div>
+
+</ion-content>
+
+<app-custom-tabs [config]="tabsConfig"></app-custom-tabs>
+
