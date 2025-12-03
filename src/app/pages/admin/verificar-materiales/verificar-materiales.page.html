@@ -1,0 +1,234 @@
+<app-header title="Verificar Materiales" [showBackButton]="true"></app-header>
+
+<ion-content [fullscreen]="true" class="verificar-materiales-content">
+  
+  <!-- Vista de búsqueda de estudiantes -->
+  <div *ngIf="!mostrandoMateriales" class="search-container">
+    
+    <!-- Barra de búsqueda -->
+    <div class="search-container">
+      <ion-searchbar 
+        [(ngModel)]="searchTerm" 
+        (ionInput)="onSearchChange($event)"
+        placeholder="Buscar estudiantes..."
+        class="custom-searchbar">
+      </ion-searchbar>
+    </div>
+
+    <!-- Filtros de búsqueda -->
+    <div class="filters-container">
+      <ion-item class="filter-item">
+        <ion-label position="stacked">Nivel</ion-label>
+        <ion-select [(ngModel)]="filtroNivel" (ionChange)="onFilterChange()">
+          <ion-select-option value="">Todos</ion-select-option>
+          <ion-select-option value="Inicial">Inicial</ion-select-option>
+          <ion-select-option value="Primaria">Primaria</ion-select-option>
+          <ion-select-option value="Secundaria">Secundaria</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item class="filter-item">
+        <ion-label position="stacked">Grado</ion-label>
+        <ion-select [(ngModel)]="filtroGrado" (ionChange)="onFilterChange()">
+          <ion-select-option value="">Todos</ion-select-option>
+          <ion-select-option value="1°">1°</ion-select-option>
+          <ion-select-option value="2°">2°</ion-select-option>
+          <ion-select-option value="3°">3°</ion-select-option>
+          <ion-select-option value="4°">4°</ion-select-option>
+          <ion-select-option value="5°">5°</ion-select-option>
+          <ion-select-option value="6°">6°</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item class="filter-item">
+        <ion-label position="stacked">Sección</ion-label>
+        <ion-select [(ngModel)]="filtroSeccion" (ionChange)="onFilterChange()">
+          <ion-select-option value="">Todas</ion-select-option>
+          <ion-select-option value="A">A</ion-select-option>
+          <ion-select-option value="B">B</ion-select-option>
+          <ion-select-option value="C">C</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <div class="filter-actions">
+        <ion-button expand="block" fill="outline" (click)="limpiarFiltros()">
+          <ion-icon name="refresh-outline" slot="start"></ion-icon>
+          Limpiar Filtros
+        </ion-button>
+      </div>
+    </div>
+
+    <!-- Lista de estudiantes -->
+    <div class="students-list" *ngIf="!loading">
+      <div *ngIf="estudiantesFiltrados.length === 0" class="empty-state">
+        <ion-icon name="people-outline"></ion-icon>
+        <p>No se encontraron estudiantes</p>
+      </div>
+
+      <ion-card 
+        *ngFor="let estudiante of estudiantesFiltrados" 
+        class="student-card"
+        (click)="seleccionarEstudiante(estudiante)">
+        <ion-card-content>
+          <div class="student-info">
+            <div class="student-name">
+              <h3>{{ estudiante.nombre || estudiante.nombres }} {{ estudiante.apellido || estudiante.apellidos }}</h3>
+              <p class="student-details">
+                {{ estudiante.grado }} - {{ estudiante.nivel }} - Sección {{ estudiante.seccion }}
+              </p>
+            </div>
+            <ion-icon name="chevron-forward-outline" class="arrow-icon"></ion-icon>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <div *ngIf="loading" class="loading-container">
+      <ion-spinner></ion-spinner>
+      <p>Cargando estudiantes...</p>
+    </div>
+  </div>
+
+  <!-- Vista de materiales del estudiante -->
+  <div *ngIf="mostrandoMateriales && estudianteSeleccionado" class="materials-container">
+    
+    <!-- Header del estudiante -->
+    <div class="student-header">
+      <ion-button fill="clear" (click)="volverALista()" class="back-button">
+        <ion-icon name="arrow-back-outline" slot="start"></ion-icon>
+        Regresar
+      </ion-button>
+      <div class="student-title">
+        <h2>{{ estudianteSeleccionado.nombre || estudianteSeleccionado.nombres }} {{ estudianteSeleccionado.apellido || estudianteSeleccionado.apellidos }}</h2>
+        <p>{{ estudianteSeleccionado.grado }} - {{ estudianteSeleccionado.nivel }} - Sección {{ estudianteSeleccionado.seccion }}</p>
+      </div>
+    </div>
+
+    <!-- Estadísticas -->
+    <div class="stats-container" *ngIf="materiales.length > 0">
+      <ion-card class="stat-card">
+        <ion-card-content>
+          <div class="stat-item">
+            <h3>{{ getEstadisticas().entregados }}</h3>
+            <p>Materiales Completos</p>
+          </div>
+          <div class="stat-item">
+            <h3>{{ getEstadisticas().itemsEntregados }}/{{ getEstadisticas().totalItems }}</h3>
+            <p>Items Entregados</p>
+          </div>
+          <div class="stat-item">
+            <h3>{{ getEstadisticas().porcentaje }}%</h3>
+            <p>Completado</p>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <!-- Lista de materiales -->
+    <div class="materials-list" *ngIf="lista && materiales.length > 0">
+      <h3 class="list-title">Lista de Útiles: {{ lista.titulo || 'Sin título' }}</h3>
+      
+      <div class="material-card" 
+        *ngFor="let material of materiales; let i = index" 
+        [class.completo]="material.entregado"
+        [class.parcial]="material.cantidadEntregada > 0 && material.cantidadEntregada < material.cantidad"
+        [class.pendiente]="!material.cantidadEntregada || material.cantidadEntregada === 0">
+        
+        <!-- Header del material -->
+        <div class="material-header-card">
+          <div class="material-title-section">
+            <h4 class="material-name">{{ material.nombre_material }}</h4>
+            <div class="status-badge-header" 
+              [class.completo]="material.entregado" 
+              [class.parcial]="material.cantidadEntregada > 0 && material.cantidadEntregada < material.cantidad">
+              <ion-icon 
+                *ngIf="material.entregado" 
+                name="checkmark-circle" 
+                color="success">
+              </ion-icon>
+              <ion-icon 
+                *ngIf="material.cantidadEntregada > 0 && material.cantidadEntregada < material.cantidad" 
+                name="warning" 
+                color="warning">
+              </ion-icon>
+              <ion-icon 
+                *ngIf="!material.cantidadEntregada || material.cantidadEntregada === 0" 
+                name="close-circle" 
+                color="danger">
+              </ion-icon>
+              <span *ngIf="material.entregado">Completo</span>
+              <span *ngIf="material.cantidadEntregada > 0 && material.cantidadEntregada < material.cantidad">Parcial</span>
+              <span *ngIf="!material.cantidadEntregada || material.cantidadEntregada === 0">Pendiente</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Imagen del material -->
+        <div class="material-image-container" *ngIf="material.imagen">
+          <img [src]="material.imagen" [alt]="material.nombre_material">
+        </div>
+
+        <!-- Información del material -->
+        <div class="material-details">
+          <p class="material-desc" *ngIf="material.descripcion">{{ material.descripcion }}</p>
+          
+          <div class="cantidad-section">
+            <div class="cantidad-info">
+              <span class="cantidad-label">Cantidad solicitada:</span>
+              <span class="cantidad-solicitada">{{ material.cantidad }}</span>
+            </div>
+            
+            <div class="cantidad-verificacion">
+              <label class="cantidad-label-input">Cantidad entregada:</label>
+              <div class="cantidad-input-container">
+                <ion-button 
+                  fill="outline" 
+                  size="small" 
+                  (click)="decrementarCantidad(material)"
+                  [disabled]="!material.cantidadEntregada || material.cantidadEntregada === 0">
+                  <ion-icon name="remove"></ion-icon>
+                </ion-button>
+                <ion-input 
+                  type="number" 
+                  [(ngModel)]="material.cantidadEntregada"
+                  (ionInput)="actualizarCantidadEntregada(material)"
+                  [min]="0"
+                  [max]="material.cantidad"
+                  placeholder="0"
+                  class="cantidad-input-large">
+                </ion-input>
+                <ion-button 
+                  fill="outline" 
+                  size="small" 
+                  (click)="incrementarCantidad(material)"
+                  [disabled]="material.cantidadEntregada >= material.cantidad">
+                  <ion-icon name="add"></ion-icon>
+                </ion-button>
+              </div>
+              <span class="cantidad-total-text">de {{ material.cantidad }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mensaje si no hay materiales -->
+    <div *ngIf="!lista || materiales.length === 0" class="empty-state">
+      <ion-icon name="list-outline"></ion-icon>
+      <p>No se encontró lista de útiles para este estudiante</p>
+    </div>
+
+    <!-- Botón para guardar todas las verificaciones -->
+    <div class="save-actions" *ngIf="materiales.length > 0">
+      <ion-button expand="block" color="primary" (click)="guardarTodasVerificaciones()">
+        <ion-icon name="save-outline" slot="start"></ion-icon>
+        Guardar Verificaciones
+      </ion-button>
+    </div>
+  </div>
+
+</ion-content>
+
+<!-- Componente de tabs personalizado para admin -->
+<app-custom-tabs [config]="tabsConfig"></app-custom-tabs>
+

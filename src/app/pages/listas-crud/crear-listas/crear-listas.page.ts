@@ -188,12 +188,15 @@ export class CrearListasPage implements OnInit {
         // Navegar de vuelta a la lista de listas
         this.router.navigate(['/listas-crud']);
         
-      } catch (error) {
+      } catch (error: any) {
         console.error('Error al crear lista:', error);
         if (loading) await loading.dismiss();
+        
+        // Mostrar mensaje de error específico si es un duplicado
+        const mensajeError = error.message || 'Error al crear la lista';
         await this.utilsSvc.presentToast({
-          message: 'Error al crear la lista',
-          duration: 2000,
+          message: mensajeError,
+          duration: 3000,
           color: 'danger'
         });
       }
@@ -208,47 +211,11 @@ export class CrearListasPage implements OnInit {
     }
   }
 
-  // Procesar materiales y subir imágenes a Firebase Storage
+  // Procesar materiales (igual que en editar-lista, sin cambios)
   async procesarMateriales() {
-    const materialesProcesados = [];
-    
-    for (let i = 0; i < this.materiales.length; i++) {
-      const material = this.materiales[i];
-      
-      // Preparar datos del material
-      const materialData = {
-        nombre_material: material.nombre_material,
-        descripcion: material.descripcion || '',
-        cantidad: material.cantidad,
-        imagen: ''
-      };
-      
-      // Si hay imagen, intentar subirla a Firebase Storage
-      // NOTA: Si Firebase Storage no está habilitado, se guardará como base64
-      if (material.imagen) {
-        try {
-          console.log(`Intentando subir imagen para: ${material.nombre_material}`);
-          const timestamp = Date.now();
-          const imagePath = `materiales/${material.nombre_material}_${timestamp}.jpg`;
-          
-          const downloadURL = await this.firebaseSvc.uploadImage(imagePath, material.imagen);
-          materialData.imagen = downloadURL;
-          console.log(`✓ Imagen subida exitosamente a Firebase Storage. URL: ${downloadURL}`);
-        } catch (error: any) {
-          console.error('Error al subir imagen del material:', error);
-          console.error('Detalles del error:', error.message);
-          
-          // Si falla la subida (Storage no habilitado o error de CORS), guardar como base64
-          materialData.imagen = material.imagen;
-          console.log('⚠ Imagen guardada como base64 (Firebase Storage no disponible)');
-          console.log('💡 Para habilitar Firebase Storage: https://console.firebase.google.com/project/montesorri-app-v1/storage');
-        }
-      }
-      
-      materialesProcesados.push(materialData);
-    }
-    
-    return materialesProcesados;
+    // Retornar los materiales tal cual, igual que en editar-lista
+    // En editar-lista se guardan directamente sin procesar
+    return this.materiales;
   }
 
 }

@@ -21,6 +21,7 @@ export class AdminInicioPage implements OnInit {
   totalPadres: number = 0;
   totalListas: number = 0;
   totalSalones: number = 0;
+  loadingCounters: boolean = true;
 
   constructor() { }
 
@@ -41,23 +42,25 @@ export class AdminInicioPage implements OnInit {
 
 async loadCounters() {
   try {
-    // total de padres
-    this.totalPadres = await this.firebaseSvc.getCountByField(
-      'users',
-      'rol',
-      'padre'
-    );
+    this.loadingCounters = true;
+    
+    // Cargar todos los contadores en paralelo para mayor velocidad
+    const [padres, listas, salones] = await Promise.all([
+      this.firebaseSvc.getCountByField('users', 'rol', 'padre'),
+      this.firebaseSvc.getCollectionCount('listas_utiles'),
+      this.firebaseSvc.getCollectionCount('aulas')
+    ]);
 
-    // total de listas
-    this.totalListas = await this.firebaseSvc.getCollectionCount('listas_utiles');
-
-    // total de salones
-    this.totalSalones = await this.firebaseSvc.getCollectionCount('aulas');
+    this.totalPadres = padres;
+    this.totalListas = listas;
+    this.totalSalones = salones;
 
     console.log('Contadores cargados');
     
   } catch (error) {
     console.error('Error cargando contadores', error);
+  } finally {
+    this.loadingCounters = false;
   }
 }
 

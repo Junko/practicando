@@ -25,13 +25,32 @@
   border: 4px solid #000;
 }
 
-.edit-btn {
+.avatar-buttons {
   position: absolute;
-  right: -26px;
-  bottom: 6px;
-  --padding-start: 4px;
-  --padding-end: 4px;
+  bottom: -4px;
+  right: -8px;
+  display: flex;
+  gap: 4px;
+  background: white;
+  border-radius: 20px;
+  padding: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.edit-btn, .edit-photo-btn {
+  --padding-start: 6px;
+  --padding-end: 6px;
   --ripple-color: transparent;
+  margin: 0;
+  --color: #1b1213;
+  
+  ion-icon {
+    font-size: 20px;
+  }
+}
+
+.edit-photo-btn {
+  --color: #1976d2;
 }
 
 .nombre {
@@ -91,6 +110,160 @@
 .logout-btn {
   margin-top: 18px;
   --border-radius: 12px;
+}
+
+// Estilos para modal de edición
+.modal-content {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 16px;
+  --padding-bottom: 16px;
+}
+
+.edit-form-modal {
+  ion-list {
+    background: transparent;
+    padding: 0;
+  }
+  
+  ion-item {
+    --padding-start: 0;
+    --inner-padding-end: 0;
+    margin-bottom: 16px;
+    --background: #f8f9fa;
+    --border-radius: 12px;
+    border-radius: 12px;
+    
+    ion-label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #1b1213;
+      margin-bottom: 8px;
+      
+      .required {
+        color: #f44336;
+      }
+    }
+    
+    ion-input {
+      --padding-start: 12px;
+      --padding-end: 12px;
+      --padding-top: 8px;
+      --padding-bottom: 8px;
+      font-size: 1rem;
+      background: white;
+      border-radius: 8px;
+      margin-top: 8px;
+      
+      &.invalid {
+        --border-color: #f44336;
+        border: 1px solid #f44336;
+      }
+    }
+  }
+  
+  .modal-actions {
+    margin-top: 24px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    
+    ion-button {
+      --border-radius: 12px;
+      height: 48px;
+      font-weight: 600;
+      margin: 0;
+    }
+  }
+}
+
+.info-row {
+  ion-label {
+    h3 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #666;
+      margin: 0 0 4px 0;
+    }
+    
+    p {
+      font-size: 1rem;
+      color: #1b1213;
+      margin: 0;
+    }
+  }
+}
+
+.circle-icon.user {
+  background: #e3f2fd;
+  ion-icon {
+    color: #1976d2;
+  }
+}
+
+// Estilos para modal de vista previa
+.preview-modal-content {
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-top: 0;
+  --padding-bottom: 0;
+}
+
+.preview-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 20px;
+  min-height: 50vh;
+  
+  .preview-image-wrapper {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 6px solid #000;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    margin-bottom: 24px;
+    
+    .preview-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  
+  .preview-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1b1213;
+    text-align: center;
+    margin: 0;
+  }
+}
+
+.preview-actions {
+  padding: 0 20px 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  
+  ion-button {
+    --border-radius: 12px;
+    height: 48px;
+    font-weight: 600;
+    margin: 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .preview-container {
+    .preview-image-wrapper {
+      width: 240px;
+      height: 240px;
+    }
+  }
 }
 
 ion-tab-bar {

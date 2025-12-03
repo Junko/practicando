@@ -49,7 +49,7 @@
     </div>
 
     <!-- Mensaje cuando no hay listas -->
-    <div *ngIf="listas.length === 0" class="empty-state">
+    <div *ngIf="!loading && listas.length === 0" class="empty-state">
       <ion-icon name="list" size="large" color="medium"></ion-icon>
       <h3>No hay listas creadas</h3>
       <p>Crea tu primera lista de útiles escolares</p>

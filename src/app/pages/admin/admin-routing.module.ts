@@ -18,9 +18,14 @@ const routes: Routes = [
   {
     path: 'perfil',
     loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
-  },  {
+  },
+  {
     path: 'aulas',
     loadChildren: () => import('./aulas/aulas.module').then( m => m.AulasPageModule)
+  },
+  {
+    path: 'verificar-materiales',
+    loadChildren: () => import('./verificar-materiales/verificar-materiales.module').then( m => m.VerificarMaterialesPageModule)
   }
 
 ];
