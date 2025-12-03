@@ -4,12 +4,7 @@
   <div class="container">
 
     <div class="barra-superior">
-      <ion-input
-        placeholder="Buscar aula o grupo (1A, 3C, Computación...)"
-        [(ngModel)]="busqueda"
-        (ionInput)="filtrar()">
-      </ion-input>
-
+   
       <ion-select [(ngModel)]="filtroTipo" (ionChange)="filtrar()" interface="popover">
         <ion-select-option value="Todos">Todos los tipos</ion-select-option>
         <ion-select-option value="General">General</ion-select-option>
@@ -36,9 +31,16 @@
           <p *ngIf="aula.muebles?.length">{{ aula.muebles.length }} muebles registrados</p>
         </div>
 
-        <div class="acciones">
-          <ion-icon name="create-outline" title="Editar" (click)="editarAula(aula)"></ion-icon>
-          <ion-icon name="trash-outline" title="Eliminar" (click)="eliminarAula(aula)"></ion-icon>
+        <div class="acciones">        
+           <ion-button fill="outline" size="small" (click)="editarAula(aula)" class="action-btn">
+            <ion-icon name="create-outline" slot="start"></ion-icon>
+            Editar
+          </ion-button>
+             <ion-button fill="outline" size="small" (click)="eliminarAula(aula)" class="action-btn delete-btn">
+            <ion-icon name="trash-outline" slot="start"></ion-icon>
+            Eliminar
+          </ion-button>
+          
         </div>
       </div>
     </div>

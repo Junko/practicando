@@ -84,4 +84,16 @@
       color: #666;
     }
   }
+
+  .delete-btn {
+  --color: #ffffff;
+  --border-color: #dc3545;
+  --background:#dc3545;
+}
+
+  .edit-btn {
+  --color: #ffffff;
+  --border-color: #007bff;
+  --background:#007bff;
+}
 }

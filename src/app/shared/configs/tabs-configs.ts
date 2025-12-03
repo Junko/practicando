@@ -41,12 +41,12 @@ export const PADRE_TABS_CONFIG: TabsConfig = {
       icon: 'home-outline',
       route: '/padre/inicio'
     },
-    {
-      id: 'listas',
-      label: 'Lista',
-      icon: 'library-outline',
-      route: '/padre/listas'
-    },
+    // {
+    //   id: 'listas',
+    //   label: 'Lista',
+    //   icon: 'library-outline',
+    //   route: '/padre/notificaciones'
+    // },
     {
       id: 'notificaciones',
       label: 'Notificaciones',
